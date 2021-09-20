@@ -31,32 +31,32 @@ public class User extends MappedEntity {
     @Column
     private Integer cardNumber;
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Language language;
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Gender gender;
     @Column
     private String phoneNumber;
     @Column
     private LocalDate dob;
     @Column
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private City city;
 
     public enum Language {
-        RUSSIAN,
-        UKRAINIAN
+        RU,
+        UA
     }
 
     public enum Gender {
-        MALE,
-        FEMALE
+        M,
+        F
     }
 
     private enum City {
-        ODESSA,
-        KIEV
+        Odessa,
+        Kiev
     }
 
 }

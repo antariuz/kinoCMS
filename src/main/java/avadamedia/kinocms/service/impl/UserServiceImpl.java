@@ -4,10 +4,11 @@ import avadamedia.kinocms.model.User;
 import avadamedia.kinocms.repository.UserRepository;
 import avadamedia.kinocms.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
@@ -18,12 +19,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changeUser(User user) {
+    public void updateUser(User user) {
         repository.save(user);
     }
 
     @Override
-    public void deleteUserById(Integer id) {
+    public void deleteUserById(Long id) {
         repository.deleteById(id);
     }
 
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Integer id) {
+    public User getUserById(Long id) {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 

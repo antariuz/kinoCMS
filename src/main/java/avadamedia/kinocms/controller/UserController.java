@@ -16,48 +16,44 @@ public class UserController {
 
     private final UserService service;
 
-    @RequestMapping({"/", ""})
-    public String userPage(){
-        return "admin/users";
+    //    Show all Users
+    @GetMapping({"/", ""})
+    public ModelAndView users() {
+        return new ModelAndView("/admin/users", "users", service.getAllUsers());
     }
 
-//    @GetMapping("/all")
-//    public ModelAndView users() {
-//        return new ModelAndView("admin/users", "users", service.getAllUsers());
-//    }
-//
-//    @GetMapping("/add")
-//    public String addUser(Model model) {
-//        model.addAttribute("user", new User());
-//        return "admin/add-user";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addUser(User user) {
-//        service.createUser(user);
-//        return "redirect:admin/users";
-//    }
-//
-//    @GetMapping("/login")
-//    public String login() {
-//        return "login";
-//    }
-//
-//
-//    @GetMapping("/update/{id}")
-//    public ModelAndView changeUser(@PathVariable("id") Integer id) {
-//        return new ModelAndView("admin/change-user", "user", service.getUserById(id));
-//    }
-//
-//    @GetMapping("/delete/{id}")
-//    public String deleteProducer(@PathVariable("id") Integer id) {
-//        service.deleteUserById(id);
-//        return "redirect:/users/all";
-//    }
-//
-//    @PutMapping("/all")
-//    public String changeUser(User user) {
-//        service.changeUser(user);
-//        return "redirect:/users/all";
-//    }
+    //    Add part mapping of Users
+    @GetMapping("/add")
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
+        return "admin/add-user";
+    }
+
+    @PostMapping("/add")
+    public String addUser(User user) {
+        service.createUser(user);
+        return "redirect:/admin/users";
+    }
+
+    //    Delete part mapping of Users
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") Long id, Model model) {
+        service.deleteUserById(id);
+        return "redirect:/admin/users";
+    }
+
+    //    Update part mapping of Users
+    @GetMapping("/update/{id}")
+    public ModelAndView changeUser(@PathVariable("id") Long id) {
+        return new ModelAndView("admin/update-user", "user", service.getUserById(id));
+    }
+
+//    ?????? WTF ??????????
+//    @PutMapping("/update")
+//    @RequestMapping(value="/update", method = RequestMethod.POST)
+    @PostMapping("/update")
+    public String updateUser(User user) {
+        service.updateUser(user);
+        return "redirect:/admin/users";
+    }
 }

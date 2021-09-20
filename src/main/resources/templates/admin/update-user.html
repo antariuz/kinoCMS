@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <title>User</title>
+    <title>Change User</title>
 </head>
 <body>
-<a class="btn btn-primary" th:href="@{/user/all}" role="button">Back</a>
-<form th:method="PUT" th:object="${user}" th:action="@{/user/all}">
+
+<a class="btn btn-primary" th:href="@{/admin/users}" role="button">Back</a>
+
+<form th:method="PUT" th:object="${user}" th:action="@{/admin/users/update}">
+    <h4>Update user</h4>
     <input type="hidden" th:field="*{id}" th:value="${user.id}"/>
     <label >Name</label>
     <input type="text" th:field="*{name}" th:placeholder="${user.name}"/>
@@ -21,16 +24,19 @@
     <input type="text" th:field="*{phoneNumber}" th:placeholder="${user.phoneNumber}"/>
     <label >Address</label>
     <input type="text" th:field="*{address}" th:placeholder="${user.address}"/>
-<!--    <label >Birth date</label>-->
-<!--    <input type="text" th:field="*{birthDate}" th:placeholder="${user.birthDate}"/>-->
+    <label >Birth date</label>
+    <input type="text" th:field="*{dob}" th:placeholder="${user.dob}"/>
     <label >Card number</label>
     <input type="text" th:field="*{cardNumber}" th:placeholder="${user.cardNumber}"/>
     <label >City</label>
     <input type="text" th:field="*{city}" th:placeholder="${user.city}"/>
     <label >Gender</label>
     <input type="text" th:field="*{gender}" th:placeholder="${user.gender}"/>
-    <label >Phone number</label>
-    <input type="text" th:field="*{language}" th:placeholder="${user.language}"/>
+    <label >Language</label>
+    <select th:field="*{language}">
+        <option th:value="'RU'" th:text="Русский" th:selected="${user.language}"></option>
+        <option th:value="'UA'" th:text="Украинский"></option>
+    </select>
     <button>Submit</button>
 </form>
 </body>

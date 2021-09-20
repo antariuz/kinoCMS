@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
-    <title>Producers</title>
+    <title>Users</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <a class="btn btn-primary" th:href="@{/}" role="button">Home</a>
+<a class="btn btn-primary" th:href="@{/admin/dashboard}" role="button">Dashboard</a>
 <a class="btn btn-primary" th:href="@{users/add}" role="button">Add User</a>
 <table>
     <tr>
@@ -21,7 +22,6 @@
         <th>City</th>
         <th>Gender</th>
         <th>Language</th>
-        <th>Status</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -38,8 +38,8 @@
         <td th:text="${user.city}"></td>
         <td th:text="${user.gender}"></td>
         <td th:text="${user.language}"></td>
-        <td><a th:href="${'user/update/' + user.id}" >X</a></td>
-        <td><a th:href="${'user/delete/' + user.id}" >X</a></td>
+        <td><a th:href="${'users/update/' + user.id}" >X</a></td>
+        <td><a th:href="${'users/delete/' + user.id}" >X</a></td>
     </tr>
 </table>
 </body>

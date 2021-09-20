@@ -6,13 +6,13 @@ public interface UserService {
 
     void createUser(User user);
 
-    void changeUser(User user);
+    void updateUser(User user);
 
-    void deleteUserById(Integer id);
+    void deleteUserById(Long id);
 
     Iterable<User> getAllUsers();
 
-    User getUserById(Integer id);
+    User getUserById(Long id);
 
     void deleteAllUsers();
 
