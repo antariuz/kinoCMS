@@ -1,0 +1,37 @@
+table {
+    border-collapse: collapse;
+
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+}
+
+ul {
+    list-style: none; /*убираем маркеры списка*/
+    padding-left: 0; /*убираем отступы*/
+    /*убираем отступы, делаем отступ сверху*/
+    margin: 25px 0 0;
+}
+a {
+    text-decoration: none; /*убираем подчеркивание текста ссылок*/
+    background:#30A8E6; /*добавляем фон к пункту меню*/
+    color:#fff; /*меняем цвет ссылок*/
+    padding:10px; /*добавляем отступ*/
+    font-family: arial, serif; /*меняем шрифт*/
+    border-radius:4px; /*добавляем скругление*/
+    -moz-transition: all 0.3s 0.01s ease; /*делаем плавный переход*/
+    -o-transition: all 0.3s 0.01s ease;
+    -webkit-transition: all 0.3s 0.01s ease;
+}
+a:hover {
+    background:#1C85BB;/*добавляем эффект при наведении*/
+}
+li {
+    float:left; /*Размещаем список горизонтально для реализации меню*/
+    margin-right:5px; /*Добавляем отступ у пунктов меню*/
+
+}

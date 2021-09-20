@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>KINOCMS</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
+</head>
+<body class="bg-image"
+      style="background-image: url(etc/background-image.jpg);
+            height: 100vh">
+
+<div class="container">
+    <div class="row my-2">
+
+        <div class="col-3">
+            <img th:src="@{etc/logo.jpg}" height="100" width="150" class="img-fluid" alt="..."/>
+        </div>
+        <div class="col-9">
+            <div class="row">
+                <div class="col-4">
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                        <button class="btn btn-outline-success" type="submit">Поиск</button>
+                    </form>
+                </div>
+                <div class="bg-light container-fluid col-4">
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                    <a class="link-dark" href="#">
+                        <svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-4">
+
+                    <h5>067-555-44-33</h5>
+                    <h5>067-555-44-33</h5>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-11">
+                    <ul class="nav justify-content-center bg-light">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="">Афиша</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Расписание</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Скоро</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Кинотеатры</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Новости</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Акции</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                О кинотеатре
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="" class="dropdown-item">Новости</a></li>
+                                <li><a href="" class="dropdown-item">Реклама</a></li>
+                                <li><a href="" class="dropdown-item">Кафе</a></li>
+                                <li><a href="" class="dropdown-item">Мобильные приложения</a></li>
+                                <li><a href="" class="dropdown-item">Контакты</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Язык
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a href="" class="dropdown-item">Рус</a></li>
+                                <li><a href="" class="dropdown-item"
+                                       data-content='<span class="flag-icon flag-icon-ua"></span> Укр'>Укр</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/admin}">Control Panel</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <div class="d-flex justify-content-between py-2 my-2 border-top">
+        </div>
+        <div class="row">
+
+            <div class="col-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Афиша</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Расписание</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Скоро в прокате</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Кинотеатры</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Акции</a></li>
+                </ul>
+            </div>
+
+            <div class="col-4">
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">О кинотеатре</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Новости</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Реклама</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Кафе-бар</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Контакты</a></li>
+                </ul>
+            </div>
+
+            <p>&copy; 2021 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"/>
+                    </svg>
+                </a></li>
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"/>
+                    </svg>
+                </a></li>
+                <li class="ms-3"><a class="link-dark" href="#">
+                    <svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"/>
+                    </svg>
+                </a></li>
+            </ul>
+
+        </div>
+    </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+`
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(function () {
+        $('.selectpicker').selectpicker();
+    });
+</script>
+</body>
+</html>

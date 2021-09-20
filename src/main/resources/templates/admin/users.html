@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Producers</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<a class="btn btn-primary" th:href="@{/}" role="button">Home</a>
+<a class="btn btn-primary" th:href="@{users/add}" role="button">Add User</a>
+<table>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Nickname</th>
+        <th>Phone number</th>
+        <th>Address</th>
+        <th>Birth date</th>
+        <th>Card number</th>
+        <th>City</th>
+        <th>Gender</th>
+        <th>Language</th>
+        <th>Status</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="user,iterator : ${users}">
+        <td th:text="${iterator.index+1}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.surname}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.nickname}"></td>
+        <td th:text="${user.phoneNumber}"></td>
+        <td th:text="${user.address}"></td>
+        <td th:text="${user.dob}"></td>
+        <td th:text="${user.cardNumber}"></td>
+        <td th:text="${user.city}"></td>
+        <td th:text="${user.gender}"></td>
+        <td th:text="${user.language}"></td>
+        <td><a th:href="${'user/update/' + user.id}" >X</a></td>
+        <td><a th:href="${'user/delete/' + user.id}" >X</a></td>
+    </tr>
+</table>
+</body>
+</html>
