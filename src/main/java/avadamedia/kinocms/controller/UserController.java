@@ -19,14 +19,14 @@ public class UserController {
     //    Show all Users
     @GetMapping({"/", ""})
     public ModelAndView users() {
-        return new ModelAndView("/admin/users", "users", service.getAllUsers());
+        return new ModelAndView("/admin/users/listUser", "users", service.getAllUsers());
     }
 
     //    Add part mapping of Users
     @GetMapping("/add")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        return "admin/add-user";
+        return "/admin/users/addUser";
     }
 
     @PostMapping("/add")
@@ -37,7 +37,7 @@ public class UserController {
 
     //    Delete part mapping of Users
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id, Model model) {
+    public String deleteUser(@PathVariable("id") Long id) {
         service.deleteUserById(id);
         return "redirect:/admin/users";
     }
@@ -45,7 +45,7 @@ public class UserController {
     //    Update part mapping of Users
     @GetMapping("/update/{id}")
     public ModelAndView changeUser(@PathVariable("id") Long id) {
-        return new ModelAndView("admin/update-user", "user", service.getUserById(id));
+        return new ModelAndView("/admin/users/updateUser", "user", service.getUserById(id));
     }
 
 //    ?????? WTF ??????????
@@ -56,4 +56,10 @@ public class UserController {
         service.updateUser(user);
         return "redirect:/admin/users";
     }
+
+//    @GetMapping({"/", ""})
+//    public ModelAndView getMaxId() {
+//        return new ModelAndView("/admin/users", "maxId", service.getMaxId());
+//    }
+
 }

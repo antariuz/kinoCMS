@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<a class="btn btn-primary" th:href="@{/admin/users}" role="button">Back</a>
+<a class="btn btn-primary" th:href="@{/templates/admin/users}" role="button">Back</a>
 
 <form th:method="PUT" th:object="${user}" th:action="@{/admin/users/update}">
     <h4>Update user</h4>
@@ -29,9 +29,15 @@
     <label >Card number</label>
     <input type="text" th:field="*{cardNumber}" th:placeholder="${user.cardNumber}"/>
     <label >City</label>
-    <input type="text" th:field="*{city}" th:placeholder="${user.city}"/>
+    <select th:field="*{city}">
+        <option th:value="'Odessa'" th:text="Одесса" th:selected="${user.city}"></option>
+        <option th:value="'Kiev'" th:text="Киев"></option>
+    </select>
     <label >Gender</label>
-    <input type="text" th:field="*{gender}" th:placeholder="${user.gender}"/>
+    <select th:field="*{gender}">
+        <option th:value="'M'" th:text="Муж." th:selected="${user.gender}"></option>
+        <option th:value="'F'" th:text="Жен."></option>
+    </select>
     <label >Language</label>
     <select th:field="*{language}">
         <option th:value="'RU'" th:text="Русский" th:selected="${user.language}"></option>

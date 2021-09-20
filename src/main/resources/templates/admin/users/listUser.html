@@ -8,6 +8,11 @@
 <a class="btn btn-primary" th:href="@{/}" role="button">Home</a>
 <a class="btn btn-primary" th:href="@{/admin/dashboard}" role="button">Dashboard</a>
 <a class="btn btn-primary" th:href="@{users/add}" role="button">Add User</a>
+
+<!--<label >MaxId</label>-->
+<!--<input type="text" th:placeholder="${maxId}"/>-->
+
+
 <table>
     <tr>
         <th>#</th>
@@ -25,7 +30,8 @@
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    <tr th:each="user,iterator : ${users}">
+    <tr th:each=" user,iterator : ${users}
+        ">
         <td th:text="${iterator.index+1}"></td>
         <td th:text="${user.name}"></td>
         <td th:text="${user.surname}"></td>
@@ -38,8 +44,8 @@
         <td th:text="${user.city}"></td>
         <td th:text="${user.gender}"></td>
         <td th:text="${user.language}"></td>
-        <td><a th:href="${'users/update/' + user.id}" >X</a></td>
-        <td><a th:href="${'users/delete/' + user.id}" >X</a></td>
+        <td><a th:href="${'users/update/' + user.id}">X</a></td>
+        <td><a th:href="${'users/delete/' + user.id}">X</a></td>
     </tr>
 </table>
 </body>

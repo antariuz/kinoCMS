@@ -16,6 +16,6 @@ public interface UserService {
 
     void deleteAllUsers();
 
-    Integer getMaxId();
+    Long getMaxId();
 
 }
