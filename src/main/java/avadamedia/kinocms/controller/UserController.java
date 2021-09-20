@@ -50,7 +50,6 @@ public class UserController {
 
 //    ?????? WTF ??????????
 //    @PutMapping("/update")
-//    @RequestMapping(value="/update", method = RequestMethod.POST)
     @PostMapping("/update")
     public String updateUser(User user) {
         service.updateUser(user);
