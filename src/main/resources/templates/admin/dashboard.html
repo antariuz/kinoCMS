@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/share/template.html}">
 <head>
-    <meta charset="UTF-8">
     <title>Admin dashboard</title>
 </head>
 <body>
-
-<h1>Admin Dashboard</h1>
-<a class="nav-link" th:href="@{/}">Home</a>
-<a class="nav-link" th:href="@{/admin/users}">Users</a>
+<div layout:fragment="content">
+    <div th:style="'text-align:center'">
+        <img src="/images/in-progress.png" alt="This page is in progress"
+             th:style="'width:35%;height:35%'"/>
+        <br>
+        <span>Sorry, this page is under construction</span>
+    </div>
+</div>
 </body>
 </html>

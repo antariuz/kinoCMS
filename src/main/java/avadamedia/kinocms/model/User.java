@@ -1,7 +1,7 @@
 package avadamedia.kinocms.model;
 
 import lombok.*;
-import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -41,8 +41,9 @@ public class User extends MappedEntity {
     @Column
     private LocalDate dob;
     @Column
-    @Enumerated(EnumType.ORDINAL)
-    private City city;
+    private LocalDate doc;
+    @Column
+    private String city;
 
     public enum Language {
         RU,

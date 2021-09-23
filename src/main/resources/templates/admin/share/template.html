@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <style th:replace="~{admin/share/style}"></style>
+</head>
+
+<body>
+<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+    <div th:replace="/admin/share/header"></div>
+    <div class="app-main">
+        <div th:replace="/admin/share/sidebar"></div>
+        <div class="app-main__outer">
+            <div class="app-main__inner">
+                <div layout:fragment="content">
+                    <p>Page content goes here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="/admin/share/js"></div>
+</div>
+</body>
+</html>
