@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/share/template.html}" lang="en">
 <head>
-    <title>Изменяем пользователя</title>
+    <title>Добавляем пользователя</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -10,9 +10,9 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fas fa-id-card"></i> Изменяем пользователя
+                    <i class="fa fa-fw" aria-hidden="true" title="Добавляем пользователя"></i>
                 </div>
-                <div>
+                <div>Добавляем пользователя
                     <div class="page-title-subheading">
                         <a th:href="@{/admin/users}">Отменить</a>
                     </div>
@@ -20,7 +20,7 @@
             </div>
         </div>
     </div>
-    <form th:method="PUT" th:object="${user}" th:action="@{/admin/users/update}">
+    <form th:method="POST" th:object="${user}" th:action="@{/admin/users/add}">
         <input type="hidden" th:field="*{id}" th:value="${user.id}"/>
         <div class="form-row">
             <div class="col-md-4 mb-2">
@@ -56,13 +56,13 @@
             </div>
             <div class="col-md-4 mb-2">
                 <label for="validationPassword">Пароль</label>
-                <input type="password" class="form-control" id="validationPassword"
-                       th:field="*{password}">
+                <input type="password" class="form-control" id="validationPassword" th:placeholder="Пароль"
+                       th:field="*{password}" required="">
             </div>
             <div class="col-md-4 mb-2">
                 <label for="validationPasswordRepeat">Повторите пароль</label>
-                <input type="password" class="form-control" id="validationPasswordRepeat"
-                       th:field="*{password}">
+                <input type="password" class="form-control" id="validationPasswordRepeat" th:placeholder="Пароль"
+                       required="">
             </div>
         </div>
         <div class="form-row">
@@ -111,8 +111,9 @@
                 </select>
             </div>
         </div>
-        <button class="btn mr-2 btn btn-success">Сохранить</button>
+        <button class="btn mr-2 btn btn-warning">Добавить</button>
     </form>
 </div>
+
 </body>
 </html>

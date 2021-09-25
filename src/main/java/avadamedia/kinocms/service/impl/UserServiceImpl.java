@@ -7,9 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserServiceImpl implements UserService {
@@ -18,7 +15,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        user.setDoc(LocalDate.now());
         repository.save(user);
     }
 
@@ -40,11 +36,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(Long id) {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
-    }
-
-    @Override
-    public void deleteAllUsers() {
-        repository.deleteAll();
     }
 
     @Override

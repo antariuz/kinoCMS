@@ -10,9 +10,9 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <i class="fa fa-fw" aria-hidden="true" title="Добавляем пользователя"></i>
+                    <h1 class="m-0"><i class="fas fa-user-plus"></i> Добавляем пользователя</h1>
                 </div>
-                <div>Добавляем пользователя
+                <div>
                     <div class="page-title-subheading">
                         <a th:href="@{/admin/users}">Отменить</a>
                     </div>
@@ -22,7 +22,6 @@
     </div>
     <form th:method="POST" th:object="${user}" th:action="@{/admin/users/add}">
         <input type="hidden" th:field="*{id}" th:value="${user.id}"/>
-        <input type="hidden" th:field="*{doc}" th:value="${user.doc}"/>
         <div class="form-row">
             <div class="col-md-4 mb-2">
                 <label for="validationName">Имя</label>
@@ -69,8 +68,8 @@
         <div class="form-row">
             <div class="col-md-4 mb-2">
                 <label for="validationDob">Дата рождения</label>
-                <input type="date" class="form-control" id="validationDob" th:placeholder="ddMMYYYY"
-                       th:field="*{dob}">
+                <input type="date" class="form-control" id="validationDob"
+                       th:field="*{birthday}">
             </div>
             <div class="col-md-6 mb-2">
                 <label for="validationAddress">Адрес</label>

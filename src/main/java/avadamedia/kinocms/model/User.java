@@ -1,14 +1,13 @@
 package avadamedia.kinocms.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
-@Data
-@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -38,10 +37,9 @@ public class User extends MappedEntity {
     private Gender gender;
     @Column
     private String phoneNumber;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column
-    private LocalDate dob;
-    @Column
-    private LocalDate doc;
+    private Date birthday;
     @Column
     private String city;
 
@@ -53,11 +51,6 @@ public class User extends MappedEntity {
     public enum Gender {
         M,
         F
-    }
-
-    private enum City {
-        Odessa,
-        Kiev
     }
 
 }

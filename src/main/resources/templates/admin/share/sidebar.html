@@ -1,63 +1,81 @@
-<div class="app-sidebar sidebar-shadow bg-light sidebar-text-dark">
-    <div class="app-header__logo">
-        <div class="logo-src"></div>
-        <div class="header__pane ml-auto">
-            <div>
-                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-                        data-class="closed-sidebar">
-                                    <span class="hamburger-box">
-                                        <span class="hamburger-inner"></span>
-                                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="app-header__mobile-menu">
-        <div>
-            <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                                <span class="hamburger-box">
-                                    <span class="hamburger-inner"></span>
-                                </span>
-            </button>
-        </div>
-    </div>
-    <div class="app-header__menu">
-                        <span>
-                            <button type="button"
-                                    class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                                <span class="btn-icon-wrapper">
-                                    <i class="fa fa-ellipsis-v fa-w-6"></i>
-                                </span>
-                            </button>
-                        </span>
-    </div>
-    <div class="scrollbar-sidebar ps ps--active-y">
-        <div class="app-sidebar__inner">
-<!--MENU-->
-            <ul class="vertical-nav-menu metismenu">
-                <li>
-                    <a th:href="@{/}" class="mm-active" aria-expanded="false">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Home
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <div class="sidebar">
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                <li class="nav-item">
+                    <a href="/admin/dashboard" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Статистика
+                        </p>
                     </a>
                 </li>
-            </ul>
-            <ul class="vertical-nav-menu metismenu">
-                <li>
-                    <a th:href="@{/admin/dashboard}" class="mm-active" aria-expanded="false">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Баннеры
+                        </p>
                     </a>
                 </li>
-            </ul>
-            <ul class="vertical-nav-menu metismenu">
-                <li>
-                    <a th:href="@{/admin/users}" class="mm-active" aria-expanded="false">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Пользователи
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Фильмы
+                        </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Новости
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Акции
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Страницы
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="users" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Пользователи
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-caret-square-right"></i>
+                        <p>
+                            Рассылки
+                        </p>
+                    </a>
+                </li>
+
             </ul>
-        </div>
+        </nav>
     </div>
-</div>
+</aside>

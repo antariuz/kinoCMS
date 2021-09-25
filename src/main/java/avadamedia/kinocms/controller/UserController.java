@@ -60,4 +60,9 @@ public class UserController {
         return service.getMaxId();
     }
 
+    @ModelAttribute("newUsers")
+    public ModelAndView newUsers() {
+        return new ModelAndView("/admin/users/list", "users", service.getAllUsers());
+    }
+
 }
