@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <style th:replace="~{/share/style}"></style>
+</head>
+<body class="text-center">
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <div th:replace="/share/header"></div>
+    <div layout:fragment="content">
+        <p>Page content goes here</p>
+    </div>
+    <div th:replace="/share/footer"></div>
+</div>
+<div th:replace="/share/js"></div>
+</body>
+</html>

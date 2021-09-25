@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/share/template.html}" lang="en">
+<head>
+    <title>Фильмы</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-lg">
+            <div class="main-card mb-3 card">
+                <div class="card-body">
+                    <h5 class="card-title">Список текущих фильмов</h5>
+                    <div th:style="'text-align:center'">
+                        <img src="/images/in-progress.png" alt="This page is in progress"
+                             th:style="'width:15%;height:15%'"/>
+                        <br>
+                        <span>Sorry, this page is under construction</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
