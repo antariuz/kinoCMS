@@ -27,7 +27,6 @@ public class MainBanner extends MappedEntity {
     @Transient
     public String getImagePath() {
         if (imageUrl == null || getId() == null) return null;
-
         return "/user-photos/" + getId() + "/" + imageUrl;
     }
 

@@ -14,8 +14,8 @@ public class MainBannerServiceImpl implements MainBannerService {
     private final MainBannerRepository repository;
 
     @Override
-    public MainBanner createMainBanner(MainBanner mainBanner) {
-       return repository.save(mainBanner);
+    public void createMainBanner(MainBanner mainBanner) {
+        repository.save(mainBanner);
     }
 
     @Override

@@ -41,15 +41,12 @@ public class MainBannerController {
 
     @PostMapping("/main/add")
     public String addMainBanner(MainBanner mainBanner,
-    @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                                @RequestParam("fileImage") MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         mainBanner.setImageUrl(fileName);
-
-        MainBanner savedMainBanner = service.createMainBanner(mainBanner);
-
-        String uploadDir = "/main-banners/" + savedMainBanner.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
+        service.createMainBanner(mainBanner);
+        String uploadDir = "/main-banners/" + mainBanner.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";
     }
 
