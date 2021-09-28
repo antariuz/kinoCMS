@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/share/template.html}" lang="en">
+<head>
+    <title>Добавляем пользователя</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <h2 class="m-0"><i class="fas fa-image"></i> Добавляем баннер</h2>
+                </div>
+                <div>
+                    <div class="page-title-subheading">
+                        <a th:href="@{/admin/banners}">Отменить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:method="POST" th:object="${mainBanner}" th:action="@{/admin/banners/main/add}"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
+
+        <div class="row">
+
+            <div class="col-md-4 mb-2">
+
+                <div class="form-group">
+                    <label for="fileImage">Баннер</label>
+                    <div class="custom-file">
+                        <input type="file" name="fileImage" class="custom-file-input" id="fileImage"
+                               accept="image/png, image/jpeg" th:field="*{imageUrl}">
+                        <label class="custom-file-label" for="fileImage">Выберите картинку</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationURL">URL</label>
+                    <input type="text" class="form-control" id="validationURL" th:placeholder="URL"
+                           th:field="*{url}" required="">
+                    <div class="invalid-feedback">
+                        Введите ссылку
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="validationText">Текст</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="Текст"
+                           th:field="*{text}" required="">
+                    <div class="invalid-feedback">
+                        Введите текст
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn mr-2 btn btn-warning">Добавить</button>
+                </div>
+
+            </div>
+            <div class="col-md-8 mb-2 text-center">
+                <label for="thumbnail">Banner Preview</label><br>
+                <img style="max-width: 400px; display: none" id="thumbnail" alt="Banner Preview"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "background_banner")
 public class BackgroundBanner extends MappedEntity {
 
-    @Column
+    @Column(name = "image_url")
     private String imageUrl;
 
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/share/template.html}" lang="en">
+<head>
+    <title>Изменяем пользователя</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="app-page-title">
+        <div class="page-title-wrapper">
+            <div class="page-title-heading">
+                <div class="page-title-icon">
+                    <h2 class="m-0"><i class="fas fa-image"></i> Обновляем баннер</h2>
+                </div>
+                <div>
+                    <div class="page-title-subheading">
+                        <a th:href="@{/admin/banners}">Отменить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form th:method="PUT" th:object="${mainBanner}" th:action="@{/admin/banners/main/update}">
+        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
+        <div class="form-row">
+            <div class="col-md-4 mb-2">
+                <label for="validationName">IMAGE_URL</label>
+                <input type="text" class="form-control" id="validationName" th:placeholder="IMAGE_URL"
+                       th:field="*{imageUrl}" required="">
+                <div class="invalid-feedback">
+                    Введите IMAGE_URL
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="validationSurname">URL</label>
+                <input type="text" class="form-control" id="validationSurname" th:placeholder="URL"
+                       th:field="*{url}" required="">
+                <div class="invalid-feedback">
+                    Введите URL
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <label for="validationEmail">Текст</label>
+                <input type="text" class="form-control" id="validationEmail" th:placeholder="Текст"
+                       th:field="*{text}" required="">
+                <div class="invalid-feedback">
+                    Введите текст
+                </div>
+            </div>
+        </div>
+        <button class="btn mr-2 btn btn-success">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>

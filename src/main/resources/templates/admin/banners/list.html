@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/share/template.html}" lang="en">
+<head>
+    <title>Фильмы</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">На главной вверху</h3>
+        </div>
+        <div class="card-body" style="display: block;">
+            <span>Размер: 1000х190</span>
+            <div class="row col-12">
+                <th:block th:each="mainBanner : ${mainBanners}">
+                    <div class="col-3 d-flex">
+                        <table class="table table-bordered text-center">
+                            <tr>
+                                <td colspan="2">
+                                    <img th:src="${mainBanner.imageUrl}" th:style="'width:100px; height:100px'">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a th:href="${'banners/main/update/' + mainBanner.id}"
+                                       class="btn btn-block btn-warning">Обновить</a>
+                                </td>
+                                <td>
+                                    <a th:href="${'banners/main/delete/' + mainBanner.id}"
+                                       class="btn btn-block btn-danger">Удалить</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </th:block>
+                <div class="col-1 d-flex">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <td rowspan="2" style="vertical-align : middle;text-align:center;">
+                                <a href="banners/main/add" class="btn btn-block btn-success">Добавить</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

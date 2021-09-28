@@ -4,6 +4,7 @@ import avadamedia.kinocms.model.MappedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +17,18 @@ import javax.persistence.Table;
 @Table(name = "main_banners")
 public class MainBanner extends MappedEntity {
 
-    @Column
+    @Column(name = "image_url", nullable = true, length = 64)
     private String imageUrl;
-    @Column
+    @Column(name = "url")
     private String url;
-    @Column
+    @Column(name = "text")
     private String text;
+
+    @Transient
+    public String getImagePath() {
+        if (imageUrl == null || getId() == null) return null;
+
+        return "/user-photos/" + getId() + "/" + imageUrl;
+    }
 
 }

@@ -4,7 +4,7 @@ import avadamedia.kinocms.model.banners.MainBanner;
 
 public interface MainBannerService {
 
-    void createMainBanner(MainBanner mainBanner);
+    MainBanner createMainBanner(MainBanner mainBanner);
 
     void updateMainBanner(MainBanner mainBanner);
 
