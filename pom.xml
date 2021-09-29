@@ -11,6 +11,7 @@
     <groupId>avadamedia</groupId>
     <artifactId>kinocms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>kinocms</name>
     <description>kinocms</description>
     <properties>
