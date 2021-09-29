@@ -1,4 +1,4 @@
-package avadamedia.kinocms.controller;
+package avadamedia.kinocms.controller.banners;
 
 import avadamedia.kinocms.model.assist.FileUploadUtil;
 import avadamedia.kinocms.model.banners.NewsBanner;
@@ -28,13 +28,13 @@ public class NewsBannerController {
 //    }
 
     //    Add part mapping of NewsBanner
-    @GetMapping("/news/add")
+    @GetMapping("add")
     public String addNewsBanner(Model model) {
         model.addAttribute("newsBanner", new NewsBanner());
         return "/admin/banners/news/add";
     }
 
-    @PostMapping("/news/add")
+    @PostMapping("add")
     public String addNewsBanner(NewsBanner newsBanner,
                                 @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -46,19 +46,19 @@ public class NewsBannerController {
     }
 
     //    Delete part
-    @GetMapping("/news/delete/{id}")
+    @GetMapping("delete/{id}")
     public String deleteNewsBanner(@PathVariable("id") Long id) {
         newsBannerService.deleteNewsBannerById(id);
         return "redirect:/admin/banners";
     }
 
     //    Update part
-    @GetMapping("/news/update/{id}")
+    @GetMapping("update/{id}")
     public ModelAndView updateNewsBanner(@PathVariable("id") Long id) {
         return new ModelAndView("/admin/banners/news/update", "newsBanner", newsBannerService.getNewsBannerById(id));
     }
 
-    @PutMapping("/news/update")
+    @PutMapping("update")
     public String updateNewsBanner(NewsBanner newsBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         newsBanner.setImageUrl(fileName);

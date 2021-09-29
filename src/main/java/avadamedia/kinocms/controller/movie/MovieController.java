@@ -1,4 +1,4 @@
-package avadamedia.kinocms.controller;
+package avadamedia.kinocms.controller.movie;
 
 import avadamedia.kinocms.model.Movie;
 import avadamedia.kinocms.service.MovieService;

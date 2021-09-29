@@ -1,4 +1,4 @@
-package avadamedia.kinocms.controller;
+package avadamedia.kinocms.controller.banners;
 
 import avadamedia.kinocms.model.assist.FileUploadUtil;
 import avadamedia.kinocms.model.banners.BackgroundBanner;
@@ -19,15 +19,6 @@ import java.io.IOException;
 public class BackgroundBannerController {
 
     private final BackgroundBannerService backgroundBannerService;
-
-//    @GetMapping({"/", ""})
-//    public ModelAndView backgroundBanner() {
-//        Long lastId = backgroundBannerService.getMaxId();
-//        if (lastId == null) {
-//            backgroundBannerService.createBackgroundBanner(new BackgroundBanner());
-//        }
-//        return new ModelAndView("/admin/banners/index", "backgroundBanner", backgroundBannerService.getBackgroundBannerById(lastId));
-//    }
 
     @PutMapping("update")
     public String updateBackgroundBanner(BackgroundBanner backgroundBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {

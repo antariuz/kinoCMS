@@ -6,13 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard</title>
-    <style th:replace="~{admin/share/style}"></style>
+    <style th:replace="~{admin/template/style}"></style>
 </head>
 
-<body class="sidebar-mini">
+<body class="sidebar-mini layout-fixed">
 <div class="wrapper">
-    <div th:replace="/admin/share/navbar"></div>
-    <div th:replace="/admin/share/sidebar"></div>
+    <div th:replace="/admin/template/navbar"></div>
+    <div th:replace="/admin/template/sidebar"></div>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
@@ -37,6 +37,6 @@
     </aside>
     <!-- /.control-sidebar -->
 </div>
-<div th:replace="/admin/share/js"></div>
+<div th:replace="/admin/template/js"></div>
 </body>
 </html>

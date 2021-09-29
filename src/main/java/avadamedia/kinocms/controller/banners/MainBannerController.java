@@ -1,4 +1,4 @@
-package avadamedia.kinocms.controller;
+package avadamedia.kinocms.controller.banners;
 
 import avadamedia.kinocms.model.assist.FileUploadUtil;
 import avadamedia.kinocms.model.banners.BackgroundBanner;
@@ -24,12 +24,6 @@ import java.io.IOException;
 public class MainBannerController {
 
     private final MainBannerService mainBannerService;
-
-//    //    Show all Banners
-//    @GetMapping({"/", ""})
-//    public ModelAndView mainBanners() {
-//        return new ModelAndView("/admin/banners/index", "mainBanners", mainBannerService.getAllMainBanners());
-//    }
 
     //    Add part mapping of MainBanner
     @GetMapping("add")

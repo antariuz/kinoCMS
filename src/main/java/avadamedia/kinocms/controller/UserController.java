@@ -19,7 +19,7 @@ public class UserController {
     //    Show all Users
     @GetMapping({"/", ""})
     public ModelAndView users() {
-        return new ModelAndView("/admin/users/list", "users", service.getAllUsers());
+        return new ModelAndView("/admin/users/index", "users", service.getAllUsers());
     }
 
     //    Add part mapping of Users
@@ -62,7 +62,7 @@ public class UserController {
 
     @ModelAttribute("newUsers")
     public ModelAndView newUsers() {
-        return new ModelAndView("/admin/users/list", "users", service.getAllUsers());
+        return new ModelAndView("/admin/users/index", "users", service.getAllUsers());
     }
 
 }

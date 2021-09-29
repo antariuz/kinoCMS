@@ -16,9 +16,4 @@ public class MainController {
         return "admin/dashboard";
     }
 
-    @RequestMapping("admin/banners")
-    public String showBannerPage(){
-        return "admin/banners/index";
-    }
-
 }
