@@ -15,7 +15,6 @@
     <description>kinocms</description>
     <properties>
         <java.version>1.8</java.version>
-        <package>war</package>
     </properties>
     <dependencies>
         <dependency>
