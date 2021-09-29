@@ -1,8 +1,12 @@
 package avadamedia.kinocms.controller;
 
 import avadamedia.kinocms.model.assist.FileUploadUtil;
+import avadamedia.kinocms.model.banners.BackgroundBanner;
 import avadamedia.kinocms.model.banners.MainBanner;
+import avadamedia.kinocms.model.banners.NewsBanner;
+import avadamedia.kinocms.service.BackgroundBannerService;
 import avadamedia.kinocms.service.MainBannerService;
+import avadamedia.kinocms.service.NewsBannerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,53 +19,56 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("admin/banners")
+@RequestMapping("admin/banners/main/")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MainBannerController {
 
-    private final MainBannerService service;
+    private final MainBannerService mainBannerService;
 
-    //    Show all Banners
-    @GetMapping({"/", ""})
-    public ModelAndView banners() {
-        return new ModelAndView("/admin/banners/list", "mainBanners", service.getAllMainBanners());
-    }
+//    //    Show all Banners
+//    @GetMapping({"/", ""})
+//    public ModelAndView mainBanners() {
+//        return new ModelAndView("/admin/banners/index", "mainBanners", mainBannerService.getAllMainBanners());
+//    }
 
     //    Add part mapping of MainBanner
-    @GetMapping("/main/add")
+    @GetMapping("add")
     public String addMainBanner(Model model) {
         model.addAttribute("mainBanner", new MainBanner());
         return "/admin/banners/main/add";
     }
 
-    @PostMapping("/main/add")
+    @PostMapping("add")
     public String addMainBanner(MainBanner mainBanner,
                                 @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         mainBanner.setImageUrl(fileName);
-        service.createMainBanner(mainBanner);
+        mainBannerService.createMainBanner(mainBanner);
         String uploadDir = "main-banners/" + mainBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";
     }
 
-    //    Delete part mapping of Banners
-    @GetMapping("/main/delete/{id}")
+    //    Delete part
+    @GetMapping("delete/{id}")
     public String deleteMainBanner(@PathVariable("id") Long id) {
-        service.deleteMainBannerById(id);
+        mainBannerService.deleteMainBannerById(id);
         return "redirect:/admin/banners";
     }
 
-    //    Update part mapping of Main Banner
-    @GetMapping("/main/update/{id}")
+    //    Update part
+    @GetMapping("update/{id}")
     public ModelAndView updateMainBanner(@PathVariable("id") Long id) {
-        return new ModelAndView("/admin/banners/main/update", "mainBanner", service.getMainBannerById(id));
+        return new ModelAndView("/admin/banners/main/update", "mainBanner", mainBannerService.getMainBannerById(id));
     }
 
-    //    @PostMapping("/update")
-    @PutMapping("/main/update")
-    public String updateMainBanner(MainBanner mainBanner) {
-        service.updateMainBanner(mainBanner);
+    @PutMapping("update")
+    public String updateMainBanner(MainBanner mainBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        mainBanner.setImageUrl(fileName);
+        mainBannerService.updateMainBanner(mainBanner);
+        String uploadDir = "main-banners/" + mainBanner.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";
     }
 

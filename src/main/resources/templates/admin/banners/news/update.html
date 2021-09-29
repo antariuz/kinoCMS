@@ -22,9 +22,9 @@
         </div>
     </div>
 
-    <form th:method="PUT" th:object="${mainBanner}" th:action="@{/admin/banners/main/update}"
+    <form th:method="PUT" th:object="${newsBanner}" th:action="@{/admin/banners/news/update}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
+        <input type="hidden" th:field="*{id}" th:value="${newsBanner.id}"/>
 
         <div class="row">
 
@@ -49,22 +49,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="validationText">Текст</label>
-                    <input type="text" class="form-control" id="validationText" th:placeholder="Текст"
-                           th:field="*{text}" required="">
-                    <div class="invalid-feedback">
-                        Введите текст
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <button class="btn mr-2 btn btn-warning">Обновить</button>
                 </div>
 
             </div>
             <div class="col-md-8 mb-2 text-center">
                 <label for="thumbnail">Текущий баннер</label><br>
-                <img style="max-width: 400px;" id="thumbnail" alt="Banner Preview" th:src="${mainBanner.getImagePath()}"/>
+                <img style="max-width: 400px;" id="thumbnail" alt="Banner Preview" th:src="${newsBanner.getImagePath()}"/>
             </div>
         </div>
     </form>

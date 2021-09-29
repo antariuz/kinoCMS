@@ -4,6 +4,7 @@ import avadamedia.kinocms.model.MappedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,5 +21,11 @@ public class NewsBanner extends MappedEntity {
     private String imageUrl;
     @Column(name = "url")
     private String url;
+
+    @Transient
+    public String getImagePath() {
+        if (imageUrl == null || getId() == null) return null;
+        return "/uploaded-images/news-banners/" + getId() + "/" + imageUrl;
+    }
 
 }
