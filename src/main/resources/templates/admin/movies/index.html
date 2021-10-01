@@ -10,30 +10,34 @@
     <br>
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">На главной вверху</h3>
+            <h3 class="card-title">Список текущих фильмов</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
             </div>
         </div>
         <div class="card-body" style="display: block;">
-            <span>Размер: 1000х190</span>
             <div class="row col-12">
-                <th:block th:each="mainBanner : ${mainBanners}">
+                <th:block th:each="currentMovie : ${currentMovies}">
                     <div class="col-3 d-flex">
                         <table class="table table-bordered text-center">
                             <tr>
                                 <td colspan="2">
-                                    <img th:src="${mainBanner.getImagePath()}" th:style="'width:100px; height:100px'">
+                                    <img th:src="${currentMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h5 th:text="${currentMovie.name}"></h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a th:href="${'banners/main/update/' + mainBanner.id}"
+                                    <a th:href="${'movies/current/update/' + currentMovie.id}"
                                        class="btn btn-block btn-warning">Обновить</a>
                                 </td>
                                 <td>
-                                    <a th:href="${'banners/main/delete/' + mainBanner.id}"
+                                    <a th:href="${'movies/current/delete/' + currentMovie.id}"
                                        class="btn btn-block btn-danger">Удалить</a>
                                 </td>
                             </tr>
@@ -44,7 +48,7 @@
                     <table class="table table-bordered text-center">
                         <tr>
                             <td rowspan="2" style="vertical-align : middle;text-align:center;">
-                                <a href="banners/main/add" class="btn btn-block btn-success">Добавить</a>
+                                <a href="movies/current/add" class="btn btn-block btn-success">Добавить</a>
                             </td>
                         </tr>
                     </table>
@@ -56,71 +60,34 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Сквозной баннер на заднем фоне</h3>
+            <h3 class="card-title">Список фильмов ожидающие проката</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                 </button>
             </div>
         </div>
         <div class="card-body" style="display: block;">
-            <span>Размер: 2000х3000</span>
-            <form th:method="PUT" th:object="${backgroundBanner}" th:action="@{/admin/banners/background/update}"
-                  enctype="multipart/form-data">
-
-                <input type="hidden" th:field="*{id}"  th:value="${backgroundBanner.id}"/>
-
-                <div class="row">
-
-                    <div class="col-md-4 mb-2">
-
-                        <div class="form-group">
-                            <label for="fileImage">Баннер</label>
-                            <div class="custom-file">
-                                <input type="file" name="fileImage" class="custom-file-input" id="fileImage"
-                                       accept="image/png, image/jpeg">
-                                <label class="custom-file-label" for="fileImage">Выберите картинку</label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn mr-2 btn btn-warning">Загрузить</button>
-                        </div>
-
-                    </div>
-                    <div class="col-md-8 mb-2 text-center">
-                        <img th:src="${backgroundBanner.getImagePath()}" th:style="'width:100px; height:100px'" />
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">На главной Новости, Акции</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body" style="display: block;">
-            <span>Размер: 1000х190</span>
             <div class="row col-12">
-                <th:block th:each="newsBanner : ${newsBanners}">
+                <th:block th:each="comingMovie : ${comingMovies}">
                     <div class="col-3 d-flex">
                         <table class="table table-bordered text-center">
                             <tr>
                                 <td colspan="2">
-                                    <img th:src="${newsBanner.getImagePath()}" th:style="'width:100px; height:100px'">
+                                    <img th:src="${comingMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h5 th:text="${comingMovie.name}"></h5>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a th:href="${'banners/news/update/' + newsBanner.id}"
+                                    <a th:href="${'movies/coming/update/' + comingMovie.id}"
                                        class="btn btn-block btn-warning">Обновить</a>
                                 </td>
                                 <td>
-                                    <a th:href="${'banners/news/delete/' + newsBanner.id}"
+                                    <a th:href="${'movies/coming/delete/' + comingMovie.id}"
                                        class="btn btn-block btn-danger">Удалить</a>
                                 </td>
                             </tr>
@@ -130,8 +97,8 @@
                 <div class="col-1 d-flex">
                     <table class="table table-bordered text-center">
                         <tr>
-                            <td rowspan="2" style="vertical-align : middle;text-align:center;">
-                                <a href="banners/news/add" class="btn btn-block btn-success">Добавить</a>
+                            <td rowspan="3" style="vertical-align : middle;text-align:center;">
+                                <a href="movies/coming/add" class="btn btn-block btn-success">Добавить</a>
                             </td>
                         </tr>
                     </table>

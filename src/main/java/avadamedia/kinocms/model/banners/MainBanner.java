@@ -1,6 +1,6 @@
 package avadamedia.kinocms.model.banners;
 
-import avadamedia.kinocms.model.MappedEntity;
+import avadamedia.kinocms.model.common.MappedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name = "main_banners")
 public class MainBanner extends MappedEntity {
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "image_name")
+    private String imageName;
     @Column(name = "url")
     private String url;
     @Column(name = "text")
@@ -26,8 +26,8 @@ public class MainBanner extends MappedEntity {
 
     @Transient
     public String getImagePath() {
-        if (imageUrl == null || getId() == null) return null;
-        return "/uploaded-images/main-banners/" + getId() + "/" + imageUrl;
+        if (imageName == null || getId() == null) return null;
+        return "/uploaded-images/main-banners/" + getId() + "/" + imageName;
     }
 
 }

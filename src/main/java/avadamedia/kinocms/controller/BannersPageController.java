@@ -31,11 +31,8 @@ public class BannersPageController {
     }
 
     public BackgroundBanner getBackgroundBanner() {
-        Long lastId = backgroundBannerService.getMaxId();
-        if (lastId == null) {
-            backgroundBannerService.createBackgroundBanner(new BackgroundBanner());
-        }
-        return backgroundBannerService.getBackgroundBannerById(lastId);
+        return backgroundBannerService
+                .getBackgroundBannerById(backgroundBannerService.getMaxId());
     }
 
 }

@@ -14,6 +14,4 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    Long getMaxId();
-
 }

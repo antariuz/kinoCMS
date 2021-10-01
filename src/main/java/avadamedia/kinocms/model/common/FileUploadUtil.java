@@ -1,4 +1,4 @@
-package avadamedia.kinocms.model.assist;
+package avadamedia.kinocms.model.common;
 
 import org.springframework.web.multipart.MultipartFile;
 

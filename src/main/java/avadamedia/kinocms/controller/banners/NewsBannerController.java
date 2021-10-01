@@ -1,6 +1,6 @@
 package avadamedia.kinocms.controller.banners;
 
-import avadamedia.kinocms.model.assist.FileUploadUtil;
+import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.model.banners.NewsBanner;
 import avadamedia.kinocms.service.NewsBannerService;
 import lombok.AllArgsConstructor;
@@ -19,15 +19,9 @@ import java.io.IOException;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class NewsBannerController {
 
-    private final NewsBannerService newsBannerService;
+    private final NewsBannerService service;
 
-//    //   Show all Banners
-//    @GetMapping({"/", ""})
-//    public ModelAndView banners() {
-//        return new ModelAndView("/admin/banners/index", "newsBanners", newsBannerService.getAllNewsBanners());
-//    }
-
-    //    Add part mapping of NewsBanner
+    //    Add part
     @GetMapping("add")
     public String addNewsBanner(Model model) {
         model.addAttribute("newsBanner", new NewsBanner());
@@ -38,8 +32,8 @@ public class NewsBannerController {
     public String addNewsBanner(NewsBanner newsBanner,
                                 @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        newsBanner.setImageUrl(fileName);
-        newsBannerService.createNewsBanner(newsBanner);
+        newsBanner.setImageName(fileName);
+        service.createNewsBanner(newsBanner);
         String uploadDir = "news-banners/" + newsBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";
@@ -48,21 +42,21 @@ public class NewsBannerController {
     //    Delete part
     @GetMapping("delete/{id}")
     public String deleteNewsBanner(@PathVariable("id") Long id) {
-        newsBannerService.deleteNewsBannerById(id);
+        service.deleteNewsBannerById(id);
         return "redirect:/admin/banners";
     }
 
     //    Update part
     @GetMapping("update/{id}")
     public ModelAndView updateNewsBanner(@PathVariable("id") Long id) {
-        return new ModelAndView("/admin/banners/news/update", "newsBanner", newsBannerService.getNewsBannerById(id));
+        return new ModelAndView("/admin/banners/news/update", "newsBanner", service.getNewsBannerById(id));
     }
 
     @PutMapping("update")
     public String updateNewsBanner(NewsBanner newsBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        newsBanner.setImageUrl(fileName);
-        newsBannerService.updateNewsBanner(newsBanner);
+        newsBanner.setImageName(fileName);
+        service.updateNewsBanner(newsBanner);
         String uploadDir = "news-banners/" + newsBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";

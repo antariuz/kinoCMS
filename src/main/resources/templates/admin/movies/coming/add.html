@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/template/index.html}" lang="en">
 <head>
-    <title>Добавляем пользователя</title>
+    <title>Добавляем фильм</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -11,20 +11,20 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div class="page-title-icon">
-                    <h2 class="m-0"><i class="fas fa-image"></i> Добавляем баннер</h2>
+                    <h2 class="m-0"><i class="fas fa-image"></i> Добавляем фильм</h2>
                 </div>
                 <div>
                     <div class="page-title-subheading">
-                        <a th:href="@{/admin/banners}">Отменить</a>
+                        <a th:href="@{/admin/movies}">Отменить</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <form th:method="POST" th:object="${newsBanner}" th:action="@{/admin/banners/news/add}"
+    <form th:method="POST" th:object="${comingMovie}" th:action="@{/admin/movies/coming/add}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${newsBanner.id}"/>
+        <input type="hidden" th:field="*{id}" th:value="${comingMovie.id}"/>
 
         <div class="row">
 
@@ -34,18 +34,27 @@
                     <label for="fileImage">Баннер</label>
                     <div class="custom-file">
                         <input type="file" name="fileImage" class="custom-file-input" id="fileImage"
-                               accept="image/png, image/jpeg">
+                               accept="image/png, image/jpeg" required="">
                         <label class="custom-file-label" for="fileImage">Выберите картинку</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="validationURL">URL</label>
-                    <input type="text" class="form-control" id="validationURL" th:placeholder="URL"
-                           th:field="*{url}" required="">
-                    <div class="invalid-feedback">
-                        Введите ссылку
-                    </div>
+                    <label for="validationURL">Название</label>
+                    <input type="text" class="form-control" id="validationURL" th:placeholder="Название"
+                           th:field="*{name}">
+                </div>
+
+                <div class="form-group">
+                    <label for="validationText">Описание</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="Описание"
+                           th:field="*{description}">
+                </div>
+
+                <div class="form-group">
+                    <label for="validationText">Ссылка на трейлер</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="'Ссылка на трейлер'"
+                           th:field="*{trailerUrl}">
                 </div>
 
                 <div class="form-group">
@@ -54,8 +63,8 @@
 
             </div>
             <div class="col-md-8 mb-2 text-center">
-                <label for="thumbnail">Banner Preview</label><br>
-                <img style="max-width: 400px; display: none" id="thumbnail" alt="Banner Preview"/>
+                <label for="thumbnail">Movie Banner Preview</label><br>
+                <img style="max-width: 400px; display: none" id="thumbnail" alt="Movie Banner Preview"/>
             </div>
         </div>
     </form>

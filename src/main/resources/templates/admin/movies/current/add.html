@@ -2,30 +2,15 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/template/index.html}" lang="en">
 <head>
-    <title>Добавляем пользователя</title>
+    <title>Добавляем фильм</title>
 </head>
 <body>
 <div layout:fragment="content">
 
-    <div class="app-page-title">
-        <div class="page-title-wrapper">
-            <div class="page-title-heading">
-                <div class="page-title-icon">
-                    <h2 class="m-0"><i class="fas fa-image"></i> Добавляем баннер</h2>
-                </div>
-                <div>
-                    <div class="page-title-subheading">
-                        <a th:href="@{/admin/banners}">Отменить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <form th:method="POST" th:object="${mainBanner}" th:action="@{/admin/banners/main/add}"
+    <form th:method="POST" th:object="${currentMovie}" th:action="@{/admin/movies/current/add}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
-
+        <input type="hidden" th:field="*{id}" th:value="${currentMovie.id}"/>
+        <br>
         <div class="row">
 
             <div class="col-md-4 mb-2">
@@ -34,38 +19,80 @@
                     <label for="fileImage">Баннер</label>
                     <div class="custom-file">
                         <input type="file" name="fileImage" class="custom-file-input" id="fileImage"
-                               accept="image/png, image/jpeg">
+                               accept="image/png, image/jpeg" required="">
                         <label class="custom-file-label" for="fileImage">Выберите картинку</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="validationURL">URL</label>
-                    <input type="text" class="form-control" id="validationURL" th:placeholder="URL"
-                           th:field="*{url}" required="">
-                    <div class="invalid-feedback">
-                        Введите ссылку
-                    </div>
+                    <label for="validationURL">Название фильма</label>
+                    <input type="text" class="form-control" id="validationURL" th:placeholder="'Название фильма'"
+                           th:field="*{name}">
                 </div>
 
                 <div class="form-group">
-                    <label for="validationText">Текст</label>
-                    <input type="text" class="form-control" id="validationText" th:placeholder="Текст"
-                           th:field="*{text}" required="">
-                    <div class="invalid-feedback">
-                        Введите текст
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <button class="btn mr-2 btn btn-warning">Добавить</button>
+                    <label for="validationText">Ссылка на трейлер</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="'Ссылка на трейлер'"
+                           th:field="*{trailerUrl}">
                 </div>
 
             </div>
             <div class="col-md-8 mb-2 text-center">
-                <label for="thumbnail">Banner Preview</label><br>
-                <img style="max-width: 400px; display: none" id="thumbnail" alt="Banner Preview"/>
+                <label for="thumbnail">Movie Banner Preview</label><br>
+                <img style="max-height: 200px; display: none" id="thumbnail" alt="Movie Banner Preview"/>
             </div>
+        </div>
+
+        <div class="row-12">
+            <div class="form-group">
+                <label for="validationText">Описание</label>
+                <textarea class="form-control" rows="3" id="validationText" th:placeholder="Описание"
+                          th:field="*{description}"></textarea>
+            </div>
+        </div>
+
+        <div class="row-12 text-left">
+            <span>Размер: 1000x190</span>
+        </div>
+
+        <div class="row col-12">
+
+            <th:block th:each="image : ${imageList}">
+                <div class="col-3 d-flex">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <td colspan="2">
+                                <img th:src="#" th:style="'width:100px; height:100px'">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a th:href="#"
+                                   class="btn btn-block btn-warning">Обновить</a>
+                            </td>
+                            <td>
+                                <a th:href="#"
+                                   class="btn btn-block btn-danger">Удалить</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </th:block>
+            <div class="col-1 d-flex">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <td rowspan="2" style="vertical-align : middle;text-align:center;">
+                            <a href="#" class="btn btn-sm btn-block btn-info">Добавить</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="row-12 text-center">
+            <button class="btn btn-lg mr-3 btn btn-success">Добавить</button>
+            <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/movies}">Отменить</a>
         </div>
     </form>
 </div>

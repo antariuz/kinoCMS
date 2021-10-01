@@ -1,6 +1,6 @@
 package avadamedia.kinocms.controller.banners;
 
-import avadamedia.kinocms.model.assist.FileUploadUtil;
+import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.model.banners.BackgroundBanner;
 import avadamedia.kinocms.service.BackgroundBannerService;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 
@@ -18,13 +17,13 @@ import java.io.IOException;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class BackgroundBannerController {
 
-    private final BackgroundBannerService backgroundBannerService;
+    private final BackgroundBannerService service;
 
     @PutMapping("update")
     public String updateBackgroundBanner(BackgroundBanner backgroundBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        backgroundBanner.setImageUrl(fileName);
-        backgroundBannerService.updateBackgroundBanner(backgroundBanner);
+        backgroundBanner.setImageName(fileName);
+        service.updateBackgroundBanner(backgroundBanner);
         String uploadDir = "background-banners/";
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/banners";

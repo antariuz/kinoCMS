@@ -1,9 +1,7 @@
 package avadamedia.kinocms.controller;
 
-import avadamedia.kinocms.model.banners.BackgroundBanner;
-import avadamedia.kinocms.service.BackgroundBannerService;
-import avadamedia.kinocms.service.MainBannerService;
-import avadamedia.kinocms.service.NewsBannerService;
+import avadamedia.kinocms.service.ComingMovieService;
+import avadamedia.kinocms.service.CurrentMovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +14,15 @@ import org.springframework.web.servlet.ModelAndView;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class MoviesPageController {
 
-    private final MainBannerService mainBannerService;
-    private final BackgroundBannerService backgroundBannerService;
+    private final CurrentMovieService currentMovieService;
+    private final ComingMovieService comingMovieService;
 
-    //    Show all Banners
+    //    Show all Movies
     @GetMapping({"/", ""})
-    public ModelAndView showAllBanners() {
+    public ModelAndView showAllMovies() {
         ModelAndView mav = new ModelAndView("/admin/movies/index");
-        mav.addObject("currentMovies", mainBannerService.getAllMainBanners());
-        mav.addObject("comingMovies", mainBannerService.getAllMainBanners());
+        mav.addObject("currentMovies", currentMovieService.getAllCurrentMovies());
+        mav.addObject("comingMovies", comingMovieService.getAllComingMovies());
         return mav;
     }
 

@@ -1,5 +1,6 @@
-package avadamedia.kinocms.model;
+package avadamedia.kinocms.model.mailing;
 
+import avadamedia.kinocms.model.common.MappedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,16 +13,12 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "seoblocks")
-public class SeoBlock extends MappedEntity {
+@Table(name = "sms_mailing")
+public class SMSMailing extends MappedEntity {
 
     @Column
-    private String url;
+    private String text;
     @Column
-    private String title;
-    @Column
-    private String keywords;
-    @Column
-    private String description;
+    private Long smsQuantity;
 
 }

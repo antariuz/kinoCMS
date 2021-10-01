@@ -1,5 +1,6 @@
 package avadamedia.kinocms.model;
 
+import avadamedia.kinocms.model.common.MappedEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +28,7 @@ public class User extends MappedEntity {
     private String address;
     @Column
     private String password;
-    @Column
+    @Column(name = "card_number")
     private Integer cardNumber;
     @Column
     @Enumerated(EnumType.ORDINAL)
@@ -35,7 +36,7 @@ public class User extends MappedEntity {
     @Column
     @Enumerated(EnumType.ORDINAL)
     private Gender gender;
-    @Column
+    @Column(name = "phone_number")
     private String phoneNumber;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Column

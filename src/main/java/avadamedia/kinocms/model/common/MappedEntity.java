@@ -1,4 +1,4 @@
-package avadamedia.kinocms.model;
+package avadamedia.kinocms.model.common;
 
 import lombok.Getter;
 import lombok.Setter;

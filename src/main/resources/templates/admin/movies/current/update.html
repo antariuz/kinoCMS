@@ -15,16 +15,16 @@
                 </div>
                 <div>
                     <div class="page-title-subheading">
-                        <a th:href="@{/admin/banners}">Отменить</a>
+                        <a th:href="@{/admin/movies}">Отменить</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <form th:method="PUT" th:object="${mainBanner}" th:action="@{/admin/banners/main/update}"
+    <form th:method="PUT" th:object="${currentMovie}" th:action="@{/admin/movies/current/update}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
+        <input type="hidden" th:field="*{id}" th:value="${currentMovie.id}"/>
 
         <div class="row">
 
@@ -34,27 +34,27 @@
                     <label for="fileImage">Баннер</label>
                     <div class="custom-file">
                         <input type="file" name="fileImage" class="custom-file-input" id="fileImage"
-                               accept="image/png, image/jpeg">
+                               accept="image/png, image/jpeg" required="">
                         <label class="custom-file-label" for="fileImage">Выберите новый баннер</label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="validationURL">URL</label>
-                    <input type="text" class="form-control" id="validationURL" th:placeholder="URL"
-                           th:field="*{url}" required="">
-                    <div class="invalid-feedback">
-                        Введите ссылку
-                    </div>
+                    <label for="validationURL">Название</label>
+                    <input type="text" class="form-control" id="validationURL" th:placeholder="Название"
+                           th:field="*{name}">
                 </div>
 
                 <div class="form-group">
-                    <label for="validationText">Текст</label>
-                    <input type="text" class="form-control" id="validationText" th:placeholder="Текст"
-                           th:field="*{text}" required="">
-                    <div class="invalid-feedback">
-                        Введите текст
-                    </div>
+                    <label for="validationText">Описание</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="Описание"
+                           th:field="*{description}">
+                </div>
+
+                <div class="form-group">
+                    <label for="validationText">Ссылка на трейлер</label>
+                    <input type="text" class="form-control" id="validationText" th:placeholder="'Ссылка на трейлер'"
+                           th:field="*{trailerUrl}">
                 </div>
 
                 <div class="form-group">
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-8 mb-2 text-center">
                 <label for="thumbnail">Текущий баннер</label><br>
-                <img style="max-width: 400px;" id="thumbnail" alt="Banner Preview" th:src="${mainBanner.getImagePath()}"/>
+                <img style="max-width: 400px;" id="thumbnail" alt="Movie Banner Preview" th:src="${currentMovie.getImagePath()}"/>
             </div>
         </div>
     </form>
