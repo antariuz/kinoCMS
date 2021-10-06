@@ -1,4 +1,4 @@
-package avadamedia.kinocms.repository;
+package avadamedia.kinocms.repository.banners;
 
 import avadamedia.kinocms.model.banners.BackgroundBanner;
 import avadamedia.kinocms.model.banners.MainBanner;

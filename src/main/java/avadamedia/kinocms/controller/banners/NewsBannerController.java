@@ -30,9 +30,9 @@ public class NewsBannerController {
 
     @PostMapping("add")
     public String addNewsBanner(NewsBanner newsBanner,
-                                @RequestParam("fileImage") MultipartFile file) throws IOException {
+                                @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        newsBanner.setImageName(fileName);
+        newsBanner.setMainImage(fileName);
         service.createNewsBanner(newsBanner);
         String uploadDir = "news-banners/" + newsBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
@@ -53,9 +53,9 @@ public class NewsBannerController {
     }
 
     @PutMapping("update")
-    public String updateNewsBanner(NewsBanner newsBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
+    public String updateNewsBanner(NewsBanner newsBanner, @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        newsBanner.setImageName(fileName);
+        newsBanner.setMainImage(fileName);
         service.updateNewsBanner(newsBanner);
         String uploadDir = "news-banners/" + newsBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);

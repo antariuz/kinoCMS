@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}" lang="en">
+<head>
+    <title>Пользователи</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Список новостей</h3>
+            <div class="card-tools">
+                <a class="btn btn-tool btn-success" href="news/add"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Дата создания</th>
+                            <th>Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="news,iterator : ${newsList}">
+                            <td th:text="${news.name}"></td>
+                            <td th:text="${#dates.format(news.createdDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${news.status}"></td>
+                            <td><a th:href="${'news/update/' + news.id}"><i class="fas fa-edit"></i></a></td>
+                            <td><a th:href="${'news/delete/' + news.id}"><i class="fas fa-trash"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

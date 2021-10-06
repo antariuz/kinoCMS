@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Кинотеатры</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <!--Cinema List-->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Список кинотеатров
+            </h3>
+            <div class="card-tools">
+                <a class="btn btn-tool btn-success" href="cinemas/add"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="col-3" th:each="cinema : ${cinemas}">
+                    <div class="row">
+                        <div class="col text-right">
+                            <a th:href="${'cinemas/delete/' + cinema.id}"
+                               class="btn-sm btn-danger"><i class="fas fa-minus"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <a th:href="${'cinemas/update/' + cinema.id}">
+                                <img th:src="${cinema.getImagePath()}" th:style="'width:100px; height:100px'">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center font-weight-bold">
+                            <h5 th:text="${cinema.name}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -17,8 +17,8 @@ import javax.persistence.Table;
 @Table(name = "main_banners")
 public class MainBanner extends MappedEntity {
 
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "main_image")
+    private String mainImage;
     @Column(name = "url")
     private String url;
     @Column(name = "text")
@@ -26,8 +26,8 @@ public class MainBanner extends MappedEntity {
 
     @Transient
     public String getImagePath() {
-        if (imageName == null || getId() == null) return null;
-        return "/uploaded-images/main-banners/" + getId() + "/" + imageName;
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/main-banners/" + getId() + "/" + mainImage;
     }
 
 }

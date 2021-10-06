@@ -1,9 +1,10 @@
-package avadamedia.kinocms.repository;
+package avadamedia.kinocms.repository.cinemas;
 
+import avadamedia.kinocms.model.cinemas.Cinema;
 import avadamedia.kinocms.model.movies.CurrentMovie;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CurrentMovieRepository extends CrudRepository<CurrentMovie, Long> {
+public interface CinemaRepository extends CrudRepository<Cinema, Long> {
 }

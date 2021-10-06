@@ -7,6 +7,7 @@ import avadamedia.kinocms.model.common.SEO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,9 +24,9 @@ public class Cinema extends MappedEntity {
     @Column
     private String description;
     @Column
-    private String condition;
-    @Column
-    private String logo;
+    private String conditions;
+    @Column(name = "main_image")
+    private String mainImage;
     @Column(name = "top_banner")
     private String topBanner;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
@@ -37,5 +38,11 @@ public class Cinema extends MappedEntity {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
             cascade = CascadeType.ALL, mappedBy = "cinema")
     private SEO SEOBlock;
+
+    @Transient
+    public String getImagePath() {
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/cinemas/" + getId() + "/" + mainImage;
+    }
 
 }

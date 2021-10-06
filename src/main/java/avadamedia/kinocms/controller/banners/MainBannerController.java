@@ -1,7 +1,9 @@
 package avadamedia.kinocms.controller.banners;
 
-import avadamedia.kinocms.model.common.FileUploadUtil;
+
+
 import avadamedia.kinocms.model.banners.MainBanner;
+import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.service.MainBannerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +32,9 @@ public class MainBannerController {
 
     @PostMapping("add")
     public String addMainBanner(MainBanner mainBanner,
-                                @RequestParam("fileImage") MultipartFile file) throws IOException {
+                                @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        mainBanner.setImageName(fileName);
+        mainBanner.setMainImage(fileName);
         service.createMainBanner(mainBanner);
         String uploadDir = "main-banners/" + mainBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
@@ -53,9 +55,9 @@ public class MainBannerController {
     }
 
     @PutMapping("update")
-    public String updateMainBanner(MainBanner mainBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
+    public String updateMainBanner(MainBanner mainBanner, @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        mainBanner.setImageName(fileName);
+        mainBanner.setMainImage(fileName);
         service.updateMainBanner(mainBanner);
         String uploadDir = "main-banners/" + mainBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);

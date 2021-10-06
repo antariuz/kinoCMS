@@ -17,13 +17,13 @@ import javax.persistence.Table;
 @Table(name = "background_banner")
 public class BackgroundBanner extends MappedEntity {
 
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "main_image")
+    private String mainImage;
 
     @Transient
     public String getImagePath() {
-        if (imageName == null || getId() == null) return null;
-        return "/uploaded-images/background-banners/" + imageName;
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/background-banners/" + mainImage;
     }
 
 }

@@ -1,7 +1,7 @@
 package avadamedia.kinocms.service.impl;
 
 import avadamedia.kinocms.model.movies.CurrentMovie;
-import avadamedia.kinocms.repository.CurrentMovieRepository;
+import avadamedia.kinocms.repository.movies.CurrentMovieRepository;
 import avadamedia.kinocms.service.CurrentMovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

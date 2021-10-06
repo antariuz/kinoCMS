@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Изменяем кинозал</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:method="PUT" th:object="${cinemaHall}" th:action="@{/admin/cinemas/halls/update}"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}" th:value="${cinemaHall.id}"/>
+
+        <!--Main face-->
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="number">Номер кинозала</label>
+                            <input type="number" class="form-control" id="number"
+                                   th:placeholder="'Номер кинозала'" th:field="*{number}">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="Description">Описание</label>
+                            <textarea class="form-control" rows="3" id="Description" th:placeholder="Описание"
+                                      th:field="*{description}"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="hallScheme">Схема зала</label>
+                            <div class="custom-file">
+                                <input type="file" name="hallScheme" class="custom-file-input" id="hallScheme"
+                                       accept="image/png, image/jpeg" required="">
+                                <label class="custom-file-label" for="hallScheme">Выберите картинку</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="topBannerImage">Вверхий баннера</label>
+                            <div class="custom-file">
+                                <input type="file" name="mainImage" class="custom-file-input" id="topBannerImage"
+                                       accept="image/png, image/jpeg" required="">
+                                <label class="custom-file-label" for="topBannerImage">Выберите картинку</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Image gallery-->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title font-weight-bold ">Галерея картинок</h3>
+                <div class="card-tools">
+                    <a class="btn btn-tool btn-success" href="#"><i class="fas fa-plus-square"></i></a>
+                </div>
+            </div>
+            <div class="card-body pt-2">
+                <div class="row">
+                    <div class="col-12">
+                        <span>Размер: 1000x190</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 d-flex" th:each="image : ${imageList}">
+                        <table class="table table-bordered text-center">
+                            <tr>
+                                <td colspan="2">
+                                    <img th:src="#" th:style="'width:100px; height:100px'">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a th:href="#"
+                                       class="btn btn-warning">Обновить</a>
+                                </td>
+                                <td>
+                                    <a th:href="#"
+                                       class="btn btn-danger">Удалить</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Seo block-->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title font-weight-bold ">SEO блок</h3>
+            </div>
+            <div class="card-body pt-2" th:object="${seo}">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="seoURL">URL</label>
+                        <input type="text" class="form-control" id="seoURL" th:placeholder="URL"
+                               th:field="*{url}">
+                    </div>
+                    <div class="col-4">
+                        <label for="seoTitle">Title</label>
+                        <input type="text" class="form-control" id="seoTitle" th:placeholder="Title"
+                               th:field="*{title}">
+                    </div>
+                    <div class="col-4">
+                        <label for="seoKeywords">Keywords</label>
+                        <input type="text" class="form-control" id="seoKeywords" th:placeholder="Keywords"
+                               th:field="*{keywords}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="seoDescription">Description</label>
+                        <textarea class="form-control" rows="3" id="seoDescription" placeholder="Description"
+                                  name="description" spellcheck="false" th:field="*{description}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Action button-->
+        <div class="row">
+            <div class="col-12 text-center pb-3">
+                <button class="btn btn-lg mr-3 btn btn-success">Добавить</button>
+                <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/cinemas}">Отменить</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -11,7 +11,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("admin/dashboard")
+    @RequestMapping({"admin/dashboard","admin","admin/"})
     public String showAdminPage(){
         return "admin/dashboard";
     }

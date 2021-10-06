@@ -11,6 +11,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -25,15 +26,19 @@ public class CurrentMovie extends MappedEntity {
     private String name;
     @Column
     private String description;
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "main_image")
+    private String mainImage;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
             cascade = CascadeType.ALL, mappedBy = "currentMovie")
     private List<Image> images;
     @Column
     private String trailerUrl;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<MovieType> movieType;
+
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Set<MovieType> movieType = new HashSet<>();
+
+
+
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
             cascade = CascadeType.ALL, mappedBy = "currentMovie")
     private SEO SEOBlock;
@@ -43,8 +48,8 @@ public class CurrentMovie extends MappedEntity {
 
     @Transient
     public String getImagePath() {
-        if (imageName == null || getId() == null) return null;
-        return "/uploaded-images/current-movies/" + getId() + "/" + imageName;
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/current-movies/" + getId() + "/" + mainImage;
     }
 
 }

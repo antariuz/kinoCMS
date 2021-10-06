@@ -6,6 +6,7 @@ import avadamedia.kinocms.model.common.SEO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -38,5 +39,11 @@ public class News extends MappedEntity {
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
             cascade = CascadeType.ALL, mappedBy = "news")
     private SEO SEOBlock;
+
+    @Transient
+    public String getImagePath() {
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/news/" + getId() + "/" + mainImage;
+    }
 
 }

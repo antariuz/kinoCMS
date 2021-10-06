@@ -1,114 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/template/index.html}" lang="en">
+      layout:decorate="~{admin/template/index.html}">
 <head>
     <title>Баннеры</title>
 </head>
 <body>
 
 <div layout:fragment="content">
-    <br>
+    <!--Current Movie List-->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Список текущих фильмов</h3>
+            <h3 class="card-title font-weight-bold">Список текущих фильмов</h3>
             <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
+                <a class="btn btn-tool btn-success" href="movies/current/add"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
-        <div class="card-body" style="display: block;">
-            <div class="row col-12">
-                <th:block th:each="currentMovie : ${currentMovies}">
-                    <div class="col-3 d-flex">
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td colspan="2">
-                                    <img th:src="${currentMovie.getImagePath()}" th:style="'width:100px; height:100px'">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h5 th:text="${currentMovie.name}"></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a th:href="${'movies/current/update/' + currentMovie.id}"
-                                       class="btn btn-block btn-warning">Обновить</a>
-                                </td>
-                                <td>
-                                    <a th:href="${'movies/current/delete/' + currentMovie.id}"
-                                       class="btn btn-block btn-danger">Удалить</a>
-                                </td>
-                            </tr>
-                        </table>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2" th:each="currentMovie : ${currentMovies}">
+                    <div class="row">
+                        <div class="col text-right">
+                            <a th:href="${'movies/current/delete/' + currentMovie.id}"
+                               class="btn-sm btn-danger"><i class="fas fa-minus"></i>
+                            </a>
+                        </div>
                     </div>
-                </th:block>
-                <div class="col-1 d-flex">
-                    <table class="table table-bordered text-center">
-                        <tr>
-                            <td rowspan="2" style="vertical-align : middle;text-align:center;">
-                                <a href="movies/current/add" class="btn btn-block btn-success">Добавить</a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col text-center">
+                            <a th:href="${'movies/current/update/' + currentMovie.id}">
+                                <img th:src="${currentMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h5 th:text="${currentMovie.name}"></h5>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-
+    <!--Coming Movie List-->
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Список фильмов ожидающие проката</h3>
+            <h3 class="card-title font-weight-bold">Список фильмов ожидающие проката</h3>
             <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
+                <a class="btn btn-tool btn-success" href="movies/coming/add"><i class="fas fa-plus-square"></i></a>
             </div>
         </div>
-        <div class="card-body" style="display: block;">
-            <div class="row col-12">
-                <th:block th:each="comingMovie : ${comingMovies}">
-                    <div class="col-3 d-flex">
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td colspan="2">
-                                    <img th:src="${comingMovie.getImagePath()}" th:style="'width:100px; height:100px'">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <h5 th:text="${comingMovie.name}"></h5>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a th:href="${'movies/coming/update/' + comingMovie.id}"
-                                       class="btn btn-block btn-warning">Обновить</a>
-                                </td>
-                                <td>
-                                    <a th:href="${'movies/coming/delete/' + comingMovie.id}"
-                                       class="btn btn-block btn-danger">Удалить</a>
-                                </td>
-                            </tr>
-                        </table>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-2" th:each="comingMovie : ${comingMovies}">
+                    <div class="row">
+                        <div class="col text-right">
+                            <a th:href="${'movies/coming/delete/' + comingMovie.id}"
+                               class="btn-sm btn-danger"><i class="fas fa-minus"></i>
+                            </a>
+                        </div>
                     </div>
-                </th:block>
-                <div class="col-1 d-flex">
-                    <table class="table table-bordered text-center">
-                        <tr>
-                            <td rowspan="3" style="vertical-align : middle;text-align:center;">
-                                <a href="movies/coming/add" class="btn btn-block btn-success">Добавить</a>
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                        <div class="col text-center">
+                            <a th:href="${'movies/coming/update/' + comingMovie.id}">
+                                <img th:src="${comingMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <h5 th:text="${comingMovie.name}"></h5>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <br>
-
 </div>
 
 </body>

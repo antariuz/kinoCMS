@@ -17,15 +17,15 @@ import javax.persistence.Table;
 @Table(name = "news_banners")
 public class NewsBanner extends MappedEntity {
 
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "main_image")
+    private String mainImage;
     @Column(name = "url")
     private String url;
 
     @Transient
     public String getImagePath() {
-        if (imageName == null || getId() == null) return null;
-        return "/uploaded-images/news-banners/" + getId() + "/" + imageName;
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/news-banners/" + getId() + "/" + mainImage;
     }
 
 }

@@ -25,8 +25,8 @@ public class ComingMovie extends MappedEntity {
     private String name;
     @Column
     private String description;
-    @Column(name = "image_name")
-    private String imageName;
+    @Column(name = "main_image")
+    private String mainImage;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
             cascade = CascadeType.ALL, mappedBy = "comingMovie")
     private List<Image> images;
@@ -43,8 +43,8 @@ public class ComingMovie extends MappedEntity {
 
     @Transient
     public String getImagePath() {
-        if (imageName == null || getId() == null) return null;
-        return "/uploaded-images/coming-movies/" + getId() + "/" + imageName;
+        if (mainImage == null || getId() == null) return null;
+        return "/uploaded-images/coming-movies/" + getId() + "/" + mainImage;
     }
 
 }

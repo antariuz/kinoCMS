@@ -1,7 +1,7 @@
 package avadamedia.kinocms.service.impl;
 
 import avadamedia.kinocms.model.banners.NewsBanner;
-import avadamedia.kinocms.repository.NewsBannerRepository;
+import avadamedia.kinocms.repository.banners.NewsBannerRepository;
 import avadamedia.kinocms.service.NewsBannerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

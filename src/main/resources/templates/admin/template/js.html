@@ -3,6 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/js/adminlte.min.js"></script>
 <!-- bs-custom-file-input -->
 <script src="/admin/js/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         bsCustomFileInput.init();
@@ -10,7 +11,7 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#fileImage').change(function () {
+        $('#mainImage').change(function () {
             showImageThumbnail(this);
             document.getElementById("thumbnail").style.display = 'inline';
         });

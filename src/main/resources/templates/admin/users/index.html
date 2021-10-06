@@ -6,17 +6,17 @@
 </head>
 <body>
 <div layout:fragment="content">
-
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0"><i class="fas fa-users"></i> Пользователи</h1>
-                    <a th:href="@{users/add}">Добавить пользователя</a>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <div class="form-inline float-sm-right">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Список пользователей</h3>
+            <div class="card-tools">
+                <a class="btn btn-tool btn-success" href="users/add"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="col">
+                    <div class="form-inline float-right">
                         <div class="input-group" data-widget="sidebar-search">
                             <input class="form-control form-control-sidebar" type="search" placeholder="Search"
                                    aria-label="Search">
@@ -27,17 +27,11 @@
                             </div>
                         </div>
                     </div>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <div class="row">
-        <div class="col-lg">
-            <div class="main-card mb-3 card">
-                <div class="card-body">
-                    <table class="mb-0 table table-bordered">
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-12">
+                    <table class="table table-bordered text-center">
                         <thead>
                         <tr>
                             <th>ID</th>

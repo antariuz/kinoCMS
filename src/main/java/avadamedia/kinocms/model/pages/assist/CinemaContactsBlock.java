@@ -21,8 +21,8 @@ public class CinemaContactsBlock extends MappedEntity {
     private String address;
     @Column(name = "map_coordinates")
     private String mapCoordinates;
-    @Column(name = "logo")
-    private String logo;
+    @Column(name = "main_image")
+    private String mainImage;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contacts_page_id")
     private ContactsPage contactsPage;

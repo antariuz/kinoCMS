@@ -1,7 +1,7 @@
 package avadamedia.kinocms.service.impl;
 
 import avadamedia.kinocms.model.banners.BackgroundBanner;
-import avadamedia.kinocms.repository.BackgroundBannerRepository;
+import avadamedia.kinocms.repository.banners.BackgroundBannerRepository;
 import avadamedia.kinocms.service.BackgroundBannerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

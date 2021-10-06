@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("admin/movies")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class MoviesPageController {
+public class MoviesController {
 
     private final CurrentMovieService currentMovieService;
     private final ComingMovieService comingMovieService;

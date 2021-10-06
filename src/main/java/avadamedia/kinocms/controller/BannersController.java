@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("admin/banners")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class BannersPageController {
+public class BannersController {
 
     private final MainBannerService mainBannerService;
     private final BackgroundBannerService backgroundBannerService;

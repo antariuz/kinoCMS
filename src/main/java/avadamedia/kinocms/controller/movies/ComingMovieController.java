@@ -1,8 +1,10 @@
-package avadamedia.kinocms.controller.movie;
+package avadamedia.kinocms.controller.movies;
 
 import avadamedia.kinocms.model.common.FileUploadUtil;
+import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.movies.ComingMovie;
 import avadamedia.kinocms.service.ComingMovieService;
+import avadamedia.kinocms.service.MovieTypeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,20 +21,23 @@ import java.io.IOException;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ComingMovieController {
 
-    private final ComingMovieService service;
+    private final ComingMovieService comingMovieService;
+    private final MovieTypeService movieTypeService;
 
     //    Add part
     @GetMapping("add")
     public String addComingMovie(Model model) {
         model.addAttribute("comingMovie", new ComingMovie());
+        model.addAttribute("movieTypes", movieTypeService.getAllMovieTypes());
+        model.addAttribute("seo", new SEO());
         return "/admin/movies/coming/add";
     }
 
     @PostMapping("add")
-    public String addComingMovie(ComingMovie comingMovie, @RequestParam("fileImage") MultipartFile file) throws IOException {
+    public String addComingMovie(ComingMovie comingMovie, @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        comingMovie.setImageName(fileName);
-        service.createComingMovie(comingMovie);
+        comingMovie.setMainImage(fileName);
+        comingMovieService.createComingMovie(comingMovie);
         String uploadDir = "coming-movies/" + comingMovie.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/movies";
@@ -41,21 +46,25 @@ public class ComingMovieController {
     //    Delete part
     @GetMapping("delete/{id}")
     public String deleteComingMovie(@PathVariable("id") Long id) {
-        service.deleteComingMovieById(id);
+        comingMovieService.deleteComingMovieById(id);
         return "redirect:/admin/movies";
     }
 
     //    Update part
     @GetMapping("update/{id}")
     public ModelAndView updateComingMovie(@PathVariable("id") Long id) {
-        return new ModelAndView("/admin/movies/coming/update", "comingMovie", service.getComingMovieById(id));
+        ModelAndView mav = new ModelAndView("/admin/movies/coming/update");
+        mav.addObject("comingMovie", comingMovieService.getComingMovieById(id));
+        mav.addObject("movieTypes", movieTypeService.getAllMovieTypes());
+        mav.addObject("seo", new SEO());
+        return mav;
     }
 
     @PutMapping("update")
-    public String updateComingMovie(ComingMovie comingMovie, @RequestParam("fileImage") MultipartFile file) throws IOException {
+    public String updateComingMovie(ComingMovie comingMovie, @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        comingMovie.setImageName(fileName);
-        service.updateComingMovie(comingMovie);
+        comingMovie.setMainImage(fileName);
+        comingMovieService.updateComingMovie(comingMovie);
         String uploadDir = "coming-movies/" + comingMovie.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/movies";

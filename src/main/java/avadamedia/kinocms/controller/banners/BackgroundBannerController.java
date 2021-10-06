@@ -20,9 +20,9 @@ public class BackgroundBannerController {
     private final BackgroundBannerService service;
 
     @PutMapping("update")
-    public String updateBackgroundBanner(BackgroundBanner backgroundBanner, @RequestParam("fileImage") MultipartFile file) throws IOException {
+    public String updateBackgroundBanner(BackgroundBanner backgroundBanner, @RequestParam("mainImage") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        backgroundBanner.setImageName(fileName);
+        backgroundBanner.setMainImage(fileName);
         service.updateBackgroundBanner(backgroundBanner);
         String uploadDir = "background-banners/";
         FileUploadUtil.saveFile(uploadDir, fileName, file);
