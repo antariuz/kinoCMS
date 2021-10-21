@@ -14,4 +14,6 @@ public interface CinemaHallService {
 
     CinemaHall getCinemaHallById(Long id);
 
+    Long getLastId();
+
 }

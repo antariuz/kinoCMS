@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/template/index.html}">
 <head>
-    <title>Баннеры</title>
+    <title>Фильмы</title>
 </head>
 <body>
 
@@ -17,8 +17,8 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-2" th:each="currentMovie : ${currentMovies}">
-                    <div class="row">
+                <div class="col-3" th:each="currentMovie : ${currentMovies}">
+                    <div class="row ">
                         <div class="col text-right">
                             <a th:href="${'movies/current/delete/' + currentMovie.id}"
                                class="btn-sm btn-danger"><i class="fas fa-minus"></i>
@@ -28,12 +28,12 @@
                     <div class="row">
                         <div class="col text-center">
                             <a th:href="${'movies/current/update/' + currentMovie.id}">
-                                <img th:src="${currentMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                                <img th:src="${currentMovie.getImagePath()}" th:style="'width:75%'">
                             </a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col text-center">
+                        <div class="col text-center font-weight-bold">
                             <h5 th:text="${currentMovie.name}"></h5>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-2" th:each="comingMovie : ${comingMovies}">
+                <div class="col-3" th:each="comingMovie : ${comingMovies}">
                     <div class="row">
                         <div class="col text-right">
                             <a th:href="${'movies/coming/delete/' + comingMovie.id}"
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="col text-center">
                             <a th:href="${'movies/coming/update/' + comingMovie.id}">
-                                <img th:src="${comingMovie.getImagePath()}" th:style="'width:100px; height:100px'">
+                                <img th:src="${comingMovie.getImagePath()}" th:style="'width:75%'">
                             </a>
                         </div>
                     </div>

@@ -1,20 +1,24 @@
 package avadamedia.kinocms.controller.movies;
 
 import avadamedia.kinocms.model.common.FileUploadUtil;
+import avadamedia.kinocms.model.common.Image;
 import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.movies.ComingMovie;
+import avadamedia.kinocms.model.movies.assist.MovieInfo;
 import avadamedia.kinocms.service.ComingMovieService;
-import avadamedia.kinocms.service.MovieTypeService;
+import avadamedia.kinocms.service.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Controller
 @RequestMapping("admin/movies/coming")
@@ -22,25 +26,16 @@ import java.io.IOException;
 public class ComingMovieController {
 
     private final ComingMovieService comingMovieService;
-    private final MovieTypeService movieTypeService;
+    private final ImageService imageService;
 
-    //    Add part
     @GetMapping("add")
-    public String addComingMovie(Model model) {
-        model.addAttribute("comingMovie", new ComingMovie());
-        model.addAttribute("movieTypes", movieTypeService.getAllMovieTypes());
-        model.addAttribute("seo", new SEO());
-        return "/admin/movies/coming/add";
-    }
-
-    @PostMapping("add")
-    public String addComingMovie(ComingMovie comingMovie, @RequestParam("mainImage") MultipartFile file) throws IOException {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        comingMovie.setMainImage(fileName);
+    public String addComingMovie() {
+        ComingMovie comingMovie = new ComingMovie();
+        comingMovie.setMovieTypes(new HashSet<>());
+        comingMovie.setMovieInfo(new MovieInfo());
+        comingMovie.setSeo(new SEO());
         comingMovieService.createComingMovie(comingMovie);
-        String uploadDir = "coming-movies/" + comingMovie.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
-        return "redirect:/admin/movies";
+        return "redirect:/admin/movies/coming/update/" + comingMovieService.getLastId();
     }
 
     //    Delete part
@@ -55,17 +50,21 @@ public class ComingMovieController {
     public ModelAndView updateComingMovie(@PathVariable("id") Long id) {
         ModelAndView mav = new ModelAndView("/admin/movies/coming/update");
         mav.addObject("comingMovie", comingMovieService.getComingMovieById(id));
-        mav.addObject("movieTypes", movieTypeService.getAllMovieTypes());
-        mav.addObject("seo", new SEO());
+        mav.addObject("movieTypes", comingMovieService.getComingMovieById(id).getMovieTypes());
+        mav.addObject("movieInfo", comingMovieService.getComingMovieById(id).getMovieInfo());
+        mav.addObject("seo", comingMovieService.getComingMovieById(id).getSeo());
         return mav;
     }
 
     @PutMapping("update")
-    public String updateComingMovie(ComingMovie comingMovie, @RequestParam("mainImage") MultipartFile file) throws IOException {
+    public String updateComingMovie(ComingMovie comingMovie, MovieInfo movieInfo, SEO seo,
+                                    @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        comingMovie.setMainImage(fileName);
-        comingMovieService.updateComingMovie(comingMovie);
         String uploadDir = "coming-movies/" + comingMovie.getId();
+        comingMovie.setMainImage(fileName);
+        comingMovie.setMovieInfo(movieInfo);
+        comingMovie.setSeo(seo);
+        comingMovieService.updateComingMovie(comingMovie);
         FileUploadUtil.saveFile(uploadDir, fileName, file);
         return "redirect:/admin/movies";
     }

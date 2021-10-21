@@ -25,14 +25,9 @@ public class BannersController {
     public ModelAndView showAllBanners() {
         ModelAndView mav = new ModelAndView("/admin/banners/index");
         mav.addObject("mainBanners", mainBannerService.getAllMainBanners());
-        mav.addObject("backgroundBanner", getBackgroundBanner());
+        mav.addObject("backgroundBanner", backgroundBannerService.getBackgroundBannerById(1L));
         mav.addObject("newsBanners", newsBannerService.getAllNewsBanners());
         return mav;
-    }
-
-    public BackgroundBanner getBackgroundBanner() {
-        return backgroundBannerService
-                .getBackgroundBannerById(backgroundBannerService.getMaxId());
     }
 
 }

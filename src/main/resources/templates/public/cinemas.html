@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/public/template/index.html}">
+<head>
+    <title>KinoCMS</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <!--Top Banners-->
+        <div class="col-12 pb-2" th:if="${!mainBanners.isEmpty()}">
+            <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <th:block th:each="mainBanner : ${mainBanners}">
+                        <div class="carousel-item active" th:if="${mainBanner.id==firstMainBanner}">
+                            <img class="d-block w-100" th:src="${mainBanner.getImagePath()}"
+                                 th:alt="${mainBanner.mainImage}">
+                        </div>
+
+                        <div class="carousel-item" th:if="${mainBanner.id&gt;firstMainBanner}">
+                            <img class="d-block w-100" th:src="${mainBanner.getImagePath()}"
+                                 th:alt="${mainBanner.mainImage}">
+                        </div>
+                    </th:block>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#topBanner" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#topBanner" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row pb-2">
+        <div class="col-10">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Наши кинотеатры</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <img th:src="@{/images/preloader-logo.png}" th:style="'width:100%'">
+                </div>
+                <div class="col-6">
+                    <img th:src="@{/images/preloader-logo.png}" th:style="'width:100%'">
+                </div>
+            </div>
+
+        </div>
+        <div class="col-2">
+            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+        </div>
+    </div>
+</div>
+</body>
+</html>

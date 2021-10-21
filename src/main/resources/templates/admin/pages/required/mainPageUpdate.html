@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Обновляем главную страницу</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:method="PUT" th:object="${mainPage}" th:action="@{/admin/pages/update}"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}" th:value="${mainPage.id}"/>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="phoneNumbers">Название страницы</label>
+                    <input type="text" class="form-control" id="phoneNumbers" th:placeholder="'777 85 98'"
+                           th:field="*{firstPhoneNumber}" required="">
+                    <input type="text" class="form-control" th:placeholder="'777 85 98'"
+                           th:field="*{secondPhoneNumber}" required="">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="status">Статус</label><br>
+                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           id="status" th:field="*{status}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="description">SEO текст</label>
+                    <textarea class="form-control" rows="3" id="description" th:placeholder="Текст"
+                              th:field="*{seoText}"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!--Seo block-->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title font-weight-bold ">SEO блок</h3>
+            </div>
+            <div class="card-body pt-2" th:object="${seo}">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="seoURL">URL</label>
+                        <input type="text" class="form-control" id="seoURL" th:placeholder="URL"
+                               th:field="*{url}">
+                    </div>
+                    <div class="col-4">
+                        <label for="seoTitle">Title</label>
+                        <input type="text" class="form-control" id="seoTitle" th:placeholder="Title"
+                               th:field="*{title}">
+                    </div>
+                    <div class="col-4">
+                        <label for="seoKeywords">Keywords</label>
+                        <input type="text" class="form-control" id="seoKeywords" th:placeholder="Keywords"
+                               th:field="*{keywords}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="seoDescription">Description</label>
+                        <textarea class="form-control" rows="3" id="seoDescription" placeholder="Description"
+                                  name="description" spellcheck="false" th:field="*{seoDescription}"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Action button-->
+        <div class="row">
+            <div class="col-12 text-center pb-3">
+                <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
+                <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/pages}">Отменить</a>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,7 +1,6 @@
 package avadamedia.kinocms.controller.banners;
 
 
-
 import avadamedia.kinocms.model.banners.MainBanner;
 import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.service.MainBannerService;
@@ -13,6 +12,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 
@@ -31,14 +31,14 @@ public class MainBannerController {
     }
 
     @PostMapping("add")
-    public String addMainBanner(MainBanner mainBanner,
-                                @RequestParam("mainImage") MultipartFile file) throws IOException {
+    public RedirectView addMainBanner(MainBanner mainBanner,
+                                      @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         mainBanner.setMainImage(fileName);
         service.createMainBanner(mainBanner);
         String uploadDir = "main-banners/" + mainBanner.getId();
         FileUploadUtil.saveFile(uploadDir, fileName, file);
-        return "redirect:/admin/banners";
+        return new RedirectView("/admin/banners", true);
     }
 
     //    Delete part
@@ -55,7 +55,7 @@ public class MainBannerController {
     }
 
     @PutMapping("update")
-    public String updateMainBanner(MainBanner mainBanner, @RequestParam("mainImage") MultipartFile file) throws IOException {
+    public String updateMainBanner(MainBanner mainBanner, @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         mainBanner.setMainImage(fileName);
         service.updateMainBanner(mainBanner);

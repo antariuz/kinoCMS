@@ -38,11 +38,5 @@ public class MovieInfo extends MappedEntity {
     private String ageRestriction;
     @Column
     private String time;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "current_movie_id")
-    private CurrentMovie currentMovie;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "coming_movie_id")
-    private ComingMovie comingMovie;
 
 }

@@ -25,7 +25,7 @@ public class NewsController {
     //    Show all News
     @GetMapping({"/", ""})
     public ModelAndView showAllNews() {
-        return new ModelAndView("/admin/news/index", "news", service.getAllNews());
+        return new ModelAndView("/admin/news/index", "newsList", service.getAllNews());
     }
 
     //    Add part
@@ -38,7 +38,7 @@ public class NewsController {
 
     @PostMapping("add")
     public String addNews(News news,
-                          @RequestParam("mainImage") MultipartFile file) throws IOException {
+                          @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         news.setMainImage(fileName);
         service.createNews(news);
@@ -65,7 +65,7 @@ public class NewsController {
 
     @PutMapping("update")
     public String updateNews(News news,
-                             @RequestParam("mainImage") MultipartFile file) throws IOException {
+                             @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         news.setMainImage(fileName);
         service.updateNews(news);

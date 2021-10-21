@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -11,6 +11,10 @@
 
 <body class="sidebar-mini layout-fixed">
 <div class="wrapper">
+    <!-- Preloader -->
+    <div class="preloader flex-column justify-content-center align-items-center dark-mode">
+        <img class="animation__shake" src="/images/preloader-logo.png" alt="KinoCMS" height="250" width="250">
+    </div>
     <div th:replace="/admin/template/navbar"></div>
     <div th:replace="/admin/template/sidebar"></div>
     <!-- Content Wrapper. Contains page content -->
@@ -20,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 pt-3" layout:fragment="content">
-                <p>Page content goes here</p>
+                        <p>Page content goes here</p>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->

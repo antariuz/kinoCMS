@@ -31,14 +31,17 @@ public class News extends MappedEntity {
     private String description;
     @Column(name = "main_image")
     private String mainImage;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "news")
-    private List<Image> images;
+
+    @OneToMany
+    @JoinColumn(name = "image_list_id")
+    private List<Image> imageList;
+
     @Column
     private String trailerUrl;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "news")
-    private SEO SEOBlock;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
     @Transient
     public String getImagePath() {

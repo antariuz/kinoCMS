@@ -14,4 +14,6 @@ public interface ComingMovieService {
 
     ComingMovie getComingMovieById(Long id);
 
+    Long getLastId();
+
 }

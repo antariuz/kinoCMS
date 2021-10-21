@@ -11,13 +11,13 @@ import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "current_movies")
 public class CurrentMovie extends MappedEntity {
@@ -28,22 +28,23 @@ public class CurrentMovie extends MappedEntity {
     private String description;
     @Column(name = "main_image")
     private String mainImage;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "currentMovie")
-    private List<Image> images;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_list_id")
+    private List<Image> imageList = new ArrayList<>();
+
     @Column
     private String trailerUrl;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<MovieType> movieType = new HashSet<>();
+    @ManyToMany
+    private Set<MovieType> movieTypes = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
-
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "currentMovie")
-    private SEO SEOBlock;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "currentMovie")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_info_id")
     private MovieInfo movieInfo;
 
     @Transient

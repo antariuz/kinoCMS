@@ -38,7 +38,7 @@ public class PromotionController {
 
     @PostMapping("add")
     public String addCurrentMovie(Promotion promotion,
-                                  @RequestParam("mainImage") MultipartFile file) throws IOException {
+                                  @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         promotion.setMainImage(fileName);
         service.createPromotion(promotion);
@@ -65,7 +65,7 @@ public class PromotionController {
 
     @PutMapping("update")
     public String updateCurrentMovie(Promotion promotion,
-                                     @RequestParam("mainImage") MultipartFile file) throws IOException {
+                                     @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         promotion.setMainImage(fileName);
         service.updatePromotion(promotion);

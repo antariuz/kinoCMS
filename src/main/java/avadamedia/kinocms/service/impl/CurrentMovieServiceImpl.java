@@ -38,4 +38,9 @@ public class CurrentMovieServiceImpl implements CurrentMovieService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getLastId() {
+        return repository.getLastId();
+    }
+
 }

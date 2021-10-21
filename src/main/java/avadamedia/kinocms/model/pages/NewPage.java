@@ -25,11 +25,13 @@ public class NewPage extends MappedEntity {
     private String description;
     @Column(name = "main_image")
     private String mainImage;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "newPage")
-    private List<Image> images;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "newPage")
-    private SEO SEOBlock;
+
+    @OneToMany
+    @JoinColumn(name = "image_list_id")
+    private List<Image> imageList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
 }

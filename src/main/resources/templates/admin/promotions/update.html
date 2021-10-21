@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/template/index.html}" lang="en">
+      layout:decorate="~{admin/template/index.html}">
 <head>
     <title>Обновляем новость</title>
 </head>
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label for="mainImage">Главная картинка</label>
                     <div class="custom-file">
-                        <input type="file" name="mainImage" class="custom-file-input" id="mainImage"
+                        <input type="file" name="image" class="custom-file-input" id="mainImage"
                                accept="image/png, image/jpeg" required="">
                         <label class="custom-file-label" for="mainImage">Выберите картинку</label>
                     </div>
@@ -125,7 +125,7 @@
                     <div class="col-12">
                         <label for="seoDescription">Description</label>
                         <textarea class="form-control" rows="3" id="seoDescription" placeholder="Description"
-                                  name="description" spellcheck="false" th:field="*{description}"></textarea>
+                                  name="description" spellcheck="false" th:field="*{seoDescription}"></textarea>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
         <!--Action button-->
         <div class="row">
             <div class="col-12 text-center pb-3">
-                <button class="btn btn-lg mr-3 btn btn-success">Добавить</button>
+                <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
                 <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/movies}">Отменить</a>
             </div>
         </div>

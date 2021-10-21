@@ -14,4 +14,6 @@ public interface CurrentMovieService {
 
     CurrentMovie getCurrentMovieById(Long id);
 
+    Long getLastId();
+
 }

@@ -14,6 +14,6 @@ public interface BackgroundBannerService {
 
     BackgroundBanner getBackgroundBannerById(Long id);
 
-    Long getMaxId();
+    Long getLastId();
 
 }

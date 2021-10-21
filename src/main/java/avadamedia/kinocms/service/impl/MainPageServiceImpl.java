@@ -38,4 +38,9 @@ public class MainPageServiceImpl implements MainPageService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getMaxId() {
+        return repository.getMaxId();
+    }
+
 }

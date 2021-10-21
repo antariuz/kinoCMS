@@ -15,16 +15,17 @@ import javax.persistence.*;
 @Table(name = "main_page")
 public class MainPage extends MappedEntity {
 
-    @Column
+    @Column(name = "first_phone_number")
     private String firstPhoneNumber;
-    @Column
+    @Column(name = "second_phone_number")
     private String secondPhoneNumber;
     @Column
     private boolean status;
     @Column
     private String seoText;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "mainPage")
-    private SEO SEOBlock;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
 }

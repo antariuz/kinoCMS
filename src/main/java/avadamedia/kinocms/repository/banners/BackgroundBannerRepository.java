@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BackgroundBannerRepository extends CrudRepository<BackgroundBanner, Long> {
     @Query(value = "SELECT MAX(id) FROM background_banner", nativeQuery = true)
-    Long getMaxId();
+    Long getLastId();
 }

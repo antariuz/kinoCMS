@@ -14,4 +14,6 @@ public interface MainBannerService {
 
     MainBanner getMainBannerById(Long id);
 
+    Long getFirstId();
+
 }

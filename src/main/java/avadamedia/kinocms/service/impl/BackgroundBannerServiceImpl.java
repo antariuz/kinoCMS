@@ -29,18 +29,18 @@ public class BackgroundBannerServiceImpl implements BackgroundBannerService {
     }
 
     @Override
-    public Iterable<BackgroundBanner> getAllBackgroundBanners() {
-        return repository.findAll();
-    }
-
-    @Override
     public BackgroundBanner getBackgroundBannerById(Long id) {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override
-    public Long getMaxId() {
-        return repository.getMaxId();
+    public Iterable<BackgroundBanner> getAllBackgroundBanners(){
+        return repository.findAll();
+    }
+
+    @Override
+    public Long getLastId() {
+        return repository.getLastId();
     }
 
 }

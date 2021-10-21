@@ -1,7 +1,7 @@
 package avadamedia.kinocms.model.mailing;
 
 import avadamedia.kinocms.model.common.MappedEntity;
-import avadamedia.kinocms.model.common.Template;
+import avadamedia.kinocms.model.mailing.assist.Template;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,8 +20,9 @@ public class EmailMailing extends MappedEntity {
     private String text;
     @Column
     private Long emailQuantity;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "emailMailing")
+
+    @OneToMany
+    @JoinColumn(name = "template_list_id")
     private List<Template> template;
 
 }

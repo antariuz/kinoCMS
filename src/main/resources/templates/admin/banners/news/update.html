@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <label for="mainImage">Баннер</label>
                     <div class="custom-file">
-                        <input type="file" name="mainImage" class="custom-file-input" id="mainImage"
+                        <input type="file" name="image" class="custom-file-input" id="mainImage"
                                accept="image/png, image/jpeg" required="">
                         <label class="custom-file-label" for="mainImage">Выберите картинку</label>
                     </div>
@@ -30,13 +30,13 @@
             </div>
             <div class="col-8 text-center">
                 <label for="thumbnail">Banner Preview</label><br>
-                <img style="max-width: 200px" id="thumbnail" alt=""/>
+                <img style="width:100%" id="thumbnail" alt=""/>
             </div>
         </div>
 
         <div class="row">
             <div class="col-12 text-center pb-3">
-                <button class="btn btn-lg mr-3 btn btn-warning">Добавить</button>
+                <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
                 <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/banners}">Отменить</a>
             </div>
         </div>

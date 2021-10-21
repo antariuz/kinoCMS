@@ -1,16 +1,17 @@
 package avadamedia.kinocms.model.cinemas.assist;
 
-import avadamedia.kinocms.model.cinemas.Cinema;
 import avadamedia.kinocms.model.common.Image;
 import avadamedia.kinocms.model.common.MappedEntity;
 import avadamedia.kinocms.model.common.SEO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,18 +23,18 @@ public class CinemaHall extends MappedEntity {
     private Integer number;
     @Column
     private String description;
-    @Column(name = "diagram_image")
-    private String diagramImage;
+    @Column(name = "main_image")
+    private String mainImage;
     @Column(name = "top_banner")
     private String topBanner;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "cinemaHall")
-    private List<Image> images;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "cinemaHall")
-    private SEO SEOBlock;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cinema_id")
-    private Cinema cinema;
+
+    @OneToMany
+    @JoinColumn(name = "image_list_id")
+    @ToString.Exclude
+    private List<Image> imageList;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
 }

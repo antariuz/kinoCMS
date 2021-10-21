@@ -6,7 +6,106 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div th:replace="/admin/template/in-progress"></div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Общие кол-во зрителей/фильм</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas id="donutChart"
+                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 505px;"
+                                width="1010" height="500" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Заполняемость кинотеатров</h3>
+                </div>
+                <div class="card-body">
+                    <div class="chart">
+                        <canvas id="stackedBarChart"
+                                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;"
+                                width="966" height="500" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Соотношение мужчин и женщин</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="pieChart"
+                            style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block;"
+                            width="966" height="500" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-6">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>44</h3>
+
+                            <p>Зарегистрированных пользователей</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <a href="/admin/users" class="small-box-footer">
+                            Подробнее <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>18067</h3>
+
+                            <p>Проведено сеансов</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                            Подробнее <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="info-box bg-success">
+                        <span class="info-box-icon"><i class="far fa-thumbs-up"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Likes</span>
+                            <span class="info-box-number">41,410</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                            <span class="progress-description">
+                  Рост на 70% за месяц
+                </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

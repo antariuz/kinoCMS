@@ -38,4 +38,9 @@ public class NewPageServiceImpl implements NewPageService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getMaxId() {
+        return repository.getMaxId();
+    }
+
 }

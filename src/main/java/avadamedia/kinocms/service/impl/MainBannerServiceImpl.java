@@ -38,4 +38,9 @@ public class MainBannerServiceImpl implements MainBannerService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getFirstId() {
+        return repository.getFirstId();
+    }
+
 }

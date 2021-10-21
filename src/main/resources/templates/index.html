@@ -1,20 +1,133 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/share/template.html}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <div th:style="'text-align:center; margin-top:50px;'">
-        <img src="/images/in-progress.png" alt="This page is in progress"
-             th:style="'width:20%;height:20%'"/>
-        <br>
-        <span>Sorry, this page is under construction</span>
+    <div class="row">
+        <!--Top Banners-->
+        <div class="col-12 pb-2" th:if="${!mainBanners.isEmpty()}">
+            <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <th:block th:each="mainBanner : ${mainBanners}">
+                        <div class="carousel-item active" th:if="${mainBanner.id==firstMainBanner}">
+                            <img class="d-block w-100" th:src="${mainBanner.getImagePath()}"
+                                 th:alt="${mainBanner.mainImage}">
+                        </div>
+
+                        <div class="carousel-item" th:if="${mainBanner.id&gt;firstMainBanner}">
+                            <img class="d-block w-100" th:src="${mainBanner.getImagePath()}"
+                                 th:alt="${mainBanner.mainImage}">
+                        </div>
+                    </th:block>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#topBanner" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#topBanner" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+        <!--Current Movie List-->
+        <div class="col-12 pb-2" th:if="${!currentMovies.isEmpty()}">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Смотрите сегодня, 16 октября</h2>
+                </div>
+            </div>
+            <div class="row border-top pt-1">
+                <div class="col-3 pb-2 fixed" th:each="currentMovie : ${currentMovies}">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img th:src="${currentMovie.getImagePath()}" th:style="'width:190px;height:280px'">
+                        </div>
+                    </div>
+                    <div class="row" th:style="'min-height: 56px'">
+                        <div class="col text-center font-weight-bold">
+                            <h5 th:text="${currentMovie.name}"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center font-weight-bold">
+                            <a class="btn btn-lg mr-3 btn btn-success" href="#">Купить билет</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Coming Movie List-->
+        <div class="col-12 pb-2" th:if="${!comingMovies.isEmpty()}">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Скоро в прокате</h2>
+                </div>
+            </div>
+            <div class="row border-top pt-1">
+                <div class="col-3 pb-2" th:each="comingMovie : ${comingMovies}">
+                    <div class="row">
+                        <div class="col text-center">
+                            <img th:src="${comingMovie.getImagePath()}" th:style="'width:190px;height:280px'">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center font-weight-bold">
+                            <h5 th:text="${comingMovie.name}"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center font-weight-bold">
+                            <a class="btn btn-lg mr-3 btn btn-success" href="#">Купить билет</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--News Banners-->
+        <div class="col-12 pb-2" th:if="${!newsBanners.isEmpty()}">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Новости и Акции</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <th:block th:each="newsBanner : ${newsBanners}">
+                            <div class="carousel-item active" th:if="${newsBanner.id==firstNewsBanner}">
+                                <img class="d-block w-100" th:src="${newsBanner.getImagePath()}"
+                                     th:alt="${newsBanner.mainImage}">
+                            </div>
+
+                            <div class="carousel-item" th:if="${newsBanner.id&gt;firstNewsBanner}">
+                                <img class="d-block w-100" th:src="${newsBanner.getImagePath()}"
+                                     th:alt="${newsBanner.mainImage}">
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--CEO block-->
+        <div class="row pb-2">
+            <div class="col-12 pb-2 text-center font-weight-bold">
+                CEO текст
+            </div>
+            <div class="col-12">
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
+                CEO текст CEO текст CEO текст CEO текст
+            </div>
+        </div>
     </div>
-    </main>
-</div>
 </div>
 </body>
 </html>

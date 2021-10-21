@@ -11,6 +11,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,18 +29,23 @@ public class ComingMovie extends MappedEntity {
     private String description;
     @Column(name = "main_image")
     private String mainImage;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "comingMovie")
-    private List<Image> images;
+
+    @OneToMany
+    @JoinColumn(name = "image_list_id")
+    private List<Image> imageList = new ArrayList<>();
+
     @Column
     private String trailerUrl;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Set<MovieType> movieType;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "comingMovie")
-    private SEO SEOBlock;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "comingMovie")
+
+    @ManyToMany
+    private Set<MovieType> movieTypes = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "movie_info_id")
     private MovieInfo movieInfo;
 
     @Transient

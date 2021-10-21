@@ -38,4 +38,9 @@ public class ContactsPageServiceImpl implements ContactsPageService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getMaxId() {
+        return repository.getMaxId();
+    }
+
 }

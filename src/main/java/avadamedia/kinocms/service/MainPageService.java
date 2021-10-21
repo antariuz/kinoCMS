@@ -14,4 +14,6 @@ public interface MainPageService {
 
     MainPage getMainPageById(Long id);
 
+    Long getMaxId();
+
 }

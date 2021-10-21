@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -29,15 +30,17 @@ public class Cinema extends MappedEntity {
     private String mainImage;
     @Column(name = "top_banner")
     private String topBanner;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "cinema")
-    private List<Image> images;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "cinema")
-    private List<CinemaHall> cinemaHall;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "cinema")
-    private SEO SEOBlock;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "image_list_id")
+    private List<Image> imageList = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
+    private List<CinemaHall> cinemaHallList = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
     @Transient
     public String getImagePath() {

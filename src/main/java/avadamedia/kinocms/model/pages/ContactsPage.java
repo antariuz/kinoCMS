@@ -17,11 +17,12 @@ import java.util.List;
 @Table(name = "contacts_page")
 public class ContactsPage extends MappedEntity {
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "contactsPage")
-    private List<CinemaContactsBlock> cinemaBlock;
-    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true,
-            cascade = CascadeType.ALL, mappedBy = "contactsPage")
-    private SEO SEOBlock;
+    @OneToMany
+    @JoinColumn(name = "cinema_contacts_block_list_id")
+    private List<CinemaContactsBlock> cinemaContactsBlocks;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "seo_id")
+    private SEO seo;
 
 }

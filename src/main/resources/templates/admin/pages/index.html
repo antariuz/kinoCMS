@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Страницы</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Список страниц</h3>
+            <div class="card-tools">
+                <a class="btn btn-tool btn-success" href="pages/add"><i class="fas fa-plus-square"></i></a>
+            </div>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Дата создания</th>
+                            <th>Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:object="${mainPage}">
+                            <td th:text="'Главная страница'"></td>
+                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="*{status}"></td>
+                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>
+                        </tr>
+<!--                        <tr th:object="${aboutCinemaPage}">-->
+<!--                            <td th:text="'О кинотеатре'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+<!--                        <tr th:object="${cafeBarPage}">-->
+<!--                            <td th:text="'Кафе-бар'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+<!--                        <tr th:object="${vipHallPage}">-->
+<!--                            <td th:text="'VIP-зал'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+<!--                        <tr th:object="${adsPage}">-->
+<!--                            <td th:text="'Реклама'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+<!--                        <tr th:object="${childrenRoomPage}">-->
+<!--                            <td th:text="'Детская комната'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+<!--                        <tr th:object="${contactsPage}">-->
+<!--                            <td th:text="'Контакты'"></td>-->
+<!--                            <td th:text="*{#dates.format(createdDate,'dd.MM.yyyy')}"></td>-->
+<!--                            <td th:text="*{status}"></td>-->
+<!--                            <td><a th:href="*{'pages/update/' + id}"><i class="fas fa-edit"></i></a></td>-->
+<!--                        </tr>-->
+                        <tr th:each="newPage,iterator : ${newPages}">
+                            <td th:text="${newPage.name}"></td>
+                            <td th:text="${#dates.format(newPage.createdDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${newPage.status}"></td>
+                            <td><a th:href="${'pages/new/update/' + promotion.id}"><i class="fas fa-edit"></i></a></td>
+                            <td><a th:href="${'pages/new/delete/' + promotion.id}"><i class="fas fa-trash"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

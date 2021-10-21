@@ -14,4 +14,6 @@ public interface ContactsPageService {
 
     ContactsPage getContactsPageById(Long id);
 
+    Long getMaxId();
+
 }

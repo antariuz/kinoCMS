@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/template/index.html}" lang="en">
+      layout:decorate="~{admin/template/index.html}">
 <head>
     <title>Добавляем новость</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:method="POST" th:object="${news}" th:action="@{/admin/news/add}" enctype="multipart/form-data">
+    <form th:method="POST" th:object="${news}" th:action="@{/admin/news/add}"
+          enctype="multipart/form-data">
         <input type="hidden" th:field="*{id}" th:value="${news.id}"/>
         <div class="row">
             <div class="col-4">
@@ -26,7 +27,7 @@
                 <div class="form-group">
                     <label for="status">Статус</label><br>
                     <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
-                           id="status">
+                           id="status" th:field="*{status}">
                 </div>
             </div>
         </div>
@@ -43,11 +44,11 @@
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
-                    <label for="image">Главная картинка</label>
+                    <label for="mainImage">Главная картинка</label>
                     <div class="custom-file">
-                        <input type="file" name="mainImage" class="custom-file-input" id="image"
+                        <input type="file" name="image" class="custom-file-input" id="mainImage"
                                accept="image/png, image/jpeg" required="">
-                        <label class="custom-file-label" for="image">Выберите картинку</label>
+                        <label class="custom-file-label" for="mainImage">Выберите картинку</label>
                     </div>
                 </div>
             </div>
@@ -124,7 +125,7 @@
                     <div class="col-12">
                         <label for="seoDescription">Description</label>
                         <textarea class="form-control" rows="3" id="seoDescription" placeholder="Description"
-                                  name="description" spellcheck="false" th:field="*{description}"></textarea>
+                                  name="description" spellcheck="false" th:field="*{seoDescription}"></textarea>
                     </div>
                 </div>
             </div>

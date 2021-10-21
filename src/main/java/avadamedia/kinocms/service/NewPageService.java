@@ -14,4 +14,6 @@ public interface NewPageService {
 
     NewPage getNewPageById(Long id);
 
+    Long getMaxId();
+
 }

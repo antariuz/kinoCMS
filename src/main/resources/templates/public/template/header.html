@@ -1,0 +1,88 @@
+<header class="masthead">
+    <div class="inner">
+        <div class="row align-items-center">
+            <div class="col-2">
+                <a th:href="@{/}">
+                    <img th:src="@{/images/logo.png}" th:style="'width:100%'" alt=""/></a>
+            </div>
+            <div class="col-4">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                    <button class="btn btn-outline-primary" type="submit">Поиск</button>
+                </form>
+            </div>
+            <div class="col-auto">
+                <!-- Facebook -->
+                <a th:href="@{/admin/dashboard}">
+                    <i class="fab fa-facebook-f fa-2x me-1" style="color: #3b5998;"></i></a>
+                <!-- Twitter -->
+                <i class="fab fa-twitter fa-2x me-1" style="color: #55acee;"></i>
+                <!-- Vkontakte -->
+                <i class="fab fa-vk fa-2x me-1" style="color: #4c75a3;"></i>
+                <!-- Odnoklassniki -->
+                <i class="fab fa-odnoklassniki fa-2x me-1" style="color: #ffac44;"></i>
+                <!-- Google -->
+                <i class="fab fa-google fa-2x me-1" style="color: #dd4b39;"></i>
+                <!-- Youtube -->
+                <i class="fab fa-youtube fa-2x me-1" style="color: #ed302f;"></i>
+            </div>
+            <div class="col-auto">
+                <div class="row">
+                    <div class="col-12">
+                        067-555-44-33
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        067-555-44-33
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/poster">Афиша</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/schedule">Расписание</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/soon">Скоро</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cinemas">Кинотеатры</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/promotions">Акции</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            О кинотеатре
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a href="/news" class="dropdown-item">Новости</a></li>
+                            <li><a href="/ad" class="dropdown-item">Реклама</a></li>
+                            <li><a href="/cafe" class="dropdown-item">Кафе</a></li>
+                            <li><a href="/apps" class="dropdown-item">Мобильные приложения</a></li>
+                            <li><a href="/contacts" class="dropdown-item">Контакты</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLanguage" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Язык
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a href="" class="dropdown-item">Рус</a></li>
+                            <li><a href="" class="dropdown-item"
+                                   data-content='<span class="flag-icon flag-icon-ua"></span> Укр'>Укр</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>

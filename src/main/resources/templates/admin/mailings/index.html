@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Рассылка</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <!--SMS Mailing-->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">SMS</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="whomToSentSMS">Кого будем слать?</label>
+                        <div class="form-check" id="whomToSentSMS">
+                            <div class="row">
+                                <div class="col-4">
+                                    <input class="form-check-input" type="checkbox" th:text="'Всех пользователей'">
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-check-input" type="checkbox" th:text="'Выборочно'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a class="btn btn-tool btn-default" href="#">Выбрать пользователей</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="smsText">Текст SMS</label>
+                        <label for="smsText" class="float-right">Символов: 666</label>
+                        <textarea class="form-control" rows="5" id="smsText"
+                                  th:placeholder="'Введите текст'"></textarea>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-auto">
+                            Кол-во SMS:
+                        </div>
+                        <div class="col-auto">
+                            <a href="#">173 629</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                            Рассылка выполнена на:
+                        </div>
+                        <div class="col-auto">
+                            <a href="#">45%</a>
+                        </div>
+                        <div class="col-auto">
+                            <a href="#">20 000</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a class="btn btn-tool btn-default" href="#">Начать рассылку</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Email Mailing-->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">E-mail</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-8">
+                    <div class="form-group">
+                        <label for="whomToSentEmail">Кого будем слать?</label>
+                        <div class="form-check" id="whomToSentEmail">
+                            <div class="row">
+                                <div class="col-4">
+                                    <input class="form-check-input" type="checkbox" th:text="'Всех пользователей'">
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-check-input" type="checkbox" th:text="'Выборочно'">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <a class="btn btn-tool btn-default" href="#">Выбрать пользователей</a>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                Загрузить HTML-письмо
+                                <a class="btn btn-tool btn-default" href="#">Загрузить</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                Загружен файл:
+                                <a href="#">Рассылка лапшы-на-уши.html</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                Шаблон используемый в текущей рассылке:
+                                <a href="#">Рассылка лапшы-на-уши.html</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                Кол-во писем:
+                                <a href="#">173 629</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                Рассылка выполнена на:
+                                <a href="#">45%</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="row">
+                                <div class="col">
+                                    Список последних загруженных шаблонов
+                                </div>
+                            </div>
+                            <!--Iterator templates-->
+                            <div class="row">
+                                <div class="col-2">
+                                    <input class="form-check-input" type="checkbox">
+                                </div>
+                                <div class="col-8">
+                                    <a href="#">Новый товар.html</a>
+                                </div>
+                                <div class="col-2">
+                                    <a class="btn-sm btn-danger"><i class="fas fa-minus"></i></a>
+                                </div>
+                            </div>
+                            <!--end of Iterator templates-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a class="btn btn-tool btn-default" href="#">Начать рассылку</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

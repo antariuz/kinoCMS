@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/template/index.html}" lang="en">
+      layout:decorate="~{admin/template/index.html}">
 <head>
     <title>Баннеры</title>
 </head>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2" th:each="mainBanner : ${mainBanners}">
+                <div class="col-6 pt-4" th:each="mainBanner : ${mainBanners}">
                     <div class="row">
                         <div class="col text-right">
                             <a th:href="${'banners/main/delete/' + mainBanner.id}"
@@ -33,7 +33,7 @@
                     <div class="row">
                         <div class="col text-center">
                             <a th:href="${'banners/main/update/' + mainBanner.id}">
-                                <img th:src="${mainBanner.getImagePath()}" th:style="'width:100px; height:100px'">
+                                <img th:src="${mainBanner.getImagePath()}" th:style="'width:100%'">
                             </a>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                         <div class="form-group">
                             <label for="mainImage">Баннер</label>
                             <div class="custom-file">
-                                <input type="file" name="mainImage" class="custom-file-input" id="mainImage"
+                                <input type="file" name="image" class="custom-file-input" id="mainImage"
                                        accept="image/png, image/jpeg" required="">
                                 <label class="custom-file-label" for="mainImage">Выберите картинку</label>
                             </div>
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2" th:each="newsBanner : ${newsBanners}">
+                <div class="col-6 pt-4" th:each="newsBanner : ${newsBanners}">
                     <div class="row">
                         <div class="col text-right">
                             <a th:href="${'banners/news/delete/' + newsBanner.id}"
@@ -104,7 +104,7 @@
                     <div class="row">
                         <div class="col text-center">
                             <a th:href="${'banners/news/update/' + newsBanner.id}">
-                                <img th:src="${newsBanner.getImagePath()}" th:style="'width:100px; height:100px'">
+                                <img th:src="${newsBanner.getImagePath()}" th:style="'width:100%'">
                             </a>
                         </div>
                     </div>
