@@ -64,22 +64,30 @@ public class CinemasController {
     public String updateCinema(Cinema cinema, SEO seo,
                                @RequestParam("image") MultipartFile file,
                                @RequestParam("image2") MultipartFile file2) throws IOException {
+        String uploadDir = "cinemas/" + cinema.getId();
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName2 = StringUtils.cleanPath(file2.getOriginalFilename());
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
+        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
         cinema.setMainImage(fileName);
         cinema.setTopBanner(fileName2);
         cinema.setSeo(seo);
         cinemaService.updateCinema(cinema);
-        String uploadDir = "cinemas/" + cinema.getId();
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
-        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
         return "redirect:/admin/cinemas";
     }
 
+    // Delete cinema
+    @GetMapping("delete/{id}")
+    public String deleteCinema(@PathVariable("id") Long id) {
+        cinemaService.deleteCinemaById(id);
+        return "redirect:/admin/cinemas";
+    }
+
+    // Create cinema hall
     @GetMapping("update/{id}/halls/add")
     public String addCinemaHall(Model model, @PathVariable("id") Long id) {
         CinemaHall cinemaHall = new CinemaHall();
-//        currentMovie.setImageList(createImageList());
+        cinemaHall.setImageList(new ArrayList<>());
         cinemaHall.setSeo(new SEO());
         cinemaHallService.createCinemaHall(cinemaHall);
         cinemaService.getCinemaById(id).getCinemaHallList().add(cinemaHall);
@@ -87,7 +95,7 @@ public class CinemasController {
         return "redirect:/admin/cinemas/update/" + id + "/halls/" + cinemaHallService.getLastId();
     }
 
-    //    Add/update cinema halls part
+    // Update cinema hall
     @GetMapping("update/{id}/halls/{idHall}")
     public ModelAndView updateCinemaHall(@PathVariable("id") Long id, @PathVariable("idHall") Long idHall) {
         ModelAndView mav = new ModelAndView("/admin/cinemas/halls/update");
@@ -102,23 +110,23 @@ public class CinemasController {
     public String updateCinemaHall(Cinema cinema, CinemaHall cinemaHall, SEO seo,
                                    @RequestParam("image") MultipartFile file,
                                    @RequestParam("image2") MultipartFile file2) throws IOException {
+        String uploadDir = "cinema-halls/" + cinemaHall.getId() + "/";
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName2 = StringUtils.cleanPath(file2.getOriginalFilename());
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
+        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
         cinemaHall.setMainImage(fileName);
         cinemaHall.setTopBanner(fileName2);
         cinemaHall.setSeo(seo);
         cinemaHallService.updateCinemaHall(cinemaHall);
-        String uploadDir = "cinema-halls/" + cinemaHall.getId() + "/";
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
-        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
         return "redirect:/admin/cinemas/update/" + cinema.getId();
     }
 
-    //    Delete part
-    @GetMapping("delete/{id}")
-    public String deleteCinema(@PathVariable("id") Long id) {
-        cinemaService.deleteCinemaById(id);
-        return "redirect:/admin/cinemas";
+    // Delete cinema hall
+    @GetMapping("delete/{id}/halls/{idHall}")
+    public String deleteCinemaHall(@PathVariable("id") Long id) {
+        cinemaHallService.deleteCinemaHallById(id);
+        return "redirect:/admin/cinemas/update/" + id;
     }
 
 }
