@@ -38,7 +38,7 @@ public class Cinema extends MappedEntity {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
     private List<CinemaHall> cinemaHallList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 

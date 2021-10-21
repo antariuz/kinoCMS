@@ -4,14 +4,11 @@ import avadamedia.kinocms.model.cinemas.Cinema;
 import avadamedia.kinocms.model.cinemas.assist.CinemaHall;
 import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.model.common.SEO;
-import avadamedia.kinocms.model.movies.CurrentMovie;
-import avadamedia.kinocms.model.movies.assist.MovieInfo;
 import avadamedia.kinocms.service.CinemaHallService;
 import avadamedia.kinocms.service.CinemaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 @Controller
 @RequestMapping("admin/cinemas")
@@ -57,6 +52,7 @@ public class CinemasController {
         mav.addObject("seo", cinemaService.getCinemaById(id).getSeo());
         System.out.println("Images: " + cinemaService.getCinemaById(id).getImageList());
         System.out.println("Cinema Halls: " + cinemaService.getCinemaById(id).getCinemaHallList());
+        System.out.println("SEO : " + cinemaService.getCinemaById(id).getSeo());
         return mav;
     }
 
@@ -85,7 +81,7 @@ public class CinemasController {
 
     // Create cinema hall
     @GetMapping("update/{id}/halls/add")
-    public String addCinemaHall(Model model, @PathVariable("id") Long id) {
+    public String addCinemaHall(@PathVariable("id") Long id) {
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setImageList(new ArrayList<>());
         cinemaHall.setSeo(new SEO());
@@ -117,15 +113,15 @@ public class CinemasController {
         FileUploadUtil.saveFile(uploadDir, fileName2, file2);
         cinemaHall.setMainImage(fileName);
         cinemaHall.setTopBanner(fileName2);
-        cinemaHall.setSeo(seo);
+        cinema.setSeo(seo);
         cinemaHallService.updateCinemaHall(cinemaHall);
         return "redirect:/admin/cinemas/update/" + cinema.getId();
     }
 
     // Delete cinema hall
     @GetMapping("delete/{id}/halls/{idHall}")
-    public String deleteCinemaHall(@PathVariable("id") Long id) {
-        cinemaHallService.deleteCinemaHallById(id);
+    public String deleteCinemaHall(@PathVariable("id") Long id, @PathVariable("idHall") Long idHall) {
+        cinemaHallService.deleteCinemaHallById(idHall);
         return "redirect:/admin/cinemas/update/" + id;
     }
 
