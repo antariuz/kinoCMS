@@ -7,10 +7,12 @@ import avadamedia.kinocms.model.common.SEO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,6 +21,14 @@ import java.util.List;
 @Entity
 @Table(name = "cinemas")
 public class Cinema extends MappedEntity {
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "cinema_id", updatable = false)
+//    private Long id;
+//    @CreationTimestamp
+//    @Column(name = "created_date", updatable = false)
+//    private Date createdDate;
 
     @Column
     private String name;
@@ -31,10 +41,12 @@ public class Cinema extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_id")
+    @OneToMany
+    @JoinColumn(name="id", referencedColumnName="id")
     private List<Image> imageList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_halls_id")
+    @OneToMany
+    @JoinColumn(name="id", referencedColumnName="id")
     private List<CinemaHall> cinemaHallList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

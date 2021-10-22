@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -18,6 +20,14 @@ import java.util.List;
 @Entity
 @Table(name = "cinema_halls")
 public class CinemaHall extends MappedEntity {
+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "cinema_hall_id", updatable = false)
+//    private Long id;
+//    @CreationTimestamp
+//    @Column(name = "created_date", updatable = false)
+//    private Date createdDate;
 
     @Column
     private Integer number;
@@ -28,7 +38,8 @@ public class CinemaHall extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_hall_id")
+    @OneToMany
+    @JoinColumn(name="id", referencedColumnName="id")
     private List<Image> imageList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
