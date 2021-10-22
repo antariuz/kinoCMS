@@ -24,7 +24,7 @@ public class MainPage extends MappedEntity {
     @Column
     private String seoText;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 

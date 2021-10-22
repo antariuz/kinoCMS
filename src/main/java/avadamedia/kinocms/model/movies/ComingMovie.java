@@ -31,7 +31,7 @@ public class ComingMovie extends MappedEntity {
     private String mainImage;
 
     @OneToMany
-    @JoinColumn(name = "image_list_id")
+    @JoinColumn(name="image_list_id", referencedColumnName="id")
     private List<Image> imageList = new ArrayList<>();
 
     @Column
@@ -40,11 +40,11 @@ public class ComingMovie extends MappedEntity {
     @ManyToMany
     private Set<MovieType> movieTypes = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "movie_info_id")
     private MovieInfo movieInfo;
 

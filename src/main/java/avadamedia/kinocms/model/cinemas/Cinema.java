@@ -22,14 +22,6 @@ import java.util.List;
 @Table(name = "cinemas")
 public class Cinema extends MappedEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "cinema_id", updatable = false)
-//    private Long id;
-//    @CreationTimestamp
-//    @Column(name = "created_date", updatable = false)
-//    private Date createdDate;
-
     @Column
     private String name;
     @Column
@@ -42,11 +34,11 @@ public class Cinema extends MappedEntity {
     private String topBanner;
 
     @OneToMany
-    @JoinColumn(name="id", referencedColumnName="id")
+    @JoinColumn(name="image_list_id", referencedColumnName="id")
     private List<Image> imageList = new ArrayList<>();
 
     @OneToMany
-    @JoinColumn(name="id", referencedColumnName="id")
+    @JoinColumn(name="cinema_hall_list_id", referencedColumnName="id")
     private List<CinemaHall> cinemaHallList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

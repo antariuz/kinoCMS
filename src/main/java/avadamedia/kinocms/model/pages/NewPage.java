@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,10 +28,10 @@ public class NewPage extends MappedEntity {
     private String mainImage;
 
     @OneToMany
-    @JoinColumn(name = "image_list_id")
-    private List<Image> imageList;
+    @JoinColumn(name="image_list_id", referencedColumnName="id")
+    private List<Image> imageList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 

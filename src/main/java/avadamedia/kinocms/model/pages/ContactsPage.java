@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,10 +19,10 @@ import java.util.List;
 public class ContactsPage extends MappedEntity {
 
     @OneToMany
-    @JoinColumn(name = "cinema_contacts_block_list_id")
-    private List<CinemaContactsBlock> cinemaContactsBlocks;
+    @JoinColumn(name = "cinema_contacts_block_list_id", referencedColumnName = "id")
+    private List<CinemaContactsBlock> cinemaContactsBlocks = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 

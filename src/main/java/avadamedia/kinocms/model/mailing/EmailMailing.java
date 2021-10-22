@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,7 +23,7 @@ public class EmailMailing extends MappedEntity {
     private Long emailQuantity;
 
     @OneToMany
-    @JoinColumn(name = "template_list_id")
-    private List<Template> template;
+    @JoinColumn(name="template_list_id", referencedColumnName="id")
+    private List<Template> template = new ArrayList<>();
 
 }
