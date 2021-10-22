@@ -28,7 +28,7 @@ public class CinemaHall extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_hall_id")
     private List<Image> imageList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

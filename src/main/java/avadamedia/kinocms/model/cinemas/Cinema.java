@@ -31,10 +31,10 @@ public class Cinema extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_id")
     private List<Image> imageList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cinema_halls_id")
     private List<CinemaHall> cinemaHallList = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
