@@ -31,8 +31,7 @@ public class Cinema extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "image_list_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
     private List<Image> imageList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")

@@ -106,7 +106,8 @@
             <div class="card-header">
                 <h3 class="card-title font-weight-bold">Список кинозалов</h3>
                 <div class="card-tools">
-                    <a class="btn btn-tool btn-success" th:href="${cinema.id + '/halls/add'}"><i class="fas fa-plus-square"></i></a>
+                    <a class="btn btn-tool btn-success" th:href="${cinema.id + '/halls/add'}"><i
+                            class="fas fa-plus-square"></i></a>
                 </div>
             </div>
             <div class="card-body pt-2">
@@ -123,8 +124,10 @@
                             <tr th:each="cinemaHall,iterator : ${cinemaHalls}">
                                 <td th:text="${cinemaHall.number}"></td>
                                 <td th:text="${#dates.format(cinemaHall.createdDate,'dd.MM.yyyy')}"></td>
-                                <td><a th:href="${'cinemas/halls/update/' + cinemaHall.id}"><i class="fas fa-edit"></i></a></td>
-                                <td><a th:href="${'cinemas/halls/delete/' + cinemaHall.id}"><i class="fas fa-trash"></i></a></td>
+                                <td><a th:href="${cinema.id + '/halls/update/' + cinemaHall.id}"><i
+                                        class="fas fa-edit"></i></a></td>
+                                <td><a th:href="${cinema.id +'/halls/delete/' + cinemaHall.id}"><i
+                                        class="fas fa-trash"></i></a></td>
                             </tr>
                             </tbody>
                         </table>

@@ -9,9 +9,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
-@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,12 +28,10 @@ public class CinemaHall extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany
-    @JoinColumn(name = "image_list_id")
-    @ToString.Exclude
-    private List<Image> imageList;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "id")
+    private List<Image> imageList = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")
     private SEO seo;
 
