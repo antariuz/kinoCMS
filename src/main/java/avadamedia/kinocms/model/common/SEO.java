@@ -21,7 +21,7 @@ public class SEO extends MappedEntity {
     private String title;
     @Column
     private String keywords;
-    @Column(name = "seo_description")
-    private String seoDescription;
+    @Column
+    private String description;
 
 }

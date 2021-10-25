@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "images")
+@Table(name = "image")
 public class Image extends MappedEntity {
 
     @Column

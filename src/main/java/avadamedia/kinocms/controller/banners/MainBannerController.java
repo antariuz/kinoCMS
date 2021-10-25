@@ -3,7 +3,7 @@ package avadamedia.kinocms.controller.banners;
 
 import avadamedia.kinocms.model.banners.MainBanner;
 import avadamedia.kinocms.model.common.FileUploadUtil;
-import avadamedia.kinocms.service.MainBannerService;
+import avadamedia.kinocms.service.banner.MainBannerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

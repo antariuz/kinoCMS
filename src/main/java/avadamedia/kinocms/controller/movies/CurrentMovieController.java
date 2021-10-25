@@ -5,8 +5,8 @@ import avadamedia.kinocms.model.common.Image;
 import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.movies.CurrentMovie;
 import avadamedia.kinocms.model.movies.assist.MovieInfo;
-import avadamedia.kinocms.service.CurrentMovieService;
-import avadamedia.kinocms.service.ImageService;
+import avadamedia.kinocms.service.movie.CurrentMovieService;
+import avadamedia.kinocms.service.common.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 

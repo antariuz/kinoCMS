@@ -4,7 +4,11 @@ import avadamedia.kinocms.model.banners.BackgroundBanner;
 import avadamedia.kinocms.model.movies.assist.MovieType;
 import avadamedia.kinocms.model.pages.ContactsPage;
 import avadamedia.kinocms.model.pages.MainPage;
-import avadamedia.kinocms.service.*;
+import avadamedia.kinocms.service.movie.MovieTypeService;
+import avadamedia.kinocms.service.banner.BackgroundBannerService;
+import avadamedia.kinocms.service.page.ContactsPageService;
+import avadamedia.kinocms.service.page.MainPageService;
+import avadamedia.kinocms.service.page.NewPageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -30,7 +34,7 @@ public class StartupInitialCheck {
 
     @EventListener(ApplicationReadyEvent.class)
     public void movieTypeInit() {
-        if (movieTypeService.getMaxId() == null) {
+        if (movieTypeService.getLastId() == null) {
             movieTypeService.createMovieType(new MovieType("2D"));
             movieTypeService.createMovieType(new MovieType("3D"));
             movieTypeService.createMovieType(new MovieType("IMAX"));
@@ -39,10 +43,10 @@ public class StartupInitialCheck {
 
     @EventListener(ApplicationReadyEvent.class)
     public void requiredPagesInit() {
-        if (mainPageService.getMaxId() == null) {
+        if (mainPageService.getLastId() == null) {
             mainPageService.createMainPage(new MainPage());
         }
-        if (contactsPageService.getMaxId() == null) {
+        if (contactsPageService.getLastId() == null) {
             contactsPageService.createContactsPage(new ContactsPage());
         }
     }

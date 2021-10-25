@@ -2,7 +2,7 @@ package avadamedia.kinocms.controller.banners;
 
 import avadamedia.kinocms.model.common.FileUploadUtil;
 import avadamedia.kinocms.model.banners.BackgroundBanner;
-import avadamedia.kinocms.service.BackgroundBannerService;
+import avadamedia.kinocms.service.banner.BackgroundBannerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,8 @@ public class BackgroundBannerController {
     private final BackgroundBannerService service;
 
     @PutMapping("update")
-    public String updateBackgroundBanner(BackgroundBanner backgroundBanner, @RequestParam("image") MultipartFile file) throws IOException {
+    public String updateBackgroundBanner(@ModelAttribute("backgroundBanner") BackgroundBanner backgroundBanner,
+                                         @RequestParam("image") MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         backgroundBanner.setMainImage(fileName);
         service.updateBackgroundBanner(backgroundBanner);

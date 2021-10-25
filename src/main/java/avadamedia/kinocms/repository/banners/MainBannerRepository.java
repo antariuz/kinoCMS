@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MainBannerRepository extends CrudRepository<MainBanner, Long> {
-    @Query(value = "SELECT MIN(id) FROM main_banners", nativeQuery = true)
+    @Query(value = "SELECT MIN(id) FROM main_banner", nativeQuery = true)
     Long getFirstId();
 }

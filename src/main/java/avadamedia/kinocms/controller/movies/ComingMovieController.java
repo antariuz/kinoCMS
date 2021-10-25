@@ -1,12 +1,11 @@
 package avadamedia.kinocms.controller.movies;
 
 import avadamedia.kinocms.model.common.FileUploadUtil;
-import avadamedia.kinocms.model.common.Image;
 import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.movies.ComingMovie;
 import avadamedia.kinocms.model.movies.assist.MovieInfo;
-import avadamedia.kinocms.service.ComingMovieService;
-import avadamedia.kinocms.service.ImageService;
+import avadamedia.kinocms.service.movie.ComingMovieService;
+import avadamedia.kinocms.service.common.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 @Controller
 @RequestMapping("admin/movies/coming")

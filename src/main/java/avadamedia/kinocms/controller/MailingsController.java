@@ -1,8 +1,5 @@
 package avadamedia.kinocms.controller;
 
-import avadamedia.kinocms.service.ContactsPageService;
-import avadamedia.kinocms.service.MainPageService;
-import avadamedia.kinocms.service.NewPageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -3,7 +3,7 @@ package avadamedia.kinocms.controller.pages;
 import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.pages.MainPage;
 import avadamedia.kinocms.model.promotions.Promotion;
-import avadamedia.kinocms.service.MainPageService;
+import avadamedia.kinocms.service.page.MainPageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

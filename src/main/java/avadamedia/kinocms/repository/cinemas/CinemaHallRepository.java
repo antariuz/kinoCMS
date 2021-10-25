@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CinemaHallRepository extends CrudRepository<CinemaHall, Long> {
-    @Query(value = "SELECT MAX(id) FROM cinemas", nativeQuery = true)
+    @Query(value = "SELECT MAX(id) FROM cinema_hall", nativeQuery = true)
     Long getLastId();
 }

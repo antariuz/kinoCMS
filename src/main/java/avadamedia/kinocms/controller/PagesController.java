@@ -1,7 +1,8 @@
 package avadamedia.kinocms.controller;
 
-import avadamedia.kinocms.model.banners.BackgroundBanner;
-import avadamedia.kinocms.service.*;
+import avadamedia.kinocms.service.page.ContactsPageService;
+import avadamedia.kinocms.service.page.MainPageService;
+import avadamedia.kinocms.service.page.NewPageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

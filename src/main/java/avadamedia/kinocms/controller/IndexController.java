@@ -1,9 +1,9 @@
 package avadamedia.kinocms.controller;
 
-import avadamedia.kinocms.service.ComingMovieService;
-import avadamedia.kinocms.service.CurrentMovieService;
-import avadamedia.kinocms.service.MainBannerService;
-import avadamedia.kinocms.service.NewsBannerService;
+import avadamedia.kinocms.service.movie.ComingMovieService;
+import avadamedia.kinocms.service.movie.CurrentMovieService;
+import avadamedia.kinocms.service.banner.MainBannerService;
+import avadamedia.kinocms.service.banner.NewsBannerService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

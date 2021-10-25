@@ -6,19 +6,16 @@ import avadamedia.kinocms.model.common.SEO;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "cinema_halls")
+@Table(name = "cinema_hall")
 public class CinemaHall extends MappedEntity {
 
     @Column
@@ -29,10 +26,12 @@ public class CinemaHall extends MappedEntity {
     private String mainImage;
     @Column(name = "top_banner")
     private String topBanner;
+    @Column(name = "cinema_id")
+    private Long cinemaId;
 
     @OneToMany
-    @JoinColumn(name="image_list_id", referencedColumnName="id")
-    private List<Image> imageList = new ArrayList<>();
+    @JoinColumn(name = "cinema_hall_id", referencedColumnName = "id")
+    private List<Image> images = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "seo_id")

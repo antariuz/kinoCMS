@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NewsBannerRepository extends CrudRepository<NewsBanner, Long> {
-    @Query(value = "SELECT MIN(id) FROM news_banners", nativeQuery = true)
+    @Query(value = "SELECT MIN(id) FROM news_banner", nativeQuery = true)
     Long getFirstId();
 }
