@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="row">
-        <!--Mobile apps block-->
-
+<div layout:fragment="content" th:object="${appsPage}">
+    <div class="row" th:if="${appsPage.status}">
+        <div class="row pb-2">
+            <div class="col-12">
+                <img th:if="${appsPage.getImagePath() != null}" th:src="${appsPage.getImagePath()}" th:style="'max-height:200px;width:100%'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <h2 th:text="${'Мобильные приложения'}"></h2>
+                </div>
+                <div class="row">
+                    <span th:text="${appsPage.description}"></span>
+                </div>
+                <div class="row">
+                    <img src="/images/apps-pic.jpg" th:style="'width:100%'">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -22,8 +22,8 @@ public class EmailMailing extends MappedEntity {
     @Column
     private Long emailQuantity;
 
-    @OneToMany
-    @JoinColumn(name="template_list_id", referencedColumnName="id")
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name="email_mailing_id", referencedColumnName="id")
     private List<Template> template = new ArrayList<>();
 
 }

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+    @Query(value = "SELECT COUNT(id) FROM user", nativeQuery = true)
+    Long getCountUser();
 }

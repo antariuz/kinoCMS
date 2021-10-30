@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/template/index.html}">
+<head>
+    <title>Выбор пользователей</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title font-weight-bold">Список пользователей</h3>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="col">
+                    <div class="form-inline float-right">
+                        <div class="input-group" data-widget="sidebar-search">
+                            <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                                   aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-sidebar">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-12">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox">
+                            </th>
+                            <th>ID</th>
+                            <th>Дата регистрации</th>
+                            <th>Дата рождения</th>
+                            <th>Email</th>
+                            <th>Телефон</th>
+                            <th>ФИО</th>
+                            <th>Псевдоним</th>
+                            <th>Город</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user,iterator : ${users}">
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${#dates.format(user.createdDate,'dd.MM.yyyy')}"></td>
+                            <td th:text="${#dates.format(user.birthday,'dd.MM.yyyy')}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td th:text="${user.phoneNumber}"></td>
+                            <td th:text="${user.name} + ' ' + ${user.surname}"></td>
+                            <td th:text="${user.nickname}"></td>
+                            <td th:text="${user.city}"></td>
+                            <td><a th:href="${'users/update/' + user.id}"><i class="fas fa-edit"></i></a></td>
+                            <td><a th:href="${'users/delete/' + user.id}"><i class="fas fa-trash"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col-12">
+                    <a class="btn btn-lg mr-3 btn btn-success"
+                       th:href="${'/admin/mailings/'}">Выбрать</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

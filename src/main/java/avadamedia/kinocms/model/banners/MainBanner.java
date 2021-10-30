@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "main_banners")
+@Table(name = "main_banner")
 public class MainBanner extends MappedEntity {
 
     @Column(name = "main_image")

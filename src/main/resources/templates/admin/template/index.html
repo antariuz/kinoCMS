@@ -15,8 +15,8 @@
     <div class="preloader flex-column justify-content-center align-items-center dark-mode">
         <img class="animation__shake" src="/images/preloader-logo.png" alt="KinoCMS" height="250" width="250">
     </div>
-    <div th:replace="/admin/template/navbar"></div>
-    <div th:replace="/admin/template/sidebar"></div>
+    <div th:replace="admin/template/navbar"></div>
+    <div th:replace="admin/template/sidebar"></div>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Main content -->
@@ -43,6 +43,7 @@
     </aside>
     <!-- /.control-sidebar -->
 </div>
-<div th:replace="/admin/template/js"></div>
+<div th:replace="admin/template/js"></div>
+<th:block layout:fragment="script"></th:block>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
@@ -35,12 +35,24 @@
         </div>
         <div class="row pb-2">
             <div class="col-10">
-
+                <div class="row">
+                    <th:block th:each="promotion : ${promotions}">
+                        <div class="col-4" th:if="${promotion.status}">
+                            <div class="row">
+                                <a th:href="${'/promotions/' + promotion.id}">
+                                    <img th:src="${promotion.getImagePath()}" th:style="'width:100%'"></a>
+                            </div>
+                            <div class="row">
+                                <h1 th:text="${promotion.name}"></h1>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
             </div>
             <div class="col-2">
-                <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
-                <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
-                <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
             </div>
         </div>
     </div>

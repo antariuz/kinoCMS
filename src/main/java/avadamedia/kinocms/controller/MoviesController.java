@@ -20,7 +20,7 @@ public class MoviesController {
     //    Show all Movies
     @GetMapping({"/", ""})
     public ModelAndView showAllMovies() {
-        ModelAndView mav = new ModelAndView("/admin/movies/index");
+        ModelAndView mav = new ModelAndView("admin/movies/index");
         mav.addObject("currentMovies", currentMovieService.getAllCurrentMovies());
         mav.addObject("comingMovies", comingMovieService.getAllComingMovies());
         return mav;

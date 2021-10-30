@@ -26,15 +26,13 @@
                 <!-- Youtube -->
                 <i class="fab fa-youtube fa-2x me-1" style="color: #ed302f;"></i>
             </div>
-            <div class="col-auto">
+            <div class="col-auto" th:if="${mainPage.status}">
                 <div class="row">
-                    <div class="col-12">
-                        067-555-44-33
+                    <div class="col-12" th:text="${mainPage.firstPhoneNumber}">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        067-555-44-33
+                    <div class="col-12" th:text="${mainPage.secondPhoneNumber}">
                     </div>
                 </div>
             </div>

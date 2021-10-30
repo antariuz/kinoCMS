@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
 <body>
-<div layout:fragment="content">
-    <div class="row">
-        <!--Cafe block-->
-
+<div layout:fragment="content" th:object="${cafePage}">
+    <div class="row" th:if="${cafePage.status}">
+        <div class="row pb-2">
+            <div class="col-12">
+                <img th:if="${cafePage.getImagePath() != null}" th:src="${cafePage.getImagePath()}" th:style="'max-height:200px;width:100%'">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <h2 th:text="${'Кафе-Бар'}"></h2>
+                </div>
+                <div class="row">
+                    <span th:text="${cafePage.description}"></span>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+                <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

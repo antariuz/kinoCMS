@@ -22,7 +22,7 @@ public class BannersController {
     //    Show all Banners
     @GetMapping({"/", ""})
     public ModelAndView showAllBanners() {
-        ModelAndView mav = new ModelAndView("/admin/banners/index");
+        ModelAndView mav = new ModelAndView("admin/banners/index");
         mav.addObject("mainBanners", mainBannerService.getAllMainBanners());
         mav.addObject("backgroundBanner", backgroundBannerService.getBackgroundBannerById(1L));
         mav.addObject("newsBanners", newsBannerService.getAllNewsBanners());

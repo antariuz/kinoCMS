@@ -38,4 +38,8 @@ public class UserServiceImpl implements UserService {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
+    @Override
+    public Long getCountUser(){
+        return repository.getCountUser();
+    }
 }

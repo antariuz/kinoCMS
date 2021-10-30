@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
@@ -44,7 +44,8 @@
                 <div class="col-3 pb-2 fixed" th:each="currentMovie : ${currentMovies}">
                     <div class="row">
                         <div class="col text-center">
-                            <img th:src="${currentMovie.getImagePath()}" th:style="'width:190px;height:280px'">
+                            <a th:href="${'/movie/current/' + currentMovie.id}">
+                            <img th:src="${currentMovie.getImagePath()}" th:style="'width:190px;height:280px'"></a>
                         </div>
                     </div>
                     <div class="row" th:style="'min-height: 56px'">
@@ -54,7 +55,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center font-weight-bold">
-                            <a class="btn btn-lg mr-3 btn btn-success" href="#">Купить билет</a>
+                            <a class="btn btn-lg mr-3 btn btn-success" th:href="${'/booking/movie/current/' + currentMovie.id}">Купить билет</a>
                         </div>
                     </div>
                 </div>
@@ -71,7 +72,9 @@
                 <div class="col-3 pb-2" th:each="comingMovie : ${comingMovies}">
                     <div class="row">
                         <div class="col text-center">
+                            <a th:href="${'/movie/coming/' + comingMovie.id}">
                             <img th:src="${comingMovie.getImagePath()}" th:style="'width:190px;height:280px'">
+                            </a>
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +84,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center font-weight-bold">
-                            <a class="btn btn-lg mr-3 btn btn-success" href="#">Купить билет</a>
+                            <a class="btn btn-lg mr-3 btn btn-success" th:href="${'/booking/movie/coming/' + comingMovie.id}">Купить билет</a>
                         </div>
                     </div>
                 </div>
@@ -113,11 +116,11 @@
             </div>
         </div>
         <!--CEO block-->
-        <div class="row pb-2">
+        <div class="row pb-2" th:if="${mainPage.status}">
             <div class="col-12 pb-2 text-center font-weight-bold">
                 CEO текст
             </div>
-            <div class="col-12">
+            <div class="col-12" th:text="${mainPage.seoText}">
                 CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
                 CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст
                 CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст CEO текст

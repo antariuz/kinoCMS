@@ -16,7 +16,7 @@
         <div class="card-body pt-2">
             <div class="row">
                 <div class="col-12">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered text-center" th:if="${!newsList.isEmpty()}">
                         <thead>
                         <tr>
                             <th>Название</th>
@@ -25,11 +25,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="news,iterator : ${newsList}">
+                        <tr th:each="news : ${newsList}">
                             <td th:text="${news.name}"></td>
                             <td th:text="${#dates.format(news.createdDate,'dd.MM.yyyy')}"></td>
-                            <td th:text="${news.status}"></td>
-                            <td><a th:href="${'news/update/' + news.id}"><i class="fas fa-edit"></i></a></td>
+                            <td th:switch="${news.status}">
+                                <button th:case="true" type="button" class="btn btn-success btn-flat">
+                                    Включено
+                                </button>
+                                <button th:case="false" type="button" class="btn btn-danger btn-flat">
+                                    Выключено
+                                </button>
+                            </td>
+                            <td><a th:href="${'news/edit/' + news.id}"><i class="fas fa-edit"></i></a></td>
                             <td><a th:href="${'news/delete/' + news.id}"><i class="fas fa-trash"></i></a></td>
                         </tr>
                         </tbody>

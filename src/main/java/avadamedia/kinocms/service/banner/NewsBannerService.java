@@ -16,4 +16,6 @@ public interface NewsBannerService {
 
     Long getFirstId();
 
+    Long getLastId();
+
 }

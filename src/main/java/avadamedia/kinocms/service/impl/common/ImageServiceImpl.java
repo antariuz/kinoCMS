@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ImageServiceImpl implements ImageService {
@@ -36,6 +39,20 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image getImageById(Long id) {
         return repository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public List<Image> initImageList(int qty) {
+        List<Image> list = new ArrayList<>();
+        for (int i = 0; i < qty; i++) {
+            list.add(createImage(new Image()));
+        }
+        return list;
+    }
+
+    @Override
+    public Long getFirstCurrentMovieId(Long currentMovieId){
+        return repository.getFirstCurrentMovieId(currentMovieId);
     }
 
 }

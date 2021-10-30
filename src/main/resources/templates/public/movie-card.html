@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/template/index.html}">
+<head>
+    <title>KinoCMS</title>
+</head>
+<body>
+<div layout:fragment="content" th:object="${movie}">
+    <div class="row">
+        <div class="col-12">
+            <div class="ratio ratio-16x9">
+                <iframe th:src="*{trailerUrl}" title="YouTube video" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row">
+            <h3>Расписание сеансов кинтотеатра</h3>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <select class="custom-select" aria-label="Default select example">
+                    <option selected>Выбрать</option>
+                    <option>One</option>
+                    <option>Two</option>
+                    <option>Three</option>
+                </select>
+            </div>
+            <div class="col-8">
+                <button type="button" class="btn btn-light">Все</button>
+                <button type="button" class="btn btn-light">2D</button>
+                <button type="button" class="btn btn-light">3D</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-auto>">
+            <table class="table table-dark">
+                <tr>
+                    <td colspan="2">18 чт</td>
+                    <td colspan="2">19 пт</td>
+                    <td colspan="2">20 сб</td>
+                    <td colspan="2">21 вс</td>
+                    <td colspan="2">22 пн</td>
+                    <td colspan="2">23 вт</td>
+                    <td colspan="2">24 ср</td>
+                </tr>
+                <tr>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                    <td colspan="2">ноября</td>
+                </tr>
+                <tr>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                    <td>16:40</td>
+                    <td>3d</td>
+                </tr>
+                <tr>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                    <td>зал 1</td>
+                    <td>23/56/120</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <img th:src="*{getImagePath()}" th:style="'width:75%'">
+        </div>
+        <div class="col-8">
+            <a class="btn btn-sm mr-3 btn btn-success" href="#">Купить билет</a>
+            <h2 th:text="*{name}"></h2>
+            <span th:text="*{description}" th:style="'width:75%'"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <table class="table table-dark">
+                <tr>
+                    <td style="text-align: right;width: 100px;">год</td>
+                    <td th:text="*{movieInfo.year}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">страна</td>
+                    <td th:text="*{movieInfo.country}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">композитор</td>
+                    <td th:text="*{movieInfo.compositor}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">продюсер</td>
+                    <td th:text="*{movieInfo.producer}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">режиссер</td>
+                    <td th:text="*{movieInfo.director}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">сценарист</td>
+                    <td th:text="*{movieInfo.operator}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">продюсер</td>
+                    <td th:text="*{movieInfo.screenwriter}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">жанр</td>
+                    <td th:text="*{movieInfo.genre}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">бюджет</td>
+                    <td th:text="*{movieInfo.budget}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">возраст</td>
+                    <td th:text="*{movieInfo.ageRestriction}"></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;width: 100px;">время</td>
+                    <td th:text="*{movieInfo.time}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <th:block th:each="galleryImage : ${movie.images}">
+                    <div class="col-2" th:text="${galleryImage.id}">
+
+                    </div>
+                </th:block>
+            </div>
+            <div class="row">
+                <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                    <h3>Кадры и постеры</h3>
+                    <div class="carousel-inner">
+                        <th:block th:each="galleryImage, iterable : ${galleryImages}">
+                            <div class="carousel-item active" th:if="${iterable.index==0}">
+                                <img class="d-block w-100" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+                            <div class="carousel-item" th:if="${iterable.index&gt;0}">
+                                <img class="d-block w-100" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+                        </th:block>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

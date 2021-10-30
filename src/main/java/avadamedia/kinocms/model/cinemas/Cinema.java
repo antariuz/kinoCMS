@@ -22,8 +22,10 @@ public class Cinema extends MappedEntity {
 
     @Column
     private String name;
+    @Lob
     @Column
     private String description;
+    @Lob
     @Column
     private String conditions;
     @Column(name = "main_image")
@@ -31,11 +33,11 @@ public class Cinema extends MappedEntity {
     @Column(name = "top_banner")
     private String topBanner;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "cinema_id", referencedColumnName = "id")
     private List<Image> images = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     @JoinColumn(name="cinema_id", referencedColumnName="id")
     private List<CinemaHall> cinemaHalls = new ArrayList<>();
 
@@ -47,6 +49,12 @@ public class Cinema extends MappedEntity {
     public String getImagePath() {
         if (mainImage == null || getId() == null) return null;
         return "/uploaded-images/cinemas/" + getId() + "/" + mainImage;
+    }
+
+    @Transient
+    public String getTopBannerPath() {
+        if (topBanner == null || getId() == null) return null;
+        return "/uploaded-images/cinemas/" + getId() + "/" + topBanner;
     }
 
 }

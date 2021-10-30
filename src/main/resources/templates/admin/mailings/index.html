@@ -17,21 +17,23 @@
             <div class="row">
                 <div class="col-8">
                     <div class="form-group">
-                        <label for="whomToSentSMS">Кого будем слать?</label>
+                        <label for="whomToSentSMS">Кому отправить?</label>
                         <div class="form-check" id="whomToSentSMS">
                             <div class="row">
                                 <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" th:text="'Всех пользователей'">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked="">
+                                    <label for="customRadio1" class="custom-control-label">Всем пользователей</label>
                                 </div>
                                 <div class="col-3">
-                                    <input class="form-check-input" type="checkbox" th:text="'Выборочно'">
+                                    <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                                    <label for="customRadio2" class="custom-control-label">Выборочно</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <a class="btn btn-tool btn-default" href="#">Выбрать пользователей</a>
+                    <a class="btn btn-tool btn-default" th:href="${'/admin/mailings/choose'}">Выбрать пользователей</a>
                 </div>
             </div>
             <div class="row">
@@ -82,21 +84,23 @@
             <div class="row">
                 <div class="col-8">
                     <div class="form-group">
-                        <label for="whomToSentEmail">Кого будем слать?</label>
-                        <div class="form-check" id="whomToSentEmail">
+                        <label for="whomToSentSMS">Кому отправить?</label>
+                        <div class="form-check" id="whomToSentSMS">
                             <div class="row">
                                 <div class="col-4">
-                                    <input class="form-check-input" type="checkbox" th:text="'Всех пользователей'">
+                                    <input class="custom-control-input" type="radio" id="customRadio1" name="customRadio" checked="">
+                                    <label for="customRadio1" class="custom-control-label">Всем пользователей</label>
                                 </div>
                                 <div class="col-3">
-                                    <input class="form-check-input" type="checkbox" th:text="'Выборочно'">
+                                    <input class="custom-control-input" type="radio" id="customRadio2" name="customRadio">
+                                    <label for="customRadio2" class="custom-control-label">Выборочно</label>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-4">
-                    <a class="btn btn-tool btn-default" href="#">Выбрать пользователей</a>
+                    <a class="btn btn-tool btn-default" th:href="${'/admin/mailings/choose'}">Выбрать пользователей</a>
                 </div>
             </div>
             <div class="row">
@@ -105,16 +109,25 @@
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
-                                Загрузить HTML-письмо
-                                <a class="btn btn-tool btn-default" href="#">Загрузить</a>
+                                <form th:method="PUT" th:object="${template}"
+                                      th:action="*{'/admin/mailings/template/add/'}"
+                                      enctype="multipart/form-data">
+                                    <div class="custom-file">
+                                        <input type="file" name="file" class="custom-file-input" id="template"
+                                               accept=".html" required="">
+                                        <label class="custom-file-label" for="template">Загрузить HTML-письмо</label>
+                                        <button class="btn btn-default">Загрузить</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <th:block th:if="${templates.size!=0}">
+                    <div class="row" >
                         <div class="col">
                             <div class="form-group">
                                 Загружен файл:
-                                <a href="#">Рассылка лапшы-на-уши.html</a>
+                                <a href="#" th:text="${lastTemplate.name}"></a>
                             </div>
                         </div>
                     </div>
@@ -122,10 +135,11 @@
                         <div class="col">
                             <div class="form-group">
                                 Шаблон используемый в текущей рассылке:
-                                <a href="#">Рассылка лапшы-на-уши.html</a>
+                                <a href="#" th:text="${lastTemplate.name}"></a>
                             </div>
                         </div>
                     </div>
+                    </th:block>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -155,15 +169,16 @@
                                 </div>
                             </div>
                             <!--Iterator templates-->
-                            <div class="row">
+                            <div class="row" th:each="template : ${templates}">
                                 <div class="col-2">
                                     <input class="form-check-input" type="checkbox">
                                 </div>
                                 <div class="col-8">
-                                    <a href="#">Новый товар.html</a>
+                                    <a href="#" th:text="${template.name}"></a>
                                 </div>
                                 <div class="col-2">
-                                    <a class="btn-sm btn-danger"><i class="fas fa-minus"></i></a>
+                                    <a class="btn-sm btn-danger" th:href="${'mailings/delete/' + template.id}"><i
+                                            class="fas fa-minus"></i></a>
                                 </div>
                             </div>
                             <!--end of Iterator templates-->

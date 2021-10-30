@@ -6,9 +6,9 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:method="PUT" th:object="${mainBanner}" th:action="@{/admin/banners/main/update}"
+    <form th:method="PUT" th:object="${mainBanner}" th:action="*{'/admin/banners/main/update/' + id}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${mainBanner.id}"/>
+        <input type="hidden" th:field="*{id}"/>
 
         <div class="row">
             <div class="col-4">
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-12 text-center pb-3">
                 <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
-                <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/banners}">Отменить</a>
+                <a class="btn btn-lg mr-3 btn btn-danger" th:href="*{'/admin/banners/main/delete/' + id}">Удалить</a>
             </div>
         </div>
     </form>

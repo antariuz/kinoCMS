@@ -79,24 +79,26 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 d-flex" th:each="image : ${cinema.images}">
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td colspan="2">
-                                    <img th:src="#" th:style="'width:100px; height:100px'">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-warning">Обновить</a>
-                                </td>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-danger">Удалить</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="col-3" th:each="image : ${cinema.images}">
+                        <div class="row">
+                            <div class="col text-center">
+                                <img th:src="${image.getImagePath()}" th:style="'width:100px; height:100px'"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="galleryImages"
+                                               class="custom-file-input" id="galleryImage"
+                                               accept="image/png, image/jpeg">
+                                        <label class="custom-file-label" for="galleryImage">Выберите
+                                            картинку</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

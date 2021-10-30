@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Getter
@@ -21,6 +22,7 @@ public class SEO extends MappedEntity {
     private String title;
     @Column
     private String keywords;
+    @Lob
     @Column
     private String description;
 

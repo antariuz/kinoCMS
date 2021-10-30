@@ -27,7 +27,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center">
-                            <a th:href="${'movies/current/update/' + currentMovie.id}">
+                            <a th:href="${'movies/current/edit/' + currentMovie.id}">
                                 <img th:src="${currentMovie.getImagePath()}" th:style="'width:75%'">
                             </a>
                         </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center">
-                            <a th:href="${'movies/coming/update/' + comingMovie.id}">
+                            <a th:href="${'movies/coming/edit/' + comingMovie.id}">
                                 <img th:src="${comingMovie.getImagePath()}" th:style="'width:75%'">
                             </a>
                         </div>

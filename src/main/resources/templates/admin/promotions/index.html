@@ -28,8 +28,15 @@
                         <tr th:each="promotion,iterator : ${promotions}">
                             <td th:text="${promotion.name}"></td>
                             <td th:text="${#dates.format(promotion.createdDate,'dd.MM.yyyy')}"></td>
-                            <td th:text="${promotion.status}"></td>
-                            <td><a th:href="${'promotions/update/' + promotion.id}"><i class="fas fa-edit"></i></a></td>
+                            <td th:switch="${promotion.status}">
+                                <button th:case="true" type="button" class="btn btn-success btn-flat">
+                                    Включено
+                                </button>
+                                <button th:case="false" type="button" class="btn btn-danger btn-flat">
+                                    Выключено
+                                </button>
+                            </td>
+                            <td><a th:href="${'promotions/edit/' + promotion.id}"><i class="fas fa-edit"></i></a></td>
                             <td><a th:href="${'promotions/delete/' + promotion.id}"><i class="fas fa-trash"></i></a></td>
                         </tr>
                         </tbody>

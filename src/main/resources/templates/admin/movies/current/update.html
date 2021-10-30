@@ -6,9 +6,12 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:method="PUT" th:object="${currentMovie}" th:action="@{/admin/movies/current/update}"
+    <form th:method="PUT" th:object="${currentMovie}" th:action="*{'/admin/movies/current/update/' + id}"
           enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" th:value="${currentMovie.id}"/>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{seo.id}"/>
+        <input type="hidden" th:field="*{movieInfo.id}"/>
+
         <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="custom-tabs-two-home-tab" data-toggle="pill"
@@ -19,9 +22,6 @@
                 <a class="nav-link" id="custom-tabs-two-profile-tab" data-toggle="pill"
                    href="#custom-tabs-two-profile" role="tab" aria-controls="custom-tabs-two-profile"
                    aria-selected="false">Доп. информация</a>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link" th:text="${currentMovie.id}"></span>
             </li>
         </ul>
 
@@ -54,33 +54,47 @@
 
                                     <div class="form-group">
                                         <label for="mainImage">Баннер</label>
-                                        <div class="custom-file">
+                                        <div class="custom-file" th:if="${currentMovie.getMainImage() == null}">
                                             <input type="file" name="image" class="custom-file-input" id="mainImage"
                                                    accept="image/png, image/jpeg" required="">
+                                            <label class="custom-file-label" for="mainImage">Выберите
+                                                картинку</label>
+                                        </div>
+                                        <div class="custom-file" th:if="${currentMovie.getMainImage() != null}">
+                                            <input type="file" name="image" class="custom-file-input" id="mainImage"
+                                                   accept="image/png, image/jpeg">
                                             <label class="custom-file-label" for="mainImage">Выберите
                                                 картинку</label>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="movieType">Тип кино</label>
-                                        <div class="form-check" id="movieType">
+                                        <label for="movieTypes">Тип кино</label>
+                                        <div class="form-check" id="movieTypes">
                                             <div class="row">
-                                                <!--  <div class="col-4" th:each="movieType: ${movieTypes}">-->
-                                                <!--  <input class="form-check-input" type="checkbox"-->
-                                                <!--   th:text="${movieType.type}"-->
-                                                <!--   th:field="${movieTypes}" th:value="${movieType.id}">-->
-                                                <!--  </div>-->
+                                                <div class="col-4" th:each="movieType: ${movieTypes}">
+                                                    <input class="form-check-input" type="checkbox" name="movieTypes"
+                                                           th:text="${movieType.name}"
+                                                           th:value="${movieType.id}"
+                                                           th:if="${currentMovie.getMovieTypes().contains(movieType)}" checked="">
+                                                    <input class="form-check-input" type="checkbox" name="movieTypes"
+                                                           th:text="${movieType.name}"
+                                                           th:value="${movieType.id}"
+                                                           th:if="${!currentMovie.getMovieTypes().contains(movieType)}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
 
                                 <div class="col-md-4 mb-2 text-center">
-                                    <label for="thumbnail">Предпросмотр баннера</label><br>
-                                    <img style="max-height: 130px" id="thumbnail"
-                                         alt=""/>
+                                    <label for="previewImage">Предпросмотр баннера</label><br>
+                                    <div class="form-group" id="previewImage">
+                                        <img style="max-height: 130px" id="thumbnail"
+                                             alt=""/>
+                                        <img style="max-height: 130px" id="uploaded"
+                                             th:src="${currentMovie.getImagePath()}"/>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -108,16 +122,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-2" th:each="image : ${imageList}">
+                                <div class="col-3" th:each="image : ${currentMovie.images}">
                                     <div class="row">
                                         <div class="col text-center">
-                                            <img th:src="${image.name}" th:style="'width:100px; height:100px'"
+                                            <img th:src="${image.getImagePath()}" th:style="'width:100px; height:100px'"
                                                  alt="">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col text-center">
-                                            <h5 th:text="${image.name}"></h5>
+                                            <div class="form-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="galleryImages"
+                                                           class="custom-file-input" id="galleryImage"
+                                                           accept="image/png, image/jpeg">
+                                                    <label class="custom-file-label" for="galleryImage">Выберите
+                                                        картинку</label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -130,23 +152,23 @@
                         <div class="card-header">
                             <h3 class="card-title font-weight-bold ">SEO блок</h3>
                         </div>
-                        <div class="card-body pt-2" th:object="${seo}">
+                        <div class="card-body pt-2">
                             <div class="row">
                                 <div class="col-4">
                                     <label for="seoURL">URL</label>
                                     <input type="text" class="form-control" id="seoURL" th:placeholder="URL"
-                                           th:field="*{url}">
+                                           th:field="*{seo.url}">
                                 </div>
                                 <div class="col-4">
                                     <label for="seoTitle">Title</label>
                                     <input type="text" class="form-control" id="seoTitle" th:placeholder="Title"
-                                           th:field="*{title}">
+                                           th:field="*{seo.title}">
                                 </div>
                                 <div class="col-4">
                                     <label for="seoKeywords">Keywords</label>
                                     <input type="text" class="form-control" id="seoKeywords"
                                            th:placeholder="Keywords"
-                                           th:field="*{keywords}">
+                                           th:field="*{seo.keywords}">
                                 </div>
                             </div>
                             <div class="row">
@@ -154,7 +176,7 @@
                                     <label for="seoDescription">Description</label>
                                     <textarea class="form-control" rows="3" id="seoDescription"
                                               placeholder="Description"
-                                              spellcheck="false" th:field="*{seoDescription}"></textarea>
+                                              spellcheck="false" th:field="*{seo.description}"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -165,19 +187,19 @@
                         <div class="col-12 text-center pb-3">
                             <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
                             <a class="btn btn-lg mr-3 btn btn-danger"
-                               th:href="@{'/admin/movies/current/delete/' + ${currentMovie.id}}">Удалить</a>
+                               th:href="*{'/admin/movies/current/delete/' + id}">Удалить</a>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="custom-tabs-two-profile" role="tabpanel"
-                     aria-labelledby="custom-tabs-two-profile-tab" th:object="${movieInfo}">
+                     aria-labelledby="custom-tabs-two-profile-tab">
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="year">Год</label>
                                 <input type="text" class="form-control" id="year"
                                        th:placeholder="'Год'"
-                                       th:field="*{year}">
+                                       th:field="*{movieInfo.year}">
                             </div>
                         </div>
 
@@ -186,7 +208,7 @@
                                 <label for="country">Страна</label>
                                 <input type="text" class="form-control" id="country"
                                        th:placeholder="'Страна'"
-                                       th:field="*{country}">
+                                       th:field="*{movieInfo.country}">
                             </div>
                         </div>
 
@@ -195,7 +217,7 @@
                                 <label for="compositor">Композитор</label>
                                 <input type="text" class="form-control" id="compositor"
                                        th:placeholder="'Композитор'"
-                                       th:field="*{compositor}">
+                                       th:field="*{movieInfo.compositor}">
                             </div>
                         </div>
 
@@ -204,7 +226,7 @@
                                 <label for="producer">Продюсер</label>
                                 <input type="text" class="form-control" id="producer"
                                        th:placeholder="'Продюсер'"
-                                       th:field="*{producer}">
+                                       th:field="*{movieInfo.producer}">
                             </div>
                         </div>
 
@@ -213,7 +235,7 @@
                                 <label for="director">Режиссер</label>
                                 <input type="text" class="form-control" id="director"
                                        th:placeholder="'Режиссер'"
-                                       th:field="*{director}">
+                                       th:field="*{movieInfo.director}">
                             </div>
                         </div>
 
@@ -222,7 +244,7 @@
                                 <label for="operator">Оператор</label>
                                 <input type="text" class="form-control" id="operator"
                                        th:placeholder="'Оператор'"
-                                       th:field="*{operator}">
+                                       th:field="*{movieInfo.operator}">
                             </div>
                         </div>
 
@@ -231,7 +253,7 @@
                                 <label for="screenwriter">Сценарист</label>
                                 <input type="text" class="form-control" id="screenwriter"
                                        th:placeholder="'Сценарист'"
-                                       th:field="*{screenwriter}">
+                                       th:field="*{movieInfo.screenwriter}">
                             </div>
                         </div>
 
@@ -240,7 +262,7 @@
                                 <label for="genre">Жанр</label>
                                 <input type="text" class="form-control" id="genre"
                                        th:placeholder="'Жанр'"
-                                       th:field="*{genre}">
+                                       th:field="*{movieInfo.genre}">
                             </div>
                         </div>
 
@@ -249,7 +271,7 @@
                                 <label for="budget">Бюджет</label>
                                 <input type="text" class="form-control" id="budget"
                                        th:placeholder="'Бюджет'"
-                                       th:field="*{budget}">
+                                       th:field="*{movieInfo.budget}">
                             </div>
                         </div>
 
@@ -258,7 +280,7 @@
                                 <label for="ageRestriction">Возраст</label>
                                 <input type="text" class="form-control" id="ageRestriction"
                                        th:placeholder="'Возраст'"
-                                       th:field="*{ageRestriction}">
+                                       th:field="*{movieInfo.ageRestriction}">
                             </div>
                         </div>
 
@@ -267,7 +289,7 @@
                                 <label for="time">Время</label>
                                 <input type="text" class="form-control" id="time"
                                        th:placeholder="'Время'"
-                                       th:field="*{time}">
+                                       th:field="*{movieInfo.time}">
                             </div>
                         </div>
 

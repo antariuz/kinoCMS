@@ -13,10 +13,13 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "templates")
+@Table(name = "template")
 public class Template extends MappedEntity {
 
     @Column
     private String name;
+
+    @Column(name = "email_mailing_id")
+    private Long emailMailingId;
 
 }

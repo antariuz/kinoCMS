@@ -43,4 +43,9 @@ public class NewsBannerServiceImpl implements NewsBannerService {
         return repository.getFirstId();
     }
 
+    @Override
+    public Long getLastId() {
+        return repository.getLastId();
+    }
+
 }

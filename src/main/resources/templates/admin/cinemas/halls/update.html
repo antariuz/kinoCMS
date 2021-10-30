@@ -7,9 +7,9 @@
 <body>
 <div layout:fragment="content">
     <form th:method="PUT" th:object="${cinemaHall}"
-          th:action="${'/admin/cinemas/edit/' + cinema.id + '/halls/update/' + cinemaHall.id}"
+          th:action="${'/admin/cinemas/edit/' + cinemaId + '/halls/update/' + cinemaHall.id}"
           enctype="multipart/form-data">
-        <input type="text" th:field="*{id}"/>
+        <input type="hidden" th:field="*{id}"/>
         <input type="hidden" th:field="*{seo.id}"/>
 
         <!--Main face-->
@@ -74,24 +74,26 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 d-flex" th:each="image : *{images}">
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td colspan="2">
-                                    <img th:src="#" th:style="'width:100px; height:100px'">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-warning">Обновить</a>
-                                </td>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-danger">Удалить</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="col-3" th:each="image : ${cinemaHall.images}">
+                        <div class="row">
+                            <div class="col text-center">
+                                <img th:src="${image.getImagePath()}" th:style="'width:100px; height:100px'"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="galleryImages"
+                                               class="custom-file-input" id="galleryImage"
+                                               accept="image/png, image/jpeg">
+                                        <label class="custom-file-label" for="galleryImage">Выберите
+                                            картинку</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +137,7 @@
             <div class="col-12 text-center pb-3">
                 <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
                 <a class="btn btn-lg mr-3 btn btn-danger"
-                   th:href="${'/admin/cinemas/edit/' + cinema.id + '/halls/delete/' + cinemaHall.id}">Удалить</a>
+                   th:href="${'/admin/cinemas/edit/' + cinemaId + '/halls/delete/' + cinemaHall.id}">Удалить</a>
             </div>
         </div>
 

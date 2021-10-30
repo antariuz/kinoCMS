@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/template/index.html}">
+<head>
+    <title>KinoCMS</title>
+</head>
+<body>
+<div layout:fragment="content" th:object="${contactsPage}">
+    <div class="row">
+        <div class="col-12">
+            <img th:src="${contactsPage.getTopBannerPath()}" th:style="'max-height:200px;width:100%'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <h2 th:text="${'Рекламодателям'}"></h2>
+            </div>
+            <div class="row">
+                <span th:text="${contactsPage.description}"></span>
+            </div>
+            <div class="row">
+                <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                    <h3>Фотогалерея</h3>
+                    <div class="carousel-inner">
+                        <th:block th:each="galleryImage, iterable : ${contactsPage.images}">
+                            <div class="carousel-item active" th:if="${iterable.index==0}">
+                                <img class="d-block w-50" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+
+                            <div class="carousel-item" th:if="${iterable.index&gt;0}">
+                                <img class="d-block w-50" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+                        </th:block>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

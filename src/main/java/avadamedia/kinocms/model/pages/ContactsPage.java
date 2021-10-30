@@ -18,8 +18,11 @@ import java.util.List;
 @Table(name = "contacts_page")
 public class ContactsPage extends MappedEntity {
 
-    @OneToMany
-    @JoinColumn(name = "cinema_contacts_block_list_id", referencedColumnName = "id")
+    @Column
+    private boolean status;
+
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "contacts_page_id", referencedColumnName = "id")
     private List<CinemaContactsBlock> cinemaContactsBlocks = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

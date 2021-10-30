@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{public/template/index.html}">
+<head>
+    <title>KinoCMS</title>
+</head>
+<body>
+<div layout:fragment="content" th:object="${cinema}">
+    <div class="row">
+        <div class="col-12">
+            <img th:src="${cinema.getTopBannerPath()}" th:style="'max-height:200px;width:100%'">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+            <h4 th:text="${'Количетво залов: ' + cinema.getCinemaHalls().size}"></h4>
+            <th:block th:each="hall: ${cinema.cinemaHalls}" th:if="${!cinema.cinemaHalls.isEmpty()}">
+                <a class="btn btn-flat btn-info" th:href="${'/hall/' + hall.id}" th:text="${'Зал: ' + hall.number}"></a>
+            </th:block>
+            <h4>Смотрите сегодня</h4>
+            <table class="table table-dark">
+                <tr>
+                    <td>Сеанс 1</td>
+                </tr>
+                <tr>
+                    <td>Сеанс 2</td>
+                </tr>
+                <tr>
+                    <td>Сеанс 3</td>
+                </tr>
+                <tr>
+                    <td>Сеанс 4</td>
+                </tr>
+                <tr>
+                    <td>Сеанс 5</td>
+                </tr>
+                <tr>
+                    <td>Сеанс 6</td>
+                </tr>
+            </table>
+            <a class="btn btn-flat btn-success" th:href="'#'">Расписание всех сеансов</a>
+        </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col-6">
+                    <h2 th:text="${cinema.name}"></h2>
+                    <img th:src="${cinema.getImagePath()}" th:style="'max-height:200px;width:100%'">
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-sm mr-3 btn btn-success" href="#">Расписание сеансов </a>
+                    <button type="button" class="btn btn-light">3D</button>
+                    <button type="button" class="btn btn-light">D-BOX</button>
+                    <button type="button" class="btn btn-light">DOLBY ATMOS</button>
+                    <button type="button" class="btn btn-light">VIP</button>
+                </div>
+            </div>
+            <div class="row">
+                <span th:text="${cinema.description}"></span>
+            </div>
+            <div class="row">
+                <h2>Условия</h2>
+                <span th:text="${cinema.conditions}"></span>
+            </div>
+            <div class="row">
+                <div id="topBanner" class="carousel slide" data-bs-ride="carousel">
+                    <h3>Фотогалерея</h3>
+                    <div class="carousel-inner">
+                        <th:block th:each="galleryImage, iterable : ${cinema.images}">
+                            <div class="carousel-item active" th:if="${iterable.index==0}">
+                                <img class="d-block w-50" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+
+                            <div class="carousel-item" th:if="${iterable.index&gt;0}">
+                                <img class="d-block w-50" th:src="${galleryImage.getImagePath()}"
+                                     th:alt="${galleryImage.name}">
+                            </div>
+                        </th:block>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#topBanner"
+                            data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

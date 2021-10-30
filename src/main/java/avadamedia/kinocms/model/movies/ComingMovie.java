@@ -20,24 +20,25 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "coming_movies")
+@Table(name = "coming_movie")
 public class ComingMovie extends MappedEntity {
 
     @Column
     private String name;
+    @Lob
     @Column
     private String description;
     @Column(name = "main_image")
     private String mainImage;
 
-    @OneToMany
-    @JoinColumn(name="image_list_id", referencedColumnName="id")
-    private List<Image> imageList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "coming_movie_id", referencedColumnName = "id")
+    private List<Image> images = new ArrayList<>();
 
     @Column
     private String trailerUrl;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<MovieType> movieTypes = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

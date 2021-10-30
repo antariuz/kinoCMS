@@ -3,9 +3,11 @@ package avadamedia.kinocms.controller;
 import avadamedia.kinocms.model.cinemas.Cinema;
 import avadamedia.kinocms.model.cinemas.assist.CinemaHall;
 import avadamedia.kinocms.model.common.FileUploadUtil;
+import avadamedia.kinocms.model.common.Image;
 import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.service.cinema.CinemaHallService;
 import avadamedia.kinocms.service.cinema.CinemaService;
+import avadamedia.kinocms.service.common.ImageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("admin/cinemas")
@@ -24,11 +27,12 @@ public class CinemasController {
 
     private final CinemaService cinemaService;
     private final CinemaHallService cinemaHallService;
+    private final ImageService imageService;
 
     // Show all Cinemas
     @GetMapping({"/", ""})
     public ModelAndView showAllCinemas() {
-        return new ModelAndView("/admin/cinemas/index", "cinemas", cinemaService.getAllCinemas());
+        return new ModelAndView("admin/cinemas/index", "cinemas", cinemaService.getAllCinemas());
     }
 
     // Cinema part
@@ -36,7 +40,7 @@ public class CinemasController {
     @GetMapping("add")
     public String addCinema() {
         Cinema cinema = new Cinema();
-        cinema.setImages(new ArrayList<>());
+        cinema.setImages(imageService.initImageList(4));
         cinema.setCinemaHalls(new ArrayList<>());
         cinema.setSeo(new SEO());
         cinemaService.createCinema(cinema);
@@ -46,23 +50,41 @@ public class CinemasController {
     // Update cinema
     @GetMapping("edit/{cinemaId}")
     public ModelAndView showCinemaEditPage(@PathVariable("cinemaId") Long cinemaId) {
-        ModelAndView mav = new ModelAndView("/admin/cinemas/update");
-        mav.addObject("cinema", cinemaService.getCinemaById(cinemaId));
-        return mav;
+        return new ModelAndView("admin/cinemas/update", "cinema", cinemaService.getCinemaById(cinemaId));
     }
 
     @PutMapping("update/{cinemaId}")
     public String updateCinema(@PathVariable("cinemaId") Long cinemaId,
+                               @ModelAttribute("cinema") Cinema cinema,
                                @RequestParam("image") MultipartFile file,
                                @RequestParam("image2") MultipartFile file2,
-                               @ModelAttribute("cinema") Cinema cinema) throws IOException {
-        String uploadDir = "cinemas/" + cinemaId;
+                               @RequestParam("galleryImages") MultipartFile[] galleryImages) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName2 = StringUtils.cleanPath(file2.getOriginalFilename());
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
-        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
-        cinema.setMainImage(fileName);
-        cinema.setTopBanner(fileName2);
+        String uploadDir = "cinemas/" + cinemaId;
+        String galleryImagesUploadDir = "/gallery-images/";
+        if (!fileName.equals("")) {
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+            cinema.setMainImage(fileName);
+        } else cinema.setMainImage(cinemaService.getCinemaById(cinemaId).getMainImage());
+        if (!fileName2.equals("")) {
+            FileUploadUtil.saveFile(uploadDir, fileName2, file2);
+            cinema.setTopBanner(fileName2);
+        } else cinema.setMainImage(cinemaService.getCinemaById(cinemaId).getTopBanner());
+        List<Image> images = cinemaService.getCinemaById(cinemaId).getImages();
+        if (galleryImages.length != 0) {
+            for (int i = 0; i < galleryImages.length; i++) {
+                String galleryImageName = StringUtils.cleanPath(galleryImages[i].getOriginalFilename());
+                if (!galleryImageName.equals("")) {
+                    FileUploadUtil.saveFile(galleryImagesUploadDir, galleryImageName, galleryImages[i]);
+                    images.get(i).setName(galleryImageName);
+                } else {
+                    images.get(i).setName(cinemaService.getCinemaById(cinemaId).getImages().get(i).getName());
+                }
+
+            }
+        }
+        cinema.setImages(images);
         cinemaService.updateCinema(cinema);
         return "redirect:/admin/cinemas/edit/{cinemaId}";
     }
@@ -79,7 +101,7 @@ public class CinemasController {
     @GetMapping("edit/{cinemaId}/halls/add")
     public String addCinemaHall(@PathVariable("cinemaId") Long cinemaId) {
         CinemaHall cinemaHall = new CinemaHall();
-        cinemaHall.setImages(new ArrayList<>());
+        cinemaHall.setImages(imageService.initImageList(4));
         cinemaHall.setSeo(new SEO());
         cinemaHall.setCinemaId(cinemaId);
         cinemaHallService.createCinemaHall(cinemaHall);
@@ -88,11 +110,10 @@ public class CinemasController {
 
     // Update cinema hall
     @GetMapping("edit/{cinemaId}/halls/edit/{hallId}")
-    public ModelAndView showCinemaHallEditPage(@PathVariable("cinemaId") Long cinemaId, @PathVariable("hallId") Long hallId) {
-        ModelAndView mav = new ModelAndView("/admin/cinemas/halls/update");
-        mav.addObject("cinema", cinemaService.getCinemaById(cinemaId));
-        mav.addObject("cinemaHall", cinemaHallService.getCinemaHallById(hallId));
-        return mav;
+    public ModelAndView showCinemaHallEditPage(@PathVariable("cinemaId") Long cinemaId,
+                                               @PathVariable("hallId") Long hallId) {
+        return new ModelAndView("admin/cinemas/halls/update",
+                "cinemaHall", cinemaHallService.getCinemaHallById(hallId));
     }
 
     @PutMapping("edit/{cinemaId}/halls/update/{hallId}")
@@ -101,21 +122,41 @@ public class CinemasController {
                                    @ModelAttribute("cinema") Cinema cinema,
                                    @ModelAttribute("cinemaHall") CinemaHall cinemaHall,
                                    @RequestParam("image") MultipartFile file,
-                                   @RequestParam("image2") MultipartFile file2) throws IOException {
-        String uploadDir = "cinema-halls/" + cinemaHall.getId() + "/";
+                                   @RequestParam("image2") MultipartFile file2,
+                                   @RequestParam("galleryImages") MultipartFile[] galleryImages) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         String fileName2 = StringUtils.cleanPath(file2.getOriginalFilename());
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
-        FileUploadUtil.saveFile(uploadDir, fileName2, file2);
-        cinemaHall.setMainImage(fileName);
-        cinemaHall.setTopBanner(fileName2);
+        String uploadDir = "cinema-halls/" + hallId;
+        String galleryImagesUploadDir = "/gallery-images/";
+        if (!fileName.equals("")) {
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+            cinemaHall.setMainImage(fileName);
+        } else cinema.setMainImage(cinemaHallService.getCinemaHallById(hallId).getMainImage());
+        if (!fileName2.equals("")) {
+            FileUploadUtil.saveFile(uploadDir, fileName2, file2);
+            cinemaHall.setTopBanner(fileName2);
+        } else cinema.setMainImage(cinemaHallService.getCinemaHallById(hallId).getTopBanner());
+        List<Image> images = cinemaHallService.getCinemaHallById(hallId).getImages();
+        if (galleryImages.length != 0) {
+            for (int i = 0; i < galleryImages.length; i++) {
+                String galleryImageName = StringUtils.cleanPath(galleryImages[i].getOriginalFilename());
+                if (!galleryImageName.equals("")) {
+                    FileUploadUtil.saveFile(galleryImagesUploadDir, galleryImageName, galleryImages[i]);
+                    images.get(i).setName(galleryImageName);
+                } else {
+                    images.get(i).setName(cinemaHallService.getCinemaHallById(hallId).getImages().get(i).getName());
+                }
+            }
+        }
+        cinemaHall.setImages(images);
         cinemaHallService.updateCinemaHall(cinemaHall);
         return "redirect:/admin/cinemas/edit/" + cinemaId;
     }
 
     // Delete cinema hall
     @GetMapping("edit/{cinemaId}/halls/delete/{hallId}")
-    public String deleteCinemaHall(@PathVariable("cinemaId") Long cinemaId, @PathVariable("hallId") Long hallId) {
+    public String deleteCinemaHall(@PathVariable("cinemaId") Long cinemaId,
+                                   @PathVariable("hallId") Long hallId) {
         cinemaHallService.deleteCinemaHallById(hallId);
         return "redirect:/admin/cinemas/edit/" + cinemaId;
     }

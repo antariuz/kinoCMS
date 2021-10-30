@@ -40,7 +40,7 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Соотношение мужчин и женщин</h3>
+                    <h3 class="card-title">Из каких городов наши пользователи?</h3>
                 </div>
                 <div class="card-body">
                     <canvas id="pieChart"
@@ -54,7 +54,7 @@
                 <div class="col-6">
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3 th:text="${usersQty}"></h3>
 
                             <p>Зарегистрированных пользователей</p>
                         </div>
@@ -105,7 +105,130 @@
             </div>
         </div>
     </div>
-
 </div>
+<th:block layout:fragment="script">
+    <!--Dashboard charts JS-->
+    <script type="text/javascript">
+        $(function () {
+
+            var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+            var donutData = {
+                labels: [
+                    'Универсальный солдат',
+                    'Человек невидимка',
+                    'Терминатор',
+                    'Терминатор-2',
+                    'Москва слезам не верит',
+                    'Кунфу-Панда',
+                ],
+                datasets: [
+                    {
+                        data: [700, 500, 400, 600, 300, 100],
+                        backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    }
+                ]
+            }
+            var donutOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            new Chart(donutChartCanvas, {
+                type: 'doughnut',
+                data: donutData,
+                options: donutOptions
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+            var barChartData = {
+                labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль'],
+                datasets: [
+                    {
+                        label: 'Кинотеатр "Золотой Дюк"',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [2800, 4008, 4000, 1900, 8600, 2700, 9000]
+                    },
+                    {
+                        label: 'Кинотеатр "Москва"',
+                        backgroundColor: 'rgba(210, 214, 222, 1)',
+                        borderColor: 'rgba(210, 214, 222, 1)',
+                        pointRadius: false,
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [6500, 5900, 8000, 8100, 5600, 5500, 4000]
+                    },
+                ]
+            }
+
+            var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+            var stackedBarChartData = $.extend(true, {}, barChartData)
+            var temp0 = barChartData.datasets[0]
+            var temp1 = barChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var stackedBarChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            }
+
+            new Chart(stackedBarChartCanvas, {
+                type: 'bar',
+                data: stackedBarChartData,
+                options: stackedBarChartOptions
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+            var pieData = {
+                labels: [
+                    'Киев',
+                    'Одесса',
+                ],
+                datasets: [
+                    {
+                        data: [50, 50],
+                        backgroundColor: ['#00a65a', '#00c0ef'],
+                    }
+                ]
+            }
+
+            var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+            var pieOptions = {
+                maintainAspectRatio: false,
+                responsive: true,
+            }
+            //Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            new Chart(pieChartCanvas, {
+                type: 'pie',
+                data: pieData,
+                options: pieOptions
+            })
+        })
+    </script>
+</th:block>
 </body>
 </html>

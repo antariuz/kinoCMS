@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
@@ -41,20 +41,23 @@
                     <h2>Наши кинотеатры</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" th:each="cinema : ${cinemas}">
                 <div class="col-6">
-                    <img th:src="@{/images/preloader-logo.png}" th:style="'width:100%'">
-                </div>
-                <div class="col-6">
-                    <img th:src="@{/images/preloader-logo.png}" th:style="'width:100%'">
+                    <div class="row">
+                        <a th:href="${'/cinemas/' + cinema.id}">
+                            <img th:src="${cinema.getImagePath()}" th:style="'width:100%'"></a>
+                    </div>
+                    <div class="row">
+                        <h1 th:text="${cinema.name}"></h1>
+                    </div>
                 </div>
             </div>
 
         </div>
         <div class="col-2">
-            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
-            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
-            <img th:src="@{/images/aside-ad.jpg}" th:style="'width:100%'">
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
+            <div class="row pb-2"><img th:src="@{/images/aside-ad.jpg}"></div>
         </div>
     </div>
 </div>

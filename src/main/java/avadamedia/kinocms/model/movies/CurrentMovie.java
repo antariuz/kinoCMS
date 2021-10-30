@@ -6,7 +6,6 @@ import avadamedia.kinocms.model.common.SEO;
 import avadamedia.kinocms.model.movies.assist.MovieInfo;
 import avadamedia.kinocms.model.movies.assist.MovieType;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
@@ -19,24 +18,25 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "current_movies")
+@Table(name = "current_movie")
 public class CurrentMovie extends MappedEntity {
 
     @Column
     private String name;
+    @Lob
     @Column
     private String description;
     @Column(name = "main_image")
     private String mainImage;
 
-    @OneToMany
-    @JoinColumn(name="image_list_id", referencedColumnName="id")
-    private List<Image> imageList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "current_movie_id", referencedColumnName = "id")
+    private List<Image> images = new ArrayList<>();
 
     @Column
     private String trailerUrl;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<MovieType> movieTypes = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

@@ -43,4 +43,9 @@ public class MainBannerServiceImpl implements MainBannerService {
         return repository.getFirstId();
     }
 
+    @Override
+    public Long getLastId() {
+        return repository.getLastId();
+    }
+
 }

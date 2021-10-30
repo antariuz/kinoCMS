@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/public/template/index.html}">
+      layout:decorate="~{public/template/index.html}">
 <head>
     <title>KinoCMS</title>
 </head>
@@ -9,17 +9,11 @@
     <div class="row">
         <!--Advertising block-->
         <div class="col-3">
-            <div class="row">
-                <div class="float-right">
-                    <a href="/poster">Афиша</a>
-                </div>
-                <div class="float-right">
-                    <a href="/soon">Скоро</a>
-                </div>
+            <div class="row d-grid pb-1">
+                <a class="btn btn-flat btn-dark text-end" href="/poster">Афиша</a>
+                <a class="btn btn-flat btn-dark text-end" href="/soon">Скоро</a>
             </div>
-            <div class="row">
-                <img th:src="@{images/aside-ad.jpg}" th:style="'height:100%'">
-            </div>
+            <img th:src="@{images/aside-ad.jpg}" th:style="'width:100%'">
         </div>
         <!--Coming Movie List-->
         <div class="col-9 pb-4" th:if="${!comingMovies.isEmpty()}">
@@ -27,7 +21,9 @@
                 <div class="col-2 pb-2 fixed" th:each="comingMovie : ${comingMovies}">
                     <div class="row">
                         <div class="col text-center" th:style="'height:130px'">
+                            <a th:href="${'/movie/coming/' + comingMovie.id}">
                             <img th:src="${comingMovie.getImagePath()}" th:style="'height:100%'">
+                            </a>
                         </div>
                     </div>
                     <div class="row" th:style="'min-height: 56px'">
@@ -37,7 +33,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center font-weight-bold">
-                            <a class="btn btn-sm mr-3 btn btn-success" href="#">Купить билет</a>
+                            <a class="btn btn-sm mr-3 btn btn-success" th:href="${'/booking/movie/coming/' + comingMovie.id}">Купить билет</a>
                         </div>
                     </div>
                 </div>

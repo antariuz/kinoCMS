@@ -2,16 +2,18 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/template/index.html}">
 <head>
-    <title>Обновляем новость</title>
+    <title>Обновляем акцию</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <form th:method="PUT" th:object="${news}" th:action="@{/admin/news/update}">
-        <input type="hidden" th:field="*{id}" th:value="${news.id}"/>
+    <form th:method="PUT" th:object="${promotion}" th:action="*{'/admin/promotions/update/' + id}"
+          enctype="multipart/form-data">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{seo.id}"/>
         <div class="row">
             <div class="col-4">
                 <div class="form-group">
-                    <label for="newsName">Название новости</label>
+                    <label for="newsName">Название акции</label>
                     <input type="text" class="form-control" id="newsName" th:placeholder="'Название новости'"
                            th:field="*{name}" required="">
                 </div>
@@ -24,10 +26,9 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <div class="custom-control custom-switch custom-switch-off-default custom-switch-on-success">
-                        <input type="checkbox" class="custom-control-input" id="customSwitch3">
-                        <label class="custom-control-label" for="customSwitch3">Статус</label>
-                    </div>
+                    <label for="status">Статус</label><br>
+                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger"
+                           data-on="Включено" data-off="Выключено" id="status" th:field="*{status}">
                 </div>
             </div>
         </div>
@@ -68,31 +69,33 @@
                     <a class="btn btn-tool btn-success" href="#"><i class="fas fa-plus-square"></i></a>
                 </div>
             </div>
-            <div class="card-body pt-2" th:object="${seo}">
+            <div class="card-body pt-2">
                 <div class="row">
                     <div class="col-12">
                         <span>Размер: 1000x190</span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 d-flex" th:each="image : ${imageList}">
-                        <table class="table table-bordered text-center">
-                            <tr>
-                                <td colspan="2">
-                                    <img th:src="#" th:style="'width:100px; height:100px'">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-warning">Обновить</a>
-                                </td>
-                                <td>
-                                    <a th:href="#"
-                                       class="btn btn-danger">Удалить</a>
-                                </td>
-                            </tr>
-                        </table>
+                    <div class="col-3" th:each="image : ${promotion.images}">
+                        <div class="row">
+                            <div class="col text-center">
+                                <img th:src="${image.getImagePath()}" th:style="'width:100px; height:100px'"
+                                     alt="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="galleryImages"
+                                               class="custom-file-input" id="galleryImage"
+                                               accept="image/png, image/jpeg">
+                                        <label class="custom-file-label" for="galleryImage">Выберите
+                                            картинку</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,29 +106,29 @@
             <div class="card-header">
                 <h3 class="card-title font-weight-bold ">SEO блок</h3>
             </div>
-            <div class="card-body pt-2" th:object="${seo}">
+            <div class="card-body pt-2">
                 <div class="row">
                     <div class="col-4">
                         <label for="seoURL">URL</label>
                         <input type="text" class="form-control" id="seoURL" th:placeholder="URL"
-                               th:field="*{url}">
+                               th:field="*{seo.url}">
                     </div>
                     <div class="col-4">
                         <label for="seoTitle">Title</label>
                         <input type="text" class="form-control" id="seoTitle" th:placeholder="Title"
-                               th:field="*{title}">
+                               th:field="*{seo.title}">
                     </div>
                     <div class="col-4">
                         <label for="seoKeywords">Keywords</label>
                         <input type="text" class="form-control" id="seoKeywords" th:placeholder="Keywords"
-                               th:field="*{keywords}">
+                               th:field="*{seo.keywords}">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <label for="seoDescription">Description</label>
                         <textarea class="form-control" rows="3" id="seoDescription" placeholder="Description"
-                                  name="description" spellcheck="false" th:field="*{seoDescription}"></textarea>
+                                  name="description" spellcheck="false" th:field="*{seo.description}"></textarea>
                     </div>
                 </div>
             </div>
@@ -135,7 +138,7 @@
         <div class="row">
             <div class="col-12 text-center pb-3">
                 <button class="btn btn-lg mr-3 btn btn-success">Сохранить</button>
-                <a class="btn btn-lg mr-3 btn btn-secondary" th:href="@{/admin/movies}">Отменить</a>
+                <a class="btn btn-lg mr-3 btn btn-danger" th:href="*{'/admin/promotions/delete/' + id}">Удалить</a>
             </div>
         </div>
 

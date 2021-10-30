@@ -21,6 +21,7 @@ public class MainPage extends MappedEntity {
     private String secondPhoneNumber;
     @Column
     private boolean status;
+    @Lob
     @Column
     private String seoText;
 

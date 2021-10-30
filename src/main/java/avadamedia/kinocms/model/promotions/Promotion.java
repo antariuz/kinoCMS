@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "promotions")
+@Table(name = "promotion")
 public class Promotion extends MappedEntity {
 
     @Column
@@ -28,14 +28,15 @@ public class Promotion extends MappedEntity {
     private Date publishDate;
     @Column
     private boolean status;
+    @Lob
     @Column
     private String description;
     @Column(name = "main_image")
     private String mainImage;
 
-    @OneToMany
-    @JoinColumn(name="image_list_id", referencedColumnName="id")
-    private List<Image> imageList = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name="promotion_id", referencedColumnName="id")
+    private List<Image> images = new ArrayList<>();
 
     @Column
     private String trailerUrl;

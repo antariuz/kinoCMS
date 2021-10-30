@@ -19,7 +19,7 @@ public class UserController {
     //    Show all Users
     @GetMapping({"/", ""})
     public ModelAndView users() {
-        return new ModelAndView("/admin/users/index", "users", service.getAllUsers());
+        return new ModelAndView("admin/users/index", "users", service.getAllUsers());
     }
 
     //    Add part
@@ -45,7 +45,7 @@ public class UserController {
     //    Update part
     @GetMapping("update/{id}")
     public ModelAndView updateUser(@PathVariable("id") Long id) {
-        return new ModelAndView("/admin/users/update", "user", service.getUserById(id));
+        return new ModelAndView("admin/users/update", "user", service.getUserById(id));
     }
 
     @PutMapping("update")
